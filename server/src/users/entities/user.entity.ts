@@ -7,4 +7,16 @@ export default class User {
 
 	@Column()
 	name: string;
+
+	@Column()
+	password: string;
+
+	@Column()
+	email: string;
+
+	@Column({ type: 'date' })
+	dateOfBirth: string;
+
+	@Column()
+	address: string;
 }
