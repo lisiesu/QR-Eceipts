@@ -33,7 +33,7 @@ module.exports ={
 		'class-methods-use-this': 'off',
 		'import/prefer-default-export':'off',
 		'import/no-extraneous-dependencies':'warn',
-		'no-useless-constructor':'warn',
+		'no-useless-constructor':'off',
     'no-console': 'off',
     'import/extensions': [
       'error',
