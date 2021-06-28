@@ -1,0 +1,9 @@
+.Header {
+}
+
+.Header-Title {
+	text-align: center;
+	background: #8dce24;
+	font-weight: 500;
+	margin: 1em;
+}
