@@ -1,0 +1,10 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "user_prod",
+  "password": "magical_password",
+  "database": "QREceipt",
+  "entities": [],
+  "synchronize": true
+}
