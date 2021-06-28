@@ -2,6 +2,7 @@
   "path": "cz-emoji",
   "config": {
     "cz-emoji":{
+			"symbol": false,
       "types": [
         {
           "emoji": "♿️",
@@ -280,7 +281,11 @@
           "name": "wip"
         }
       ],
-			"skipQuestions": ["scope", "breaking", "issues"]
+			"skipQuestions": [ "breaking", "issues"],
+			"questions": {
+        "scope": "Which part of QReceipt will be affected by this commit?"
+      },
+			"scopes": ["⚛️ Frontend", "🐈 Backend", "🏳️ Both"]
     }
   }
 }

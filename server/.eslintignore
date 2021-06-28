@@ -1,3 +1,4 @@
+*/test/*.ts
 .vscode/*
 build/Release
 */build/*
@@ -18,4 +19,7 @@ node_modules/
 .vscode-test
 .gitignore
 .editorconfig
-lint-staged.config.js
+*config.js
+tsconfig.json
+*.spec.ts
+

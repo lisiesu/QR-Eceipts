@@ -1,4 +1,4 @@
-module.exports = {
+module.exports= {
   printWidth: 80,
   semi: true,
   singleQuote: true,
@@ -8,6 +8,5 @@ module.exports = {
   quoteProps: 'as-needed',
   bracketSpacing: true,
   arrowParens: 'always',
-  parser: 'typescript',
-  endOfLine: 'lf'
+  endOfLine: 'lf',
 }

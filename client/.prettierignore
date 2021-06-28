@@ -1,0 +1,15 @@
+build/Release
+*/build/*
+/dist
+/node_modules
+node_modules/
+.eslintcache
+.eslintignore
+.eslintrc.js
+.env
+.env.test
+.env.production
+.cache
+.parcel-cache
+.gitignore
+.editorconfig
