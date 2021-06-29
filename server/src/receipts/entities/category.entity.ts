@@ -1,18 +1,15 @@
 import { EntitySchema } from 'typeorm';
-import Store from './store.interface';
+import type Category from './category.interface';
 
-export const StoreSchema = new EntitySchema<Store>({
-	name: 'store',
+export const CategorySchema = new EntitySchema<Category>({
+	name: 'category',
 	columns: {
 		id: {
 			primary: true,
 			type: 'int',
 			generated: 'increment',
 		},
-		address: {
-			type: String,
-		},
-		logo: {
+		name: {
 			type: String,
 		},
 	},
@@ -20,10 +17,6 @@ export const StoreSchema = new EntitySchema<Store>({
 		receipts: {
 			type: 'one-to-many',
 			target: 'receipt',
-		},
-		users: {
-			type: 'many-to-many',
-			target: 'user',
 		},
 	},
 });
