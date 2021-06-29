@@ -5,7 +5,12 @@ import type Category from './category.interface';
 export default interface Receipt {
 	id: number;
 	timeOfPurchase: Date;
-	content: JSON;
+	products: JSON;
+	total: number;
+	currency: string;
+	paymentMethod: string;
+	cardNumber: string;
+	misc?: string;
 	store: Store;
 	user: User;
 	category: Category;

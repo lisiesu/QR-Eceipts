@@ -12,8 +12,24 @@ export const ReceiptSchema = new EntitySchema<Receipt>({
 		timeOfPurchase: {
 			type: 'timestamp',
 		},
-		content: {
+		products: {
 			type: 'jsonb',
+		},
+		total: {
+			type: Number,
+		},
+		currency: {
+			type: String,
+		},
+		paymentMethod: {
+			type: String,
+		},
+		cardNumber: {
+			type: String,
+		},
+		misc: {
+			type: String,
+			nullable: true,
 		},
 	},
 	relations: {
