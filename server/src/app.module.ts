@@ -1,5 +1,6 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
+import * as dotenv from 'dotenv';
 import { ReceiptsModule } from './receipts/receipts.module';
 import { UsersModule } from './users/users.module';
 import { StoresModule } from './stores/stores.module';
@@ -10,15 +11,17 @@ import { StoreSchema } from './stores/entities/store.entity';
 import { ReceiptSchema } from './receipts/entities/receipt.entity';
 import { CategorySchema } from './receipts/entities/category.entity';
 
+dotenv.config();
+
 @Module({
 	imports: [
 		TypeOrmModule.forRoot({
 			type: 'postgres',
 			host: 'localhost',
-			port: 5432,
-			username: 'user_prod',
-			password: 'magical_password',
-			database: 'QREceipt',
+			port: Number(process.env.POSTGRES_PORT),
+			username: process.env.POSTGRES_USER,
+			password: process.env.POSTGRES_PASSWORD,
+			database: process.env.POSTGRES_DB,
 			entities: [UserSchema, StoreSchema, ReceiptSchema, CategorySchema],
 			synchronize: true,
 		}),
