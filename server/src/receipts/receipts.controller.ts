@@ -3,14 +3,14 @@ import {
 	Get,
 	Post,
 	Body,
-	Patch,
+	// Patch,
 	Param,
-	Delete,
+	// Delete,
 	Query,
 } from '@nestjs/common';
 import { ReceiptsService } from './receipts.service';
 import { CreateReceiptDto } from './dto/create-receipt.dto';
-import { ReceiptDto } from './dto/receipt.dto';
+// import { ReceiptDto } from './dto/receipt.dto';
 
 @Controller('receipts')
 export class ReceiptsController {
@@ -55,19 +55,19 @@ export class ReceiptsController {
 		return query;
 	}
 
-	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.receiptsService.findOne(id);
-	}
+	// @Get(':id')
+	// findOne(@Param('id') id: string) {
+	// 	return this.receiptsService.findOne(id);
+	// }
 
-	@Patch()
-	update(@Param('id') id: string, @Body() receiptDto: ReceiptDto) {
-		this.receiptsService.update(id, receiptDto);
-		return receiptDto;
-	}
+	// @Patch()
+	// update(@Param('id') id: string, @Body() receiptDto: ReceiptDto) {
+	// 	this.receiptsService.update(id, receiptDto);
+	// 	return receiptDto;
+	// }
 
-	@Delete(':id')
-	remove(@Param('id') id: string) {
-		return this.receiptsService.remove(id);
-	}
+	// @Delete(':id')
+	// remove(@Param('id') id: string) {
+	// 	return this.receiptsService.remove(id);
+	// }
 }
