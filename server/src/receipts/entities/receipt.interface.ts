@@ -1,5 +1,6 @@
 import type Store from '../../stores/entities/store.interface';
 import type User from '../../users/entities/user.interface';
+import type Category from './category.interface';
 
 export default interface Receipt {
 	id: number;
@@ -7,4 +8,5 @@ export default interface Receipt {
 	content: JSON;
 	store: Store;
 	user: User;
+	category: Category;
 }
