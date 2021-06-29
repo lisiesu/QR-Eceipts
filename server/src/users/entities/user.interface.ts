@@ -1,3 +1,5 @@
+import type Receipt from '../../receipts/entities/receipt.interface';
+
 export default interface User {
 	id: number;
 	name: string;
@@ -5,4 +7,5 @@ export default interface User {
 	email: string;
 	dateOfBirth: string;
 	address: string;
+	receipts: Receipt[];
 }

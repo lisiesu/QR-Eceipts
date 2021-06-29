@@ -21,5 +21,9 @@ export const ReceiptSchema = new EntitySchema<Receipt>({
 			type: 'many-to-one',
 			target: 'store',
 		},
+		user: {
+			type: 'many-to-one',
+			target: 'user',
+		},
 	},
 });
