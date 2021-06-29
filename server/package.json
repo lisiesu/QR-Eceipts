@@ -26,6 +26,7 @@
 		"@nestjs/mapped-types": "*",
 		"@nestjs/platform-express": "^7.6.15",
 		"@nestjs/typeorm": "^7.1.5",
+		"class-validator": "^0.13.1",
 		"dotenv": "^10.0.0",
 		"hashids": "^2.2.8",
 		"pg": "^8.6.0",
