@@ -12,6 +12,10 @@ function ReceiptBody(): JSX.Element {
 				<p className="Timestamp">12th May 2021 15:50pm</p>
 				<p className="Circle">🦞</p>
 			</div>
+			<div className="Item-List-Titles">
+				<p>Item</p>
+				<p>Price</p>
+			</div>
 			<div className="Item-List-Container">
 				<ul className="List">
 					<li className="List-item">Pizza 4 Stazzione</li>
@@ -26,6 +30,13 @@ function ReceiptBody(): JSX.Element {
 					<p className="Total-Price">€16.50</p>
 				</div>
 				<p className="Receipt-Id">Id: 2793927</p>
+			</div>
+			<div className="Message-Container">
+				<p>Thank you for shopping at Sainsbury&apos;s</p>
+			</div>
+			<div className="Receipt-Saved-Message">
+				<p className="Tick">🐋</p>
+				<p className="Saved-Message">Your receipt has been saved!</p>
 			</div>
 		</div>
 	);

@@ -1,8 +1,8 @@
 .Receipt-Body {
-	background-color: red;
+	background-color: rgb(241, 209, 209);
 	margin-left: 1em;
 	margin-right: 1em;
-	justify-content: space-between;
+	border-radius: 20px;
 }
 
 .Company-Details {
@@ -11,7 +11,6 @@
 }
 
 .Company-Name {
-	background-color: aqua;
 	font-weight: bold;
 	margin-bottom: 0;
 }
@@ -19,7 +18,6 @@
 .Company-Logo {
 	color: rgb(245, 164, 89);
 	font-weight: bold;
-	background-color: lightblue;
 	margin-bottom: 0;
 }
 
@@ -48,6 +46,16 @@
 	margin-top: 0;
 }
 
+.Item-List-Titles {
+	display: flex;
+	justify-content: space-between;
+	font-size: x-small;
+	margin-left: 0.7em;
+	margin-right: 0.7em;
+	font-weight: 500;
+	color: #248cce;
+}
+
 .Item-List-Container {
 	background: white;
 	border-radius: 8px;
@@ -64,23 +72,59 @@
 .Total-Container {
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 0.5em;
 }
 
 .Price-Container {
+	display: flex;
+	flex-wrap: wrap;
 	border-radius: 8px;
 	background: white;
 	font-size: x-large;
 	font-weight: bold;
 	max-width: 4em;
-}
-
-.Total-Price {
+	min-width: 6em;
+	padding: 0.2em;
 }
 
 .Receipt-Id {
+	display: flex;
 	border-radius: 8px;
 	background: white;
 	font-size: xx-small;
 	min-height: 5em;
-	min-width: 7em;
+	min-width: 10em;
+	align-items: flex-end;
+	justify-content: space-around;
+}
+
+.Message-Container {
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 8px;
+	background: white;
+	font-size: small;
+	margin-bottom: 0.5em;
+}
+
+.Receipt-Saved-Message {
+	display: flex;
+	flex-direction: column;
+	background: rgb(139, 205, 236);
+	padding: 0;
+	margin-bottom: 0.5em;
+	align-items: center;
+}
+
+.Tick {
+	width: 80px;
+	line-height: 80px;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 70px;
+	background: #e3f5e4;
+}
+
+.Saved-Message {
+	font-size: small;
 }
