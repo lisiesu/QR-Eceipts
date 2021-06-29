@@ -6,10 +6,11 @@ import {
 	Patch,
 	Param,
 	Delete,
+	Query,
 } from '@nestjs/common';
 import { ReceiptsService } from './receipts.service';
 import { CreateReceiptDto } from './dto/create-receipt.dto';
-import { UpdateReceiptDto } from './dto/update-receipt.dto';
+import { ReceiptDto } from './dto/receipt.dto';
 
 @Controller('receipts')
 export class ReceiptsController {
@@ -17,26 +18,56 @@ export class ReceiptsController {
 
 	@Post()
 	create(@Body() createReceiptDto: CreateReceiptDto) {
-		return this.receiptsService.create(createReceiptDto);
+		this.receiptsService.create(createReceiptDto);
+		return createReceiptDto;
+	}
+
+	@Post(':userId/:receiptId')
+	transferToUser(
+		@Param('receiptId') receiptId: string,
+		@Param('userId') userId: string,
+	) {
+		return {
+			userId,
+			receiptId,
+		};
+	}
+
+	@Get(':userId')
+	FindAllForKey(@Param('userId') userId: string, @Query() queries) {
+		return { userId, ...queries };
+	}
+
+	@Get(':userId')
+	findAllForOneUser(@Param('userId') userId: string) {
+		return userId;
 	}
 
 	@Get()
-	findAll() {
-		return this.receiptsService.findAll();
+	findAll(@Query() query) {
+		// if authorised as user, return all receipts for that user.
+		// if authorised as vendor, return all receipts for user is speified in query
+		// using user Auth
+		// filtered by user
+
+		// optional query: ?clientId=74917
+		this.receiptsService.findAll();
+		return query;
 	}
 
 	@Get(':id')
 	findOne(@Param('id') id: string) {
-		return this.receiptsService.findOne(+id);
+		return this.receiptsService.findOne(id);
 	}
 
-	@Patch(':id')
-	update(@Param('id') id: string, @Body() updateReceiptDto: UpdateReceiptDto) {
-		return this.receiptsService.update(+id, updateReceiptDto);
+	@Patch()
+	update(@Param('id') id: string, @Body() receiptDto: ReceiptDto) {
+		this.receiptsService.update(id, receiptDto);
+		return receiptDto;
 	}
 
 	@Delete(':id')
 	remove(@Param('id') id: string) {
-		return this.receiptsService.remove(+id);
+		return this.receiptsService.remove(id);
 	}
 }
