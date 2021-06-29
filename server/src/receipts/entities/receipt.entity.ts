@@ -1,13 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { EntitySchema } from 'typeorm';
+import Receipt from './receipt.interface';
 
-@Entity()
-export default class Receipt {
-	@PrimaryGeneratedColumn()
-	id: number;
-
-	@Column({ type: 'timestamp' })
-	timeOfPurchase: Date;
-
-	@Column({ type: 'jsonb' })
-	content: JSON;
-}
+export const ReceiptSchema = new EntitySchema<Receipt>({
+	name: 'receipt',
+	columns: {
+		id: {
+			primary: true,
+			type: 'int',
+			generated: 'increment',
+		},
+		timeOfPurchase: {
+			type: 'timestamp',
+		},
+		content: {
+			type: 'jsonb',
+		},
+	},
+});
