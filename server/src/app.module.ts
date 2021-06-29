@@ -6,7 +6,7 @@ import { StoresModule } from './stores/stores.module';
 import AppController from './app.controller';
 import AppService from './app.service';
 import Users from './users/entities/user.entity';
-import Stores from './stores/entities/store.entity';
+import { StoreSchema } from './stores/entities/store.entity';
 import Receipts from './receipts/entities/receipt.entity';
 
 @Module({
@@ -18,7 +18,7 @@ import Receipts from './receipts/entities/receipt.entity';
 			username: 'user_prod',
 			password: 'magical_password',
 			database: 'QREceipt',
-			entities: [Users, Stores, Receipts],
+			entities: [Users, StoreSchema, Receipts],
 			synchronize: true,
 		}),
 		ReceiptsModule,

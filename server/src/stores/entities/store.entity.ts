@@ -1,22 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { EntitySchema } from 'typeorm';
+import Store from './store.interface';
 
-@Entity()
-export default class Store {
-	@PrimaryGeneratedColumn()
-	id: number;
-
-	@Column()
-	users: string;
-
-	@Column()
-	address: string;
-
-	@Column()
-	number: string;
-
-	@Column()
-	logo: string;
-
-	@Column()
-	category: string;
-}
+export const StoreSchema = new EntitySchema<Store>({
+	name: 'store',
+	columns: {
+		id: {
+			primary: true,
+			type: 'int',
+			generated: 'increment',
+		},
+		address: {
+			type: String,
+		},
+		logo: {
+			type: String,
+		},
+	},
+});
