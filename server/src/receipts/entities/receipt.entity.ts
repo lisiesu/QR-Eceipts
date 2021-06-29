@@ -2,7 +2,7 @@ import { EntitySchema } from 'typeorm';
 import Receipt from './receipt.interface';
 
 export const ReceiptSchema = new EntitySchema<Receipt>({
-	name: 'receipt',
+	name: 'receipts',
 	columns: {
 		id: {
 			primary: true,

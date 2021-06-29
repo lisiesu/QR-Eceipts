@@ -5,9 +5,9 @@ import { UsersModule } from './users/users.module';
 import { StoresModule } from './stores/stores.module';
 import AppController from './app.controller';
 import AppService from './app.service';
-import Users from './users/entities/user.entity';
+import { UserSchema } from './users/entities/user.entity';
 import { StoreSchema } from './stores/entities/store.entity';
-import Receipts from './receipts/entities/receipt.entity';
+import { ReceiptSchema } from './receipts/entities/receipt.entity';
 
 @Module({
 	imports: [
@@ -18,7 +18,7 @@ import Receipts from './receipts/entities/receipt.entity';
 			username: 'user_prod',
 			password: 'magical_password',
 			database: 'QREceipt',
-			entities: [Users, StoreSchema, Receipts],
+			entities: [UserSchema, StoreSchema, ReceiptSchema],
 			synchronize: true,
 		}),
 		ReceiptsModule,
