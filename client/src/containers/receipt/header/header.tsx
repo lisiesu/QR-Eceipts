@@ -1,10 +1,12 @@
-import './header.css';
 import React from 'react';
+import './header.css';
+import ReceiptBody from '../Receipt-Body/receipt-body';
 
 function Header(): JSX.Element {
 	return (
 		<div className="Header">
-			<h3>Header</h3>
+			<p className="Header-Title">Your receipt!</p>
+			<ReceiptBody />
 		</div>
 	);
 }

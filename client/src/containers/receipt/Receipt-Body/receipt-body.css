@@ -1,0 +1,202 @@
+.Receipt-Container {
+	background-color: #f5f6fa;
+	border-radius: 30px;
+	height: 100vh;
+}
+
+.Receipt-Body {
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.Company-Details {
+	display: flex;
+	justify-content: space-between;
+}
+
+.Company-Name {
+	font-weight: bold;
+	margin-bottom: 0;
+	margin-top: 0.8em;
+	color: #3d3232;
+}
+
+.Company-Logo {
+	color: rgb(245, 164, 89);
+	font-weight: bold;
+	margin-bottom: 0;
+	margin-top: 0.8em;
+}
+
+.Time-Container {
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+	margin-bottom: 0.5em;
+}
+
+.Timestamp {
+	font-size: xx-small;
+	margin-top: 0%;
+	font-weight: 500;
+	color: #a1a1a1;
+}
+
+.Shop-Icon-Circle {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	line-height: 25px;
+	border-radius: 50%;
+	background: #f5f6fa;
+	margin-right: 2em;
+	margin-top: 0;
+	vertical-align: middle;
+	text-align: center;
+	list-style: none;
+}
+
+.Shop-Icon {
+	font-size: 25px;
+}
+
+.Item-List-Titles {
+	display: flex;
+	justify-content: space-between;
+	font-size: x-small;
+	margin-left: 0.7em;
+	margin-right: 0.7em;
+	font-weight: 600;
+	color: #248cce;
+}
+
+.Item-List-Container {
+	background: white;
+	border-radius: 8px;
+	max-height: 5em;
+	min-height: 5em;
+	margin-bottom: 1em;
+	overflow-y: auto;
+}
+/* Styles to make scrollbar always visilble */
+.Item-List-Container::-webkit-scrollbar {
+	-webkit-appearance: none;
+}
+
+.Item-List-Container::-webkit-scrollbar:vertical {
+	width: 10px;
+}
+
+.Item-List-Container::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	border: 2px solid white;
+	background-color: #ebedfd;
+}
+
+.List {
+	font-size: x-small;
+	list-style: none;
+	padding: 0.2em;
+}
+
+.Total-Container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1em;
+}
+
+.Price-Container {
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 8px;
+	background: white;
+	font-size: x-large;
+	font-weight: bold;
+	max-width: 4em;
+	min-width: 6em;
+	min-height: 2.8em;
+	padding: 0.2em;
+	color: #3d3232;
+}
+
+.Total-Title {
+	line-height: 1.2em;
+}
+
+.Total-Price {
+	line-height: 1em;
+}
+
+.Receipt-Id {
+	display: flex;
+	border-radius: 8px;
+	background: white;
+	font-size: xx-small;
+	min-height: 5em;
+	min-width: 10em;
+	align-items: flex-end;
+	justify-content: space-around;
+}
+
+.Message-Container {
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 8px;
+	background: white;
+	font-size: small;
+	margin-bottom: 1em;
+	padding: 0.3em;
+}
+
+.Receipt-Saved-Text {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	margin-bottom: 1em;
+	align-items: center;
+}
+
+.Tick-Container {
+	display: inline-block;
+	background-color: rgb(254, 254, 254);
+	width: 70px;
+	height: 70px;
+	line-height: 80px;
+	border-radius: 50%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.Tick {
+	color: #18ddba;
+	font-size: 70px;
+}
+
+.Saved-Message {
+	font-size: small;
+}
+
+.List-Button {
+	display: flex;
+	justify-content: center;
+}
+
+.Button-Text {
+	background-color: #1fc2c2;
+	padding: 0 1.25rem;
+	line-height: 2.125rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	text-align: center;
+	margin: 0.125rem;
+	color: white;
+
+	border-radius: 30px;
+
+	transition: color 0.125s ease;
+	cursor: pointer;
+
+	box-shadow: 0px 0px 0px transparent;
+	border: 0px solid transparent;
+	text-shadow: 0px 0px 0px transparent;
+}
