@@ -2,7 +2,7 @@ import { EntitySchema } from 'typeorm';
 import Store from './store.interface';
 
 export const StoreSchema = new EntitySchema<Store>({
-	name: 'stores',
+	name: 'store',
 	columns: {
 		id: {
 			primary: true,
@@ -14,6 +14,12 @@ export const StoreSchema = new EntitySchema<Store>({
 		},
 		logo: {
 			type: String,
+		},
+	},
+	relations: {
+		receipts: {
+			type: 'one-to-many',
+			target: 'receipt',
 		},
 	},
 });

@@ -2,7 +2,7 @@ import { EntitySchema } from 'typeorm';
 import Receipt from './receipt.interface';
 
 export const ReceiptSchema = new EntitySchema<Receipt>({
-	name: 'receipts',
+	name: 'receipt',
 	columns: {
 		id: {
 			primary: true,
@@ -14,6 +14,12 @@ export const ReceiptSchema = new EntitySchema<Receipt>({
 		},
 		content: {
 			type: 'jsonb',
+		},
+	},
+	relations: {
+		store: {
+			type: 'many-to-one',
+			target: 'store',
 		},
 	},
 });
