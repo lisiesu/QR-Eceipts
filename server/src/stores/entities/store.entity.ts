@@ -21,5 +21,9 @@ export const StoreSchema = new EntitySchema<Store>({
 			type: 'one-to-many',
 			target: 'receipt',
 		},
+		users: {
+			type: 'many-to-many',
+			target: 'user',
+		},
 	},
 });

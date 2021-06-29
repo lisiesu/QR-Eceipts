@@ -1,4 +1,5 @@
 import type Receipt from '../../receipts/entities/receipt.interface';
+import type Store from '../../stores/entities/store.interface';
 
 export default interface User {
 	id: number;
@@ -8,4 +9,5 @@ export default interface User {
 	dateOfBirth: string;
 	address: string;
 	receipts: Receipt[];
+	stores: Store[];
 }
