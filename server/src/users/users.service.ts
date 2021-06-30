@@ -3,21 +3,20 @@ import {
 	ConflictException,
 	InternalServerErrorException,
 } from '@nestjs/common';
-import Hashids = require('hashids');
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import HashidsService from 'services/hashid/hashid.service';
 import { UserSchema } from './entities/user.entity';
 import User from './entities/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-
-const hashids = new Hashids();
 
 @Injectable()
 export class UsersService {
 	constructor(
 		@InjectRepository(UserSchema)
 		private repository: Repository<User>,
+		private hashidsService: HashidsService,
 	) {}
 
 	async create(createUserDto: CreateUserDto) {
@@ -28,7 +27,7 @@ export class UsersService {
 			if (found.length !== 0) throw new ConflictException(); // Without querying before the id counter increases even if TypeORM save fails.
 			const user = this.repository.create(createUserDto);
 			const userSaved = await this.repository.save(user);
-			return userSaved;
+			return this.hashidsService.encode(userSaved);
 		} catch (err) {
 			const { code, status } = err;
 			if (code === '23505' || status === 409) throw new ConflictException(); // code refers to TypeORM save() error and status for ConlictException error.
@@ -37,7 +36,7 @@ export class UsersService {
 	}
 
 	findAll() {
-		return hashids.encode(1234);
+		return undefined;
 	}
 
 	findOne(id: number) {
