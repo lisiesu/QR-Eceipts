@@ -35,14 +35,6 @@ export class UsersService {
 		}
 	}
 
-	findAll() {
-		return undefined;
-	}
-
-	findOne(id: number) {
-		return `This action returns a #${id} user`;
-	}
-
 	update(id: number, updateUserDto: UpdateUserDto) {
 		return updateUserDto;
 	}
