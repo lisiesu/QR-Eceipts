@@ -11,10 +11,7 @@ export default class HashidsService {
 		return { ...objNumberId, id: this.hashids.encode(objNumberId.id) };
 	}
 
-	decode(objStringId: ObjStringId): ObjNumberId {
-		return {
-			...objStringId,
-			id: Number(this.hashids.decode(objStringId.id)),
-		};
+	decode(id: string): number {
+		return Number(this.hashids.decode(id));
 	}
 }
