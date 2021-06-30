@@ -39,7 +39,8 @@ export class UsersService {
 		return updateUserDto;
 	}
 
-	remove(id: number) {
-		return `This action removes a #${id} user`;
+	async remove(id: string) {
+		const userId = this.hashidsService.decode(id);
+		return this.repository.delete(userId);
 	}
 }
