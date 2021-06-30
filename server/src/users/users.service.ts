@@ -1,11 +1,6 @@
-import {
-	Injectable,
-	ConflictException,
-	InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import HashidsService from 'services/hashid/hashid.service';
 import { UserSchema } from './entities/user.entity';
 import User from './entities/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,31 +11,27 @@ export class UsersService {
 	constructor(
 		@InjectRepository(UserSchema)
 		private repository: Repository<User>,
-		private hashidsService: HashidsService,
 	) {}
 
-	async create(createUserDto: CreateUserDto) {
-		try {
-			const found = await this.repository.find({
-				where: { email: createUserDto.email },
-			});
-			if (found.length !== 0) throw new ConflictException(); // Without querying before the id counter increases even if TypeORM save fails.
-			const user = this.repository.create(createUserDto);
-			const userSaved = await this.repository.save(user);
-			return this.hashidsService.encode(userSaved);
-		} catch (err) {
-			const { code, status } = err;
-			if (code === '23505' || status === 409) throw new ConflictException(); // code refers to TypeORM save() error and status for ConlictException error.
-			throw new InternalServerErrorException();
-		}
+	async create(createUserDto: CreateUserDto): Promise<User> {
+		const user = this.repository.create(createUserDto);
+		const userSaved = await this.repository.save(user);
+		return userSaved;
+	}
+
+	async findByEmail(email: string): Promise<User[]> {
+		const users = await this.repository.find({
+			where: { email },
+		});
+		return users;
 	}
 
 	update(id: number, updateUserDto: UpdateUserDto) {
 		return updateUserDto;
 	}
 
-	async remove(id: string) {
-		const userId = this.hashidsService.decode(id);
-		return this.repository.delete(userId);
+	async remove(id: number): Promise<boolean> {
+		const confirmation = await this.repository.delete(id);
+		return confirmation.affected !== 0;
 	}
 }
