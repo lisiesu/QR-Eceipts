@@ -1,0 +1,38 @@
+.Price-QR-Container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1em;
+}
+
+.Price-Container {
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 8px;
+	background: white;
+	font-size: x-large;
+	font-weight: bold;
+	max-width: 4em;
+	min-width: 6em;
+	min-height: 2.8em;
+	padding: 0.2em;
+	color: #3d3232;
+}
+
+.Total-Title {
+	line-height: 1.2em;
+}
+
+.Total-Price {
+	line-height: 1em;
+}
+
+.Receipt-Id {
+	display: flex;
+	border-radius: 8px;
+	background: white;
+	font-size: xx-small;
+	min-height: 5em;
+	min-width: 10em;
+	align-items: flex-end;
+	justify-content: space-around;
+}
