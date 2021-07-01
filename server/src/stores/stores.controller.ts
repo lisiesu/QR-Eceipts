@@ -3,41 +3,52 @@ import {
 	Get,
 	Post,
 	Body,
-	// Patch,
 	Param,
-	// Query,
-	// Delete,
+	BadRequestException,
 } from '@nestjs/common';
+import HashidsService from 'services/hashid/hashid.service';
 import { StoresService } from './stores.service';
 import { CreateStoreDto } from './dto/create-store.dto';
-// import { UpdateStoreDto } from './dto/update-store.dto';
 
 @Controller('stores')
 export class StoresController {
-	constructor(private readonly storesService: StoresService) {}
+	constructor(
+		private readonly storesService: StoresService,
+		private hashidsService: HashidsService,
+	) {}
 
 	@Post()
-	create(@Body() createStoreDto: CreateStoreDto) {
-		return this.storesService.create(createStoreDto);
-	}
+	async create(@Body() createStoreDto: CreateStoreDto) {
+		const store = await this.storesService.create(createStoreDto);
+		const { id, address, logo, name, storeNumber, telephoneNumber, website } =
+			store;
 
-	@Get()
-	findAll() {
-		return this.storesService.findAll();
+		return {
+			id: this.hashidsService.encode(id),
+			address,
+			logo,
+			name,
+			storeNumber,
+			telephoneNumber,
+			website,
+		};
 	}
 
 	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.storesService.findOne(+id);
+	async findOne(@Param('id') id: string) {
+		const storeId = this.hashidsService.decode(id);
+		const store = await this.storesService.findOne(storeId);
+		if (store === undefined) throw new BadRequestException();
+		const { address, logo, name, storeNumber, telephoneNumber, website } =
+			store;
+
+		return {
+			address,
+			logo,
+			name,
+			storeNumber,
+			telephoneNumber,
+			website,
+		};
 	}
-
-	// @Patch(':id')
-	// update(@Param('id') id: string, @Body() updateStoreDto: UpdateStoreDto) {
-	// 	return this.storesService.update(+id, updateStoreDto);
-	// }
-
-	// @Delete(':id')
-	// remove(@Param('id') id: string) {
-	// 	return this.storesService.remove(+id);
-	// }
 }

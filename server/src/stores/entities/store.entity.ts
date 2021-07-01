@@ -15,6 +15,9 @@ export const StoreSchema = new EntitySchema<Store>({
 		logo: {
 			type: String,
 		},
+		name: {
+			type: String,
+		},
 		storeNumber: {
 			type: String,
 			unique: true,
