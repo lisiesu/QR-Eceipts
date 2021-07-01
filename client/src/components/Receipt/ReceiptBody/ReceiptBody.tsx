@@ -1,8 +1,9 @@
 import React from 'react';
-import './receipt-body.css';
+import './ReceiptBody.css';
 import { FiShoppingCart } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
-import ItemsList from '../Items-List/items-list';
+import { useHistory } from 'react-router-dom';
+import ItemsList from '../ItemsList/ItemsList';
 import Receipt from '../../../interfaces/types';
 
 interface Props {
@@ -10,6 +11,11 @@ interface Props {
 }
 
 function ReceiptBody({ receipt }: Props): JSX.Element {
+	const history = useHistory();
+	const clickHandler = () => {
+		history.push('/receipt-list');
+	};
+
 	return (
 		<div className="Receipt-Container">
 			<div className="Receipt-Body">
@@ -34,11 +40,15 @@ function ReceiptBody({ receipt }: Props): JSX.Element {
 					</li>
 					<p className="Saved-Message">Your receipt has been saved!</p>
 				</div>
-				<div className="List-Button">
-					<div className="Button-Text">
-						<p>View my receipts</p>
-					</div>
-				</div>
+				<button
+					className="listButton"
+					type="submit"
+					onClick={() => {
+						clickHandler();
+					}}
+				>
+					View all your receipts
+				</button>
 			</div>
 		</div>
 	);

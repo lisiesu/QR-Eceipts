@@ -1,6 +1,6 @@
 import React from 'react';
-import './items-list.css';
-import PriceAndQR from '../PriceAndQR/priceAndQR';
+import './ItemsList.css';
+import PriceAndQR from '../PriceAndQR/PriceAndQR';
 
 function ItemsList(): JSX.Element {
 	return (

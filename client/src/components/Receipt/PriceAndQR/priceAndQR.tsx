@@ -1,4 +1,4 @@
-import './priceAndQR.css';
+import './PriceAndQR.css';
 import React from 'react';
 
 function PriceAndQR(): JSX.Element {
