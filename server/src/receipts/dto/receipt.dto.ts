@@ -1,7 +1,8 @@
-import ProductInterface from 'receipts/entities/product.interface';
+import ProductInterface from '../entities/product.interface';
 import Category from '../entities/category.interface';
+import Store from '../entities/store.interface';
 
-export class ReceiptDto {
+export default class ReceiptDto {
 	id: string;
 
 	timeOfPurchase: Date;
@@ -14,13 +15,11 @@ export class ReceiptDto {
 
 	paymentMethod: string;
 
-	cardNumber: number;
+	cardNumber: string;
 
 	misc?: string;
 
-	store: string;
-
-	user: string;
+	store: Store;
 
 	category: Category;
 }

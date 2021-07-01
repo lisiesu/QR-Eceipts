@@ -10,9 +10,8 @@ import {
 } from '@nestjs/common';
 import QRCode = require('qrcode');
 import { ReceiptsService } from './receipts.service';
-import { CreateReceiptDto } from './dto/create-receipt.dto';
-// import { ReceiptDto } from './dto/receipt.dto';
-import { UpdateReceiptDto } from './dto/update-receipt.dto';
+import CreateReceiptDto from './dto/create-receipt.dto';
+import UpdateReceiptDto from './dto/update-receipt.dto';
 // import error from 'express';
 
 function generateQrCode(url: string): string {
@@ -81,6 +80,7 @@ export class ReceiptsController {
 
 	@Get(':id')
 	findOne(@Param('id') id: number) {
+		console.log("Bernie's here!");
 		return this.receiptsService.findOne(id);
 	}
 
