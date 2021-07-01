@@ -1,7 +1,8 @@
+import * as dotenv from 'dotenv';
 import { Connection } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Module } from '@nestjs/common';
-import * as dotenv from 'dotenv';
+import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { AuthMiddleware } from './auth/auth.middleware';
 import { ReceiptsModule } from './receipts/receipts.module';
 import { UsersModule } from './users/users.module';
 import { StoresModule } from './stores/stores.module';
@@ -35,4 +36,8 @@ dotenv.config();
 })
 export default class AppModule {
 	constructor(private connection: Connection) {}
+
+	configure(consumer: MiddlewareConsumer) {
+		consumer.apply(AuthMiddleware).forRoutes('receipts');
+	}
 }

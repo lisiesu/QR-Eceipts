@@ -7,8 +7,10 @@ import {
 	Param,
 	Delete,
 	Query,
+	Req,
 } from '@nestjs/common';
 import QRCode = require('qrcode');
+import { Request } from 'express';
 import { ReceiptsService } from './receipts.service';
 import { CreateReceiptDto } from './dto/create-receipt.dto';
 // import { ReceiptDto } from './dto/receipt.dto';
@@ -80,8 +82,9 @@ export class ReceiptsController {
 	}
 
 	@Get(':id')
-	findOne(@Param('id') id: number) {
-		return this.receiptsService.findOne(id);
+	findOne(@Req() request: Request) {
+		return request.headers;
+		// return this.receiptsService.findOne(id);
 	}
 
 	@Patch()
