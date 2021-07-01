@@ -9,4 +9,5 @@ export default interface Store {
 	telephoneNumber: string;
 	receipts: Receipt[];
 	users: User[];
+	website?: string;
 }

@@ -21,6 +21,9 @@ export const StoreSchema = new EntitySchema<Store>({
 		telephoneNumber: {
 			type: String,
 		},
+		website: {
+			type: String,
+		},
 	},
 	relations: {
 		receipts: {
