@@ -1,5 +1,6 @@
 import {
 	Controller,
+	Get,
 	Post,
 	Body,
 	Patch,
@@ -53,12 +54,16 @@ export class UsersController {
 		if (!isUserRemoved) throw new BadRequestException();
 	}
 
-	@Post(':id/receipts')
+	@Get(':id/receipts')
 	@HttpCode(200)
 	async getAllUserReceipts(@Param('id') id: string) {
 		const userId = this.hashidsService.decode(id);
-		const receipts = await this.usersService.findAllUserReceipts(userId);
-		if (receipts === undefined) throw new BadRequestException();
+		const receiptsFound = await this.usersService.findAllUserReceipts(userId);
+		if (receiptsFound === undefined) throw new BadRequestException();
+		const receipts = receiptsFound.map((receipt) => ({
+			...receipt,
+			id: this.hashidsService.encode(receipt.id),
+		}));
 		return { receipts };
 	}
 }
