@@ -1,39 +1,46 @@
-import Hashids = require('hashids');
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserSchema } from './entities/user.entity';
 import User from './entities/user.interface';
-
-const hashids = new Hashids();
-
-// import { CreateUserDto } from './dto/create-user.dto';
-// import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
 	constructor(
 		@InjectRepository(UserSchema)
-		private usersRepository: Repository<User>,
+		private repository: Repository<User>,
 	) {}
 
-	create() {
-		return undefined;
+	async create(createUserDto: CreateUserDto): Promise<User> {
+		const user = this.repository.create(createUserDto);
+		const userSaved = await this.repository.save(user);
+		return userSaved;
 	}
 
-	findAll() {
-		return hashids.encode(1234);
+	async findByEmail(email: string): Promise<User[]> {
+		const users = await this.repository.find({
+			where: { email },
+		});
+		return users;
 	}
 
-	// findOne(id: number) {
-	// 	return `This action returns a #${id} user`;
-	// }
+	update(id: number, updateUserDto: UpdateUserDto) {
+		return updateUserDto;
+	}
 
-	// update(id: number, updateUserDto: UpdateUserDto) {
-	// 	return updateUserDto;
-	// }
+	async remove(id: number): Promise<boolean> {
+		const confirmation = await this.repository.delete(id);
+		return confirmation.affected !== 0;
+	}
 
-	// remove(id: number) {
-	// 	return `This action removes a #${id} user`;
-	// }
+	async findAllUserReceipts(id: number) {
+		const found = await this.repository.findOne({
+			select: ['id'],
+			where: { id },
+			relations: ['receipts'],
+		});
+		return found !== undefined ? found.receipts : undefined;
+	}
 }
