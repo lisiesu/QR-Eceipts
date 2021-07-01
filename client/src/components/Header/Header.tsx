@@ -12,8 +12,11 @@ function Header({ headerReceipt, title }: Props): JSX.Element {
 	return (
 		<div className="Header">
 			<p className="title">{title}</p>
-
-			<ReceiptBody receipt={headerReceipt} />
+			{title === 'Your Receipt!' ? (
+				<ReceiptBody receipt={headerReceipt} />
+			) : (
+				<ReceiptBody receipt={headerReceipt} />
+			)}
 		</div>
 	);
 }
