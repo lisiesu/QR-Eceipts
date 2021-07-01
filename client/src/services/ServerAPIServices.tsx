@@ -1,12 +1,12 @@
 import * as DATA from './Http-data';
-import { Receipt } from '../interfaces/types';
+import Receipt from '../interfaces/types';
 
 // const baseUrl = './';
 
 export const getUserReceipts = async (userId: string): Promise<Receipt[]> =>
 	DATA;
 
-export const getReceiptByid = async (id: string) => {
+export const getReceiptByid = async (id: string): Promise<Receipt> => {
 	const index = +id;
 	const result = DATA[index];
 	return result;

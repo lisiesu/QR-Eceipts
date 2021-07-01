@@ -1,4 +1,4 @@
-export interface Receipt {
+export default interface Receipt {
 	id: string;
 	timeOfPurchase: string;
 	products: Product[];

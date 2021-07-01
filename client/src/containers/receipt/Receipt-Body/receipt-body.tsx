@@ -3,27 +3,10 @@ import './receipt-body.css';
 import { FiShoppingCart } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
 import ItemsList from '../Items-List/items-list';
+import Receipt from '../../../interfaces/types';
 
-export interface Props {
-	receipt: {
-		id: string;
-		timeOfPurchase: string;
-		products: Product[];
-		total: number;
-		currency: string;
-		paymentMethod: string;
-		cardNumber: number;
-		misc: string;
-		user: string;
-		store: string;
-	};
-}
-
-export interface Product {
-	product: string;
-	price: number;
-	vat: number;
-	isRefunded: boolean;
+interface Props {
+	receipt: Receipt | Receipt[];
 }
 
 function ReceiptBody({ receipt }: Props): JSX.Element {
@@ -31,11 +14,11 @@ function ReceiptBody({ receipt }: Props): JSX.Element {
 		<div className="Receipt-Container">
 			<div className="Receipt-Body">
 				<div className="Company-Details">
-					<p className="Company-Name">{receipt.store}</p>
-					<p className="Company-Logo">{receipt.store}</p>
+					<p className="Company-Name">Sainsbury</p>
+					<p className="Company-Logo">💩</p>
 				</div>
 				<div className="Time-Container">
-					<p className="Timestamp">{receipt.timeOfPurchase}</p>
+					<p className="Timestamp">12/04/2018</p>
 					<li className="Shop-Icon-Circle">
 						<p className="Shop-Icon">
 							<FiShoppingCart />

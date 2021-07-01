@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './containers/Receipt/Header/header';
 import * as service from './services/ServerAPIServices';
-import { Receipt } from './interfaces/types';
+import Receipt from './interfaces/types';
 
 function App(): JSX.Element {
 	const [receipts, setReceipts] = useState<Receipt>();
@@ -18,11 +18,11 @@ function App(): JSX.Element {
 			<div className="App">
 				<Switch>
 					<Route exact path="/receipt">
-						<Header receipt={receipts} />
+						<Header headerReceipt={receipts} />
 						{console.log(receipts)}
 					</Route>
 					<Route exact path="/receipt-list">
-						<Header receipt={receipts} />
+						<Header headerReceipt={receipts} />
 					</Route>
 				</Switch>
 			</div>
