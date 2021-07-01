@@ -16,9 +16,9 @@ export class StoresService {
 		return this.storesRepository.save(store);
 	}
 
-	findAll(): Promise<Store[]> {
-		return this.storesRepository.find();
-	}
+	// findAll(): Promise<Store[]> {
+	// 	return this.storesRepository.find();
+	// }
 
 	findOne(id: number): Promise<Store> {
 		return this.storesRepository.findOne(id);
