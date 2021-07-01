@@ -17,6 +17,7 @@ export const StoreSchema = new EntitySchema<Store>({
 		},
 		storeNumber: {
 			type: String,
+			unique: true,
 		},
 		telephoneNumber: {
 			type: String,
