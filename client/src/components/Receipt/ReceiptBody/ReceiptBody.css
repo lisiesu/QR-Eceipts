@@ -60,94 +60,6 @@
 	font-size: 25px;
 }
 
-.Item-List-Titles {
-	display: flex;
-	justify-content: space-between;
-	font-size: x-small;
-	margin-left: 0.7em;
-	margin-right: 0.7em;
-	font-weight: 600;
-	color: #248cce;
-}
-
-.Item-List-Container {
-	background: white;
-	border-radius: 8px;
-	max-height: 5em;
-	min-height: 5em;
-	margin-bottom: 1em;
-	overflow-y: auto;
-}
-/* Styles to make scrollbar always visilble */
-.Item-List-Container::-webkit-scrollbar {
-	-webkit-appearance: none;
-}
-
-.Item-List-Container::-webkit-scrollbar:vertical {
-	width: 10px;
-}
-
-.Item-List-Container::-webkit-scrollbar-thumb {
-	border-radius: 8px;
-	border: 2px solid white;
-	background-color: #ebedfd;
-}
-
-.List {
-	font-size: x-small;
-	list-style: none;
-	padding: 0.2em;
-}
-
-.Total-Container {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 1em;
-}
-
-.Price-Container {
-	display: flex;
-	flex-wrap: wrap;
-	border-radius: 8px;
-	background: white;
-	font-size: x-large;
-	font-weight: bold;
-	max-width: 4em;
-	min-width: 6em;
-	min-height: 2.8em;
-	padding: 0.2em;
-	color: #3d3232;
-}
-
-.Total-Title {
-	line-height: 1.2em;
-}
-
-.Total-Price {
-	line-height: 1em;
-}
-
-.Receipt-Id {
-	display: flex;
-	border-radius: 8px;
-	background: white;
-	font-size: xx-small;
-	min-height: 5em;
-	min-width: 10em;
-	align-items: flex-end;
-	justify-content: space-around;
-}
-
-.Message-Container {
-	display: flex;
-	flex-wrap: wrap;
-	border-radius: 8px;
-	background: white;
-	font-size: small;
-	margin-bottom: 1em;
-	padding: 0.3em;
-}
-
 .Receipt-Saved-Text {
 	display: flex;
 	flex-direction: column;
@@ -176,7 +88,7 @@
 	font-size: small;
 }
 
-.List-Button {
+.listButton {
 	display: flex;
 	justify-content: center;
 }
