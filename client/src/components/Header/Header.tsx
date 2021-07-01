@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+
 import ReceiptBody from '../Receipt/ReceiptBody/ReceiptBody';
 import Receipt from '../../interfaces/types';
 

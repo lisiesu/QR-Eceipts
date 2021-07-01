@@ -7,7 +7,6 @@ import Receipt from './interfaces/types';
 
 function App(): JSX.Element {
 	const [receipts, setReceipts] = useState<Receipt>();
-	//	const [products, setProducts] = useState<Product[]>([]);
 
 	useEffect(() => {
 		service.getReceiptByid('3').then((el) => setReceipts(el));
@@ -17,7 +16,7 @@ function App(): JSX.Element {
 		<BrowserRouter>
 			<div className="App">
 				<Switch>
-					<Route exact path="/receipt">
+					<Route exact path="/receipt/:id">
 						<Header headerReceipt={receipts} title="Your Receipt!" />
 					</Route>
 					<Route exact path="/receipt-list">
