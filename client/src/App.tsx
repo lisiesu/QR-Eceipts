@@ -1,22 +1,28 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './containers/Receipt/Header/header';
-import service from './services/ServerAPIServices';
-
-const userSeven = service.getUserReceipts('user7');
+import * as service from './services/ServerAPIServices';
+import { Receipt } from './interfaces/types';
 
 function App(): JSX.Element {
+	const [receipts, setReceipts] = useState<Receipt>();
+	//	const [products, setProducts] = useState<Product[]>([]);
+
+	useEffect(() => {
+		service.getReceiptByid('3').then((el) => setReceipts(el));
+	}, []);
+
 	return (
 		<Router>
-			{console.log(userSeven)}
 			<div className="App">
 				<Switch>
 					<Route exact path="/receipt">
-						<Header />
+						<Header receipt={receipts} />
+						{console.log(receipts)}
 					</Route>
 					<Route exact path="/receipt-list">
-						<Header />
+						<Header receipt={receipts} />
 					</Route>
 				</Switch>
 			</div>

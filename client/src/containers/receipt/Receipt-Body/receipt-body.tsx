@@ -4,7 +4,29 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
 import ItemsList from '../Items-List/items-list';
 
-function ReceiptBody(): JSX.Element {
+export interface Props {
+	receipt: {
+		id: string;
+		timeOfPurchase: string;
+		products: Product[];
+		total: number;
+		currency: string;
+		paymentMethod: string;
+		cardNumber: number;
+		misc: string;
+		user: string;
+		store: string;
+	};
+}
+
+export interface Product {
+	product: string;
+	price: number;
+	vat: number;
+	isRefunded: boolean;
+}
+
+function ReceiptBody({ receipt }: Props): JSX.Element {
 	return (
 		<div className="Receipt-Container">
 			<div className="Receipt-Body">
