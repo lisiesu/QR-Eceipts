@@ -27,7 +27,14 @@ export class UsersController {
 		if (usersFound.length !== 0) throw new ConflictException();
 		else {
 			const newUser = await this.usersService.create(createUserDto);
-			return this.hashidsService.encode(newUser);
+			const { id, address, dateOfBirth, email, name } = newUser;
+			return {
+				id: this.hashidsService.encode(id),
+				address,
+				dateOfBirth,
+				email,
+				name,
+			};
 		}
 	}
 
@@ -47,10 +54,11 @@ export class UsersController {
 	}
 
 	@Post(':id/receipts')
+	@HttpCode(200)
 	async getAllUserReceipts(@Param('id') id: string) {
 		const userId = this.hashidsService.decode(id);
 		const receipts = await this.usersService.findAllUserReceipts(userId);
 		if (receipts === undefined) throw new BadRequestException();
-		return receipts;
+		return { receipts };
 	}
 }
