@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateReceiptDto } from './create-receipt.dto';
+import { UpdateProductInterface } from 'receipts/entities/updateProduct.interface';
 
-export class UpdateReceiptDto extends PartialType(CreateReceiptDto) {}
+export class UpdateReceiptDto {
+	products: UpdateProductInterface[];
+
+	misc?: string;
+}

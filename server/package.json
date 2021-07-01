@@ -31,6 +31,7 @@
 		"dotenv": "^10.0.0",
 		"hashids": "^2.2.8",
 		"pg": "^8.6.0",
+		"qrcode": "^1.4.4",
 		"reflect-metadata": "^0.1.13",
 		"rimraf": "^3.0.2",
 		"rxjs": "^6.6.6",
