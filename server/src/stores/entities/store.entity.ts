@@ -29,6 +29,7 @@ export const StoreSchema = new EntitySchema<Store>({
 		receipts: {
 			type: 'one-to-many',
 			target: 'receipt',
+			inverseSide: 'store',
 		},
 		users: {
 			type: 'many-to-many',
