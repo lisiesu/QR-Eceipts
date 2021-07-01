@@ -34,4 +34,13 @@ export class UsersService {
 		const confirmation = await this.repository.delete(id);
 		return confirmation.affected !== 0;
 	}
+
+	async findAllUserReceipts(id: number) {
+		const found = await this.repository.findOne({
+			select: ['id'],
+			where: { id },
+			relations: ['receipts'],
+		});
+		return found !== undefined ? found.receipts : undefined;
+	}
 }

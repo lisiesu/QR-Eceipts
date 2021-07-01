@@ -31,9 +31,11 @@ export class UsersController {
 		}
 	}
 
-	@Patch(':id')
+	@Patch(':id') // TODO
 	update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-		return this.usersService.update(+id, updateUserDto);
+		// return this.usersService.update(+id, updateUserDto);
+		this.usersService.update(+id, updateUserDto);
+		throw new BadRequestException();
 	}
 
 	@Delete(':id')
@@ -42,5 +44,13 @@ export class UsersController {
 		const userId = this.hashidsService.decode(id);
 		const isUserRemoved = await this.usersService.remove(userId);
 		if (!isUserRemoved) throw new BadRequestException();
+	}
+
+	@Post(':id/receipts')
+	async getAllUserReceipts(@Param('id') id: string) {
+		const userId = this.hashidsService.decode(id);
+		const receipts = await this.usersService.findAllUserReceipts(userId);
+		if (receipts === undefined) throw new BadRequestException();
+		return receipts;
 	}
 }
