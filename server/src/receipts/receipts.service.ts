@@ -17,9 +17,8 @@ export class ReceiptsService {
 		return this.receiptsRepository.save(createReceiptDto);
 	}
 
-	findAll(queries) {
-		if (queries) return this.receiptsRepository.find(queries);
-		return this.receiptsRepository.find();
+	findAll(id) {
+		return this.receiptsRepository.find({ where: { user: id } });
 	}
 
 	findOne(id: number) {

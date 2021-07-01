@@ -4,11 +4,8 @@ import { Request, Response, NextFunction } from 'express';
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
 	use(req: Request, res: Response, next: NextFunction) {
-		if (req.headers.bearer) {
-			console.log('header exists');
-		} else {
-			console.log('no header');
-		}
+		// const header: string = req.headers.bearer as string;
+		// if (storage[header]) {}
 		next();
 	}
 }

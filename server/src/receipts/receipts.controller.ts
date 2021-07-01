@@ -8,32 +8,15 @@ import {
 	Delete,
 	Query,
 	Req,
+	Res,
 } from '@nestjs/common';
-import QRCode = require('qrcode');
-import { Request } from 'express';
+import { Request, Response } from 'express';
+import QRCode from '../qrcode/qrcodeGenerator';
 import { ReceiptsService } from './receipts.service';
 import { CreateReceiptDto } from './dto/create-receipt.dto';
 // import { ReceiptDto } from './dto/receipt.dto';
 import { UpdateReceiptDto } from './dto/update-receipt.dto';
 // import error from 'express';
-
-function generateQrCode(url: string): string {
-	const options = {
-		errorCorrectionLevel: 'H',
-		type: 'svg',
-		color: {
-			dark: '#000000',
-			light: '#ffffff',
-		},
-	};
-	const qrcode = QRCode.toString(url, options, function (error, string) {
-		if (error) {
-			return error;
-		}
-		return string;
-	});
-	return qrcode;
-}
 
 @Controller('receipts')
 export class ReceiptsController {
@@ -44,7 +27,7 @@ export class ReceiptsController {
 		console.log(createReceiptDto);
 		const receipt = await this.receiptsService.create(createReceiptDto);
 		const url = `localhost:3000/receipts/${receipt.id}`;
-		const qrcode = generateQrCode(url);
+		const qrcode = QRCode.generate(url);
 		return { qrcode };
 	}
 
@@ -70,19 +53,20 @@ export class ReceiptsController {
 	// }
 
 	@Get()
-	findAll(@Query() queries) {
-		// if authorised as user, return all receipts for that user.
-		// if authorised as vendor, return all receipts for user if speified in query
-		// using user Auth
-		// filtered by user
-
-		// optional query: ?clientId=74917
-		const receipts = this.receiptsService.findAll(queries);
-		return receipts;
+	async findAll(@Req() request: Request, @Res() response: Response) {
+		const cookie = request.cookies;
+		console.log(cookie.id);
+		let receipts: any = 'you are not logged in';
+		if (cookie) {
+			receipts = await this.receiptsService.findAll(cookie.id);
+		}
+		// response.cookie('id', 1);
+		response.send(receipts);
 	}
 
 	@Get(':id')
-	findOne(@Req() request: Request) {
+	findOne(@Req() request: Request, @Query() queries) {
+		console.log(queries);
 		return request.headers;
 		// return this.receiptsService.findOne(id);
 	}
