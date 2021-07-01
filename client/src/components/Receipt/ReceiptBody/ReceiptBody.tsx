@@ -40,15 +40,17 @@ function ReceiptBody({ receipt }: Props): JSX.Element {
 					</li>
 					<p className="Saved-Message">Your receipt has been saved!</p>
 				</div>
-				<button
-					className="listButton"
-					type="submit"
-					onClick={() => {
-						clickHandler();
-					}}
-				>
-					View all your receipts
-				</button>
+				<div className="listButton">
+					<button
+						className="Button-Text"
+						type="submit"
+						onClick={() => {
+							clickHandler();
+						}}
+					>
+						View all your receipts
+					</button>
+				</div>
 			</div>
 		</div>
 	);
