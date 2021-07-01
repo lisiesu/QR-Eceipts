@@ -16,7 +16,7 @@ export const ReceiptSchema = new EntitySchema<Receipt>({
 			type: 'jsonb',
 		},
 		total: {
-			type: Number,
+			type: 'numeric',
 		},
 		currency: {
 			type: String,
