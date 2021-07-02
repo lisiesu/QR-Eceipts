@@ -4,6 +4,12 @@ import './App.css';
 import Header from './components/Header/Header';
 
 function App(): JSX.Element {
+	const [receipts, setReceipts] = useState<Receipt>();
+
+	useEffect(() => {
+		service.getReceiptByid('3').then((el) => setReceipts(el));
+	}, []);
+
 	return (
 		<BrowserRouter>
 			<div className="App">
