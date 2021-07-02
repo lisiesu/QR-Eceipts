@@ -50,21 +50,23 @@ export class ReceiptsController {
 
 	@Get(':id')
 	async findOne(
-		@Param() id: string,
+		@Param('id') id: string,
 		@Req() request: Request,
 		@Res() response: Response,
 	) {
-		const receipt = this.receiptsService.findOne(+id);
-		const userId = request.cookies;
+		const receipt = await this.receiptsService.findOne(+id);
+		const userId = request.cookies.id;
+		console.log(userId, +id);
 		if (userId) {
-			await this.receiptsService.update(id, { user: userId });
+			await this.receiptsService.update(+id, { user: userId });
 		}
+		console.log(receipt);
 		response.send({ ...receipt, addedToDatabase: true });
 	}
 
 	@Patch()
 	update(@Param('id') id: string, @Body() updateReceiptDto: UpdateReceiptDto) {
-		this.receiptsService.update(id, updateReceiptDto);
+		this.receiptsService.update(+id, updateReceiptDto);
 		return UpdateReceiptDto;
 	}
 
