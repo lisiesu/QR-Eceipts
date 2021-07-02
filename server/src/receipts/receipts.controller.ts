@@ -32,7 +32,7 @@ export class ReceiptsController {
 
 	@Post()
 	async create(@Body() createReceiptDto: CreateReceiptDto) {
-		const receipt = await this.receiptsService.create(createReceiptDto);
+		const receipt: any = await this.receiptsService.create(createReceiptDto);
 		const url = `${BASE_URL}/${receipt.id}`;
 		const qrcode = QRCode.generate(url);
 		return { qrcode };
