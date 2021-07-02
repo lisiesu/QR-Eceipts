@@ -3,7 +3,6 @@ import {
 	Get,
 	Post,
 	Body,
-	Patch,
 	Param,
 	Delete,
 	HttpCode,
@@ -13,7 +12,6 @@ import {
 import HashidsService from 'services/hashid/hashid.service';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -37,13 +35,6 @@ export class UsersController {
 				name,
 			};
 		}
-	}
-
-	@Patch(':id') // TODO
-	update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-		// return this.usersService.update(+id, updateUserDto);
-		this.usersService.update(+id, updateUserDto);
-		throw new BadRequestException();
 	}
 
 	@Delete(':id')
