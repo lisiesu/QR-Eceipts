@@ -36,3 +36,4 @@ get(baseUrl + ‘/receipts:receiptId’)
 The server will respond with receipt information that can be displayed using html.
 If the user is authorised with a cookie, then it also gets added to their db.
 Should display the message added to DB if they are authorised and adding to db was successful.
+*/
