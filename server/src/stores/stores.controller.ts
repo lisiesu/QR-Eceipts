@@ -37,8 +37,10 @@ export class StoresController {
 	@Get(':id')
 	async findOne(@Param('id') id: string) {
 		const storeId = this.hashidsService.decode(id);
+		console.log(id);
+		console.log(storeId);
 		const store = await this.storesService.findOne(storeId);
-		if (store === undefined) throw new BadRequestException();
+		if (store === undefined) throw new BadRequestException('No such store');
 		const { address, logo, name, storeNumber, telephoneNumber, website } =
 			store;
 
