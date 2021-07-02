@@ -21,12 +21,15 @@ function ReceiptBody(): JSX.Element {
 	const [receipt, setReceipt] = useState<Receipt>();
 
 	useEffect(() => {
-		service.getReceiptByid('3').then((el) => setReceipt(el));
+		service.getReceiptByid('1').then((el) => setReceipt(el));
 	}, []);
+
+	// useEffect(() => {
+	// 	service.getUserReceipt(id).then((el) => setReceipt(el));
+	// }, []);
 
 	return (
 		<div className="Receipt-Container">
-			<h1>{id}</h1>
 			{receipt ? (
 				<div className="Receipt-Body">
 					<div className="Company-Details">
