@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import Receipt from './entities/receipt.interface';
 import { ReceiptSchema } from './entities/receipt.entity';
-import { CreateReceiptDto } from './dto/create-receipt.dto';
-import { UpdateReceiptDto } from './dto/update-receipt.dto';
+import CreateReceiptDto from './dto/create-receipt.dto';
+import UpdateReceiptDto from './dto/update-receipt.dto';
 
 @Injectable()
 export class ReceiptsService {

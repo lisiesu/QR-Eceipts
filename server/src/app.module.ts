@@ -11,7 +11,8 @@ import AppService from './app.service';
 import { UserSchema } from './users/entities/user.entity';
 import { StoreSchema } from './stores/entities/store.entity';
 import { ReceiptSchema } from './receipts/entities/receipt.entity';
-import { CategorySchema } from './receipts/entities/category.entity';
+import { CategorySchema } from './categories/entities/category.entity';
+import { CategoryModule } from './categories/categories.module';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ dotenv.config();
 		ReceiptsModule,
 		UsersModule,
 		StoresModule,
+		CategoryModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

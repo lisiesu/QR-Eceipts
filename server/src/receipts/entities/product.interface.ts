@@ -1,7 +1,7 @@
 export default class ProductInterface {
 	id: string;
 
-	prodcut: string;
+	product: string;
 
 	price: number;
 

@@ -10,11 +10,10 @@ import {
 	Res,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import QRCode from '../qrcode/qrcodeGenerator';
+import QRCode from '../helpers/qrcode/qrcodeGenerator';
 import { ReceiptsService } from './receipts.service';
-import { CreateReceiptDto } from './dto/create-receipt.dto';
-// import { ReceiptDto } from './dto/receipt.dto';
-import { UpdateReceiptDto } from './dto/update-receipt.dto';
+import CreateReceiptDto from './dto/create-receipt.dto';
+import UpdateReceiptDto from './dto/update-receipt.dto';
 // import error from 'express';
 const { BASE_URL } = process.env;
 
