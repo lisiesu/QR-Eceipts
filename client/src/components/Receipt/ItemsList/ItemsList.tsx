@@ -9,28 +9,22 @@ interface Props {
 }
 
 function ItemsList({ products }: Props): JSX.Element {
-	const items = products.forEach((el) => <Items item={el.product} />);
+	const items = products.map((el) => (
+		<Items key={el.id} item={el.product} price={el.price} />
+	));
 	return (
 		<div>
-			{console.log(items)}
+			{console.log(products)}
 			<div className="Item-List-Titles">
 				<p>Item</p>
 				<p>Price</p>
 			</div>
 			<div className="Item-List-Container">
-				<ul className="List">
-					{items}
-					<li className="List-item">Pizza Margarita</li>
-					<li className="List-item">Strongbow Cider</li>
-					<li className="List-item">Chicken breast fillets</li>
-					<li className="List-item">Ice cream</li>
-					<li className="List-item">Chocolate Chip Cookies</li>
-					<li className="List-item">Cheese Crackers</li>
-				</ul>
+				<ul className="List">{items}</ul>
 			</div>
 			<PriceAndQR />
 			<div className="Message-Container">
-				<p>Thank you for shopping at Sainsbury&apos;s</p>
+				<p>Thank you for shopping at Tesco&apos;s, have a great day!</p>
 			</div>
 		</div>
 	);

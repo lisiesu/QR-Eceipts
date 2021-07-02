@@ -4,14 +4,15 @@ import { ProductInterface } from '../../../interfaces/types';
 
 interface Props {
 	item: ProductInterface['product'];
+	price: ProductInterface['price'];
 }
 
-function Items({ item }: Props): JSX.Element {
+function Items({ item, price }: Props): JSX.Element {
 	return (
 		<div>
-			{console.log('hi', item)}
-
-			<li>{item}</li>
+			<li>
+				{item}, {price}
+			</li>
 		</div>
 	);
 }
