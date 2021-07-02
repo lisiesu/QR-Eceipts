@@ -1,5 +1,5 @@
 import * as DATA from './Http-data';
-import Receipt from '../interfaces/types';
+import { Receipt } from '../interfaces/types';
 
 // const baseUrl = 'http://localhost:3000';
 
