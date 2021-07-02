@@ -1,9 +1,8 @@
-import Category from 'receipts/entities/category.interface';
 import ProductInterface from 'receipts/entities/product.interface';
+import Store from 'receipts/entities/store.interface';
+import Category from 'receipts/entities/category.interface';
 
-export class CreateReceiptDto {
-	id?: string;
-
+export default class CreateReceiptDto {
 	timeOfPurchase: Date;
 
 	products: ProductInterface[];
@@ -18,9 +17,7 @@ export class CreateReceiptDto {
 
 	misc?: string;
 
-	store: string;
-
-	user?: string;
+	store: Store;
 
 	category: Category;
 }

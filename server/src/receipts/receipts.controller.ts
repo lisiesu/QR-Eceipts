@@ -6,82 +6,60 @@ import {
 	Patch,
 	Param,
 	Delete,
-	Query,
+	Req,
+	Res,
 } from '@nestjs/common';
-import QRCode = require('qrcode');
+import { Request, Response } from 'express';
+import QRCode from '../helpers/qrcode/qrcodeGenerator';
 import { ReceiptsService } from './receipts.service';
-import { CreateReceiptDto } from './dto/create-receipt.dto';
-// import { ReceiptDto } from './dto/receipt.dto';
-import { UpdateReceiptDto } from './dto/update-receipt.dto';
+import CreateReceiptDto from './dto/create-receipt.dto';
+import UpdateReceiptDto from './dto/update-receipt.dto';
 // import error from 'express';
-
-function generateQrCode(url: string): string {
-	const options = {
-		errorCorrectionLevel: 'H',
-		type: 'svg',
-		color: {
-			dark: '#000000',
-			light: '#ffffff',
-		},
-	};
-	const qrcode = QRCode.toString(url, options, function (error, string) {
-		if (error) {
-			return error;
-		}
-		return string;
-	});
-	return qrcode;
-}
+const { BASE_URL } = process.env;
 
 @Controller('receipts')
 export class ReceiptsController {
 	constructor(private readonly receiptsService: ReceiptsService) {}
 
+	@Get('/provideCookie/:userid')
+	async provideCookie(
+		@Res() response: Response,
+		@Param('userid') userId: string,
+	) {
+		response.cookie('id', userId);
+		response.send();
+	}
+
 	@Post()
 	async create(@Body() createReceiptDto: CreateReceiptDto) {
-		console.log(createReceiptDto);
-		const receipt = await this.receiptsService.create(createReceiptDto);
-		const url = `localhost:3000/receipts/${receipt.id}`;
-		const qrcode = generateQrCode(url);
+		const receipt: any = await this.receiptsService.create(createReceiptDto);
+		const url = `${BASE_URL}/${receipt.id}`;
+		const qrcode = QRCode.generate(url);
 		return { qrcode };
 	}
 
-	// @Post(':userId/:receiptId')
-	// transferToUser(
-	// 	@Param('receiptId') receiptId: string,
-	// 	@Param('userId') userId: string,
-	// ) {
-	// 	return {
-	// 		userId,
-	// 		receiptId,
-	// 	};
-	// }
-
-	// @Get(':userId')
-	// FindAllForKey(@Param('userId') userId: string, @Query() queries) {
-	// 	return { userId, ...queries };
-	// }
-
-	// @Get(':userId')
-	// findAllForOneUser(@Param('userId') userId: string) {
-	// 	return userId;
-	// }
-
 	@Get()
-	findAll(@Query() queries) {
-		// if authorised as user, return all receipts for that user.
-		// if authorised as vendor, return all receipts for user if speified in query
-		// using user Auth
-		// filtered by user
-
-		// optional query: ?clientId=74917
-		const receipts = this.receiptsService.findAll(queries);
-		return receipts;
+	async findAll(@Req() request: Request, @Res() response: Response) {
+		const cookie = request.cookies;
+		let receipts: any = 'you are not logged in';
+		if (cookie) {
+			receipts = await this.receiptsService.findAll(cookie.id);
+		}
+		response.send(receipts);
 	}
 
 	@Get(':id')
-	findOne(@Param('id') id: number) {
-		return this.receiptsService.findOne(id);
+	async findOne(
+		@Param() id: string,
+		@Req() request: Request,
+		@Res() response: Response,
+	) {
+		const receipt = this.receiptsService.findOne(+id);
+		const userId = request.cookies;
+		if (userId) {
+			await this.receiptsService.update(id, { user: userId });
+		}
+		response.send({ ...receipt, addedToDatabase: true });
 	}
 
 	@Patch()
@@ -94,4 +72,6 @@ export class ReceiptsController {
 	remove(@Param('id') id: number) {
 		return this.receiptsService.remove(id);
 	}
+
+	// @Query() queries
 }

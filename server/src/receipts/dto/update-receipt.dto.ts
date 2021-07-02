@@ -1,7 +1,9 @@
-import { UpdateProductInterface } from 'receipts/entities/updateProduct.interface';
+import UpdateProductInterface from '../entities/updateProduct.interface';
 
-export class UpdateReceiptDto {
-	products: UpdateProductInterface[];
+export default class UpdateReceiptDto {
+	products?: UpdateProductInterface[];
+
+	user?: string;
 
 	misc?: string;
 }
