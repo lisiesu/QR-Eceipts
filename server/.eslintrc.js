@@ -31,9 +31,9 @@ module.exports ={
     '@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/no-unused-vars': 'error',
 		'class-methods-use-this': 'off',
-		'import/prefer-default-export':'warn',
+		'import/prefer-default-export':'off',
 		'import/no-extraneous-dependencies':'warn',
-		'no-useless-constructor':'warn',
+		'no-useless-constructor':'off',
     'no-console': 'off',
     'import/extensions': [
       'error',
