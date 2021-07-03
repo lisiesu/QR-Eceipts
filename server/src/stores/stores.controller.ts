@@ -5,6 +5,7 @@ import {
 	Body,
 	Param,
 	BadRequestException,
+	ConflictException,
 } from '@nestjs/common';
 import HashidsService from 'services/hashid/hashid.service';
 import { StoresService } from './stores.service';
@@ -22,7 +23,7 @@ export class StoresController {
 		const storeInDB = await this.storesService.alreadyInDB(
 			createStoreDto.storeNumber,
 		);
-		if (storeInDB) throw new BadRequestException('Store already exists');
+		if (storeInDB) throw new ConflictException('Store already exists');
 		const store = await this.storesService.create(createStoreDto);
 		const { id, address, logo, name, storeNumber, telephoneNumber, website } =
 			store;
