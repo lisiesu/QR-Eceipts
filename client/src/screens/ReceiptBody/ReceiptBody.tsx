@@ -3,9 +3,9 @@ import './ReceiptBody.css';
 import { FiShoppingCart } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
-import ItemsList from '../ItemsList/ItemsList';
-import { ProductInterface, Receipt } from '../../../interfaces/types';
-import * as service from '../../../services/ServerAPIServices';
+import ItemsList from '../../components/Receipt/ItemsList/ItemsList';
+import { ProductInterface, Receipt } from '../../interfaces/types';
+import * as service from '../../services/ServerAPIServices';
 
 interface Props {
 	receipt: Receipt;

@@ -6,7 +6,7 @@ const cookie =
 	'MySuperCookie=IhateAPIS; Path=/; Expires=Fri, 01 Jul 2022 20:54:57 GMT;';
 const userId = 'nel5a';
 
-export const getUserReceipts = async (userId: string): Promise<Receipt[]> => {
+export const getUserReceipts = async (user_Id: string): Promise<Receipt[]> => {
 	let response: Receipt[];
 	try {
 		await fetch(`${baseUrl}/users/${userId}/receipts`, {

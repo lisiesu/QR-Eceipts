@@ -1,10 +1,8 @@
 import React from 'react';
 import './ReceiptList.css';
-import { FiShoppingCart } from 'react-icons/fi';
-import { BiCheckCircle } from 'react-icons/bi';
 import { useHistory } from 'react-router-dom';
 import ItemsList from '../ItemsList/ItemsList';
-import Receipt from '../../../interfaces/types';
+import { Receipt } from '../../../interfaces/types';
 
 interface Props {
 	receipt: Receipt | Receipt[];
@@ -26,17 +24,12 @@ function ReceiptList({ receipt }: Props): JSX.Element {
 				<div className="Time-Container">
 					<p className="Timestamp">12/04/2018</p>
 					<li className="Shop-Icon-Circle">
-						<p className="Shop-Icon">
-							<FiShoppingCart />
-						</p>
+						<p className="Shop-Icon" />
 					</li>
 				</div>
-				<ItemsList />
 				<div className="Receipt-Saved-Text">
 					<li className="Tick-Container">
-						<p className="Tick">
-							<BiCheckCircle />
-						</p>
+						<p className="Tick" />
 					</li>
 					<p className="Saved-Message">Your receipt has been saved!</p>
 				</div>
