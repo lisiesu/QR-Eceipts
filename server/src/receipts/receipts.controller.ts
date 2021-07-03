@@ -72,7 +72,7 @@ export class ReceiptsController {
 		const receipt = await this.receiptsService.findOne(receiptId);
 		const userId: number = this.hashidsService.decode(response.locals.userId);
 		let receiptUpdated = false;
-		if (userId) {
+		if (userId && receipt) {
 			await this.receiptsService.update(receiptId, { user: userId });
 			receiptUpdated = true;
 		}
