@@ -1,3 +1,4 @@
+import * as dotenv from 'dotenv';
 import {
 	Controller,
 	Get,
@@ -6,65 +7,81 @@ import {
 	Patch,
 	Param,
 	Delete,
-	Req,
 	Res,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
-import QRCode from '../helpers/qrcode/qrcodeGenerator';
+import { Response } from 'express';
+import jwt = require('jsonwebtoken');
+import HashidsService from 'services/hashid/hashid.service';
+import QRCodeService from '../services/qrcode/qrcode.service';
 import { ReceiptsService } from './receipts.service';
 import CreateReceiptDto from './dto/create-receipt.dto';
 import UpdateReceiptDto from './dto/update-receipt.dto';
+
+dotenv.config();
 // import error from 'express';
-const { BASE_URL } = process.env;
+const { BASE_URL, SECRET_KEY } = process.env;
 
 @Controller('receipts')
 export class ReceiptsController {
-	constructor(private readonly receiptsService: ReceiptsService) {}
+	constructor(
+		private readonly receiptsService: ReceiptsService,
+		private hashidsService: HashidsService,
+		private qrCodeService: QRCodeService,
+	) {}
 
 	@Get('/provideCookie/:userid')
 	async provideCookie(
 		@Res() response: Response,
 		@Param('userid') userId: string,
 	) {
-		response.cookie('id', userId);
+		const hashedId = this.hashidsService.encode(+userId);
+		const encodedUserId = jwt.sign({ userId: hashedId }, SECRET_KEY, {
+			expiresIn: '3h',
+		});
+		response.cookie('userId', encodedUserId);
 		response.send();
 	}
 
 	@Post()
 	async create(@Body() createReceiptDto: CreateReceiptDto) {
 		const receipt: any = await this.receiptsService.create(createReceiptDto);
-		const url = `${BASE_URL}/${receipt.id}`;
-		const qrcode = QRCode.generate(url);
+		const hashedId = this.hashidsService.encode(receipt.id);
+		const url = `${BASE_URL}/${hashedId}`;
+		const qrcode = this.qrCodeService.generate(url);
+		console.log(hashedId);
 		return { qrcode };
 	}
 
 	@Get()
-	async findAll(@Req() request: Request, @Res() response: Response) {
-		const cookie = request.cookies;
-		let receipts: any = 'you are not logged in';
-		if (cookie) {
-			receipts = await this.receiptsService.findAll(cookie.id);
+	async findAll(@Res() response: Response) {
+		const userId: number = this.hashidsService.decode(response.locals.userId);
+		let receipts: any = 'User account not found!';
+		if (userId) {
+			receipts = await this.receiptsService.findAll(userId);
+			receipts = receipts.forEach((receipt) => {
+				const hashedId = this.hashidsService.encode(receipt.id);
+				return { id: hashedId, ...receipt };
+			});
 		}
 		response.send(receipts);
 	}
 
 	@Get(':id')
-	async findOne(
-		@Param() id: string,
-		@Req() request: Request,
-		@Res() response: Response,
-	) {
-		const receipt = this.receiptsService.findOne(+id);
-		const userId = request.cookies;
-		if (userId) {
-			await this.receiptsService.update(id, { user: userId });
+	async findOne(@Param('id') hashedId: string, @Res() response: Response) {
+		const receiptId: number = this.hashidsService.decode(hashedId);
+		const receipt = await this.receiptsService.findOne(receiptId);
+		const userId: number = this.hashidsService.decode(response.locals.userId);
+		let receiptUpdated = false;
+		if (userId && receipt) {
+			await this.receiptsService.update(receiptId, { user: userId });
+			receiptUpdated = true;
 		}
-		response.send({ ...receipt, addedToDatabase: true });
+		response.send({ ...receipt, id: hashedId, receiptUpdated });
 	}
 
 	@Patch()
 	update(@Param('id') id: string, @Body() updateReceiptDto: UpdateReceiptDto) {
-		this.receiptsService.update(id, updateReceiptDto);
+		this.receiptsService.update(+id, updateReceiptDto);
 		return UpdateReceiptDto;
 	}
 
