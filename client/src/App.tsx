@@ -12,6 +12,8 @@ function App(): JSX.Element {
 				<Switch>
 					<Route exact path="/receipt/:id" component={ReceiptBody} />
 					<Route exact path="/receipt-list" component={ReceiptBody} />
+					<Route exact path="/signup" component={ReceiptBody} />
+					<Route exact path="/login" component={ReceiptBody} />
 				</Switch>
 			</div>
 		</BrowserRouter>
