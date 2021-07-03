@@ -1,6 +1,8 @@
+import { Injectable } from '@nestjs/common';
 import qrcode = require('qrcode');
 
-class CodeMaker {
+@Injectable()
+export default class QRCode {
 	generate(url) {
 		const options = {
 			errorCorrectionLevel: 'H',
@@ -23,7 +25,3 @@ class CodeMaker {
 		return generatedCode;
 	}
 }
-
-const QRCode = new CodeMaker();
-
-export default QRCode;

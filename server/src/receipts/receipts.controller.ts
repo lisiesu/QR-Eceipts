@@ -12,7 +12,7 @@ import {
 import { Response } from 'express';
 import jwt = require('jsonwebtoken');
 import HashidsService from 'services/hashid/hashid.service';
-import QRCode from '../helpers/qrcode/qrcodeGenerator';
+import QRCodeService from '../services/qrcode/qrcode.service';
 import { ReceiptsService } from './receipts.service';
 import CreateReceiptDto from './dto/create-receipt.dto';
 import UpdateReceiptDto from './dto/update-receipt.dto';
@@ -26,6 +26,7 @@ export class ReceiptsController {
 	constructor(
 		private readonly receiptsService: ReceiptsService,
 		private hashidsService: HashidsService,
+		private qrCodeService: QRCodeService,
 	) {}
 
 	@Get('/provideCookie/:userid')
@@ -46,7 +47,7 @@ export class ReceiptsController {
 		const receipt: any = await this.receiptsService.create(createReceiptDto);
 		const hashedId = this.hashidsService.encode(receipt.id);
 		const url = `${BASE_URL}/${hashedId}`;
-		const qrcode = QRCode.generate(url);
+		const qrcode = this.qrCodeService.generate(url);
 		console.log(hashedId);
 		return { qrcode };
 	}
