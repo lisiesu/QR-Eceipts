@@ -29,3 +29,12 @@ export interface Category {
 	id: number;
 	name: string;
 }
+
+export interface User {
+	id?: string;
+	address: string;
+	dateOfBirth: string;
+	email: string;
+	name: string;
+	password?: string;
+}
