@@ -5,6 +5,7 @@ import {
 	Body,
 	Param,
 	BadRequestException,
+	ConflictException,
 } from '@nestjs/common';
 import HashidsService from 'services/hashid/hashid.service';
 import { StoresService } from './stores.service';
@@ -19,6 +20,10 @@ export class StoresController {
 
 	@Post()
 	async create(@Body() createStoreDto: CreateStoreDto) {
+		const storeInDB = await this.storesService.alreadyInDB(
+			createStoreDto.storeNumber,
+		);
+		if (storeInDB) throw new ConflictException('Store already exists');
 		const store = await this.storesService.create(createStoreDto);
 		const { id, address, logo, name, storeNumber, telephoneNumber, website } =
 			store;
@@ -37,8 +42,6 @@ export class StoresController {
 	@Get(':id')
 	async findOne(@Param('id') id: string) {
 		const storeId = this.hashidsService.decode(id);
-		console.log(id);
-		console.log(storeId);
 		const store = await this.storesService.findOne(storeId);
 		if (store === undefined) throw new BadRequestException('No such store');
 		const { address, logo, name, storeNumber, telephoneNumber, website } =
