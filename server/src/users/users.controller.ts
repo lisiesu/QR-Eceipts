@@ -81,11 +81,9 @@ export class UsersController {
 	) {
 		const userId = this.hashidsService.decode(id);
 		const isUserRemoved = await this.usersService.remove(userId);
-		if (!isUserRemoved) throw new BadRequestException();
+		if (!isUserRemoved) throw new BadRequestException("User doesn't exist");
 		response.clearCookie('userId');
-		return {
-			message: 'User was successfully removed',
-		};
+		return 'User was successfully removed';
 	}
 
 	@Get(':id/receipts')
@@ -93,7 +91,8 @@ export class UsersController {
 	async getAllUserReceipts(@Param('id') id: string) {
 		const userId = this.hashidsService.decode(id);
 		const receiptsFound = await this.usersService.findAllUserReceipts(userId);
-		if (receiptsFound === undefined) throw new BadRequestException();
+		if (receiptsFound === undefined)
+			throw new BadRequestException('No receipts here');
 		const receipts = receiptsFound.map((receipt) => ({
 			...receipt,
 			id: this.hashidsService.encode(receipt.id),
