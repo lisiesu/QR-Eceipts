@@ -6,20 +6,27 @@ const cookie =
 	'MySuperCookie=IhateAPIS; Path=/; Expires=Fri, 01 Jul 2022 20:54:57 GMT;';
 const userId = 'nel5a';
 
-export const getUserReceipts = async (user_Id: string): Promise<Receipt[]> => {
-	let response: Receipt[];
-	try {
-		await fetch(`${baseUrl}/users/${userId}/receipts`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-		return response;
-	} catch (err) {
-		console.log(err);
-		return err;
-	}
+// export const getUserReceipts = async (user_Id: string): Promise<Receipt[]> => {
+// 	try {
+// 		const response = await fetch(`${baseUrl}/users/${userId}/receipts`, {
+// 			method: 'POST',
+// 			headers: {
+// 				'Content-Type': 'application/json',
+// 			},
+// 		});
+// 		return await response.json();
+// 	} catch (err) {
+// 		console.log(err);
+// 		return err;
+// 	}
+// };
+
+export const getUserReceipts = (user_Id: string): Receipt[] => {
+	const userReceipts = [];
+	DATA.forEach((element) => {
+		if (element.user && element.user === user_Id) userReceipts.push(element);
+	});
+	return userReceipts;
 };
 
 export const createUser = async (user: User): Promise<User> => {

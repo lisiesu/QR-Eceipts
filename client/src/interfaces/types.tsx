@@ -7,6 +7,7 @@ export interface Receipt {
 	paymentMethod: string;
 	cardNumber: string;
 	misc?: string;
+	user: string;
 	store: Store;
 	category: Category;
 }
@@ -21,13 +22,14 @@ export interface ProductInterface {
 export interface Store {
 	id: number;
 	name: string;
-	address: string;
-	logo: string;
+	address?: string;
+	logo?: string;
 	storeNumber: string;
 }
 export interface Category {
 	id: number;
 	name: string;
+	logotype: string;
 }
 
 export interface User {

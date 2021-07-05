@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import ReceiptBody from './screens/ReceiptBody/ReceiptBody';
+import ReceiptList from './screens/ReceiptList/ReceiptList';
 
 function App(): JSX.Element {
 	return (
@@ -11,7 +12,7 @@ function App(): JSX.Element {
 				<Header />
 				<Switch>
 					<Route exact path="/receipt/:id" component={ReceiptBody} />
-					<Route exact path="/receipt-list" component={ReceiptBody} />
+					<Route exact path="/receipt-list" component={ReceiptList} />
 					<Route exact path="/signup" component={ReceiptBody} />
 					<Route exact path="/login" component={ReceiptBody} />
 				</Switch>
