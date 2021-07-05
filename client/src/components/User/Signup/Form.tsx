@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { User } from '../../../interfaces/types';
+import * as apiClient from '../../../services/ServerAPIServices';
+
 import './Form.css';
 
 function UserSignupForm(): JSX.Element {
-	const [input, setInput] = useState({
+	const user: User = {
 		name: '',
 		email: '',
 		password: '',
 		dateOfBirth: '',
 		address: '',
-	});
+	};
+
+	const [input, setInput] = useState(user);
 
 	function handleChange(event) {
 		console.log(event);
@@ -16,9 +21,12 @@ function UserSignupForm(): JSX.Element {
 		setInput({ ...input, [name]: value });
 	}
 
-	function handleSubmit(event) {
+	async function handleSubmit(event) {
 		event.preventDefault();
-		console.log(input);
+		const createdUser = await apiClient.createUser(input);
+		console.log(createdUser.id);
+		// TODO save user state to global state
+		// TODO redirect to receipt list
 	}
 
 	return (

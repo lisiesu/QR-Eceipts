@@ -2,6 +2,7 @@ import * as DATA from './Http-data';
 import { Receipt, User } from '../interfaces/types';
 
 const baseUrl = 'https://66d6f4ba-d92e-490a-b764-04768e8484be.mock.pstmn.io';
+const localUrl = 'http://localhost:3005';
 const cookie =
 	'MySuperCookie=IhateAPIS; Path=/; Expires=Fri, 01 Jul 2022 20:54:57 GMT;';
 const userId = 'nel5a';
@@ -24,7 +25,7 @@ export const getUserReceipts = async (user_Id: string): Promise<Receipt[]> => {
 
 export const createUser = async (user: User): Promise<User> => {
 	try {
-		const response = await fetch(`${baseUrl}/users`, {
+		const response = await fetch(`${localUrl}/users`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -33,7 +34,7 @@ export const createUser = async (user: User): Promise<User> => {
 		});
 		return await response.json();
 	} catch (err) {
-		console.log(err);
+		console.error(err);
 		return err;
 	}
 };
