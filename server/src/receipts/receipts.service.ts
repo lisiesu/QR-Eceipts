@@ -25,7 +25,7 @@ export class ReceiptsService {
 		return this.receiptsRepository.findOne(id);
 	}
 
-	update(id: string, updateReceiptDto: UpdateReceiptDto) {
+	update(id: number, updateReceiptDto: UpdateReceiptDto) {
 		const newId = Number(id);
 		return this.receiptsRepository.update(newId, updateReceiptDto);
 	}

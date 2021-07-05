@@ -17,6 +17,7 @@ export const CategorySchema = new EntitySchema<Category>({
 		receipts: {
 			type: 'one-to-many',
 			target: 'receipt',
+			inverseSide: 'category',
 		},
 	},
 });

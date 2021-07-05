@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { UserSchema } from './entities/user.entity';
 import User from './entities/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -24,10 +23,6 @@ export class UsersService {
 			where: { email },
 		});
 		return users;
-	}
-
-	update(id: number, updateUserDto: UpdateUserDto) {
-		return updateUserDto;
 	}
 
 	async remove(id: number): Promise<boolean> {
