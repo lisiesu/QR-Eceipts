@@ -1,0 +1,24 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-button {
+	background-color: #1fc2c2;
+	padding: 0 1.25rem;
+	line-height: 2.125rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	text-align: center;
+	margin: 0.125rem;
+	color: white;
+
+	border-radius: 30px;
+
+	transition: color 0.125s ease;
+	cursor: pointer;
+
+	box-shadow: 0px 0px 0px transparent;
+	border: 0px solid transparent;
+	text-shadow: 0px 0px 0px transparent;
+}

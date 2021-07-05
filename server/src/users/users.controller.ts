@@ -8,10 +8,16 @@ import {
 	HttpCode,
 	BadRequestException,
 	ConflictException,
+	Res,
 } from '@nestjs/common';
 import HashidsService from 'services/hashid/hashid.service';
-import { UsersService } from './users.service';
+import { Response } from 'express';
+import jwt = require('jsonwebtoken');
+import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UsersService } from './users.service';
+
+const { SECRET_KEY } = process.env;
 
 @Controller('users')
 export class UsersController {
@@ -21,28 +27,65 @@ export class UsersController {
 	) {}
 
 	@Post()
-	async create(@Body() createUserDto: CreateUserDto) {
-		const usersFound = await this.usersService.findByEmail(createUserDto.email);
-		if (usersFound.length !== 0) throw new ConflictException();
+	async create(
+		@Body() createUserDto: CreateUserDto,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		const user = await this.usersService.findByEmail(createUserDto.email);
+		if (user.length !== 0) throw new ConflictException();
 		else {
-			const newUser = await this.usersService.create(createUserDto);
-			const { id, address, dateOfBirth, email, name } = newUser;
+			const { password, ...restOfUserInfo } = createUserDto;
+			const hashedPassword = await bcrypt.hash(password, 12);
+			const newUser = await this.usersService.create({
+				password: hashedPassword,
+				...restOfUserInfo,
+			});
+			const hashedId = this.hashidsService.encode(+newUser.id);
+			const encodedUserId = jwt.sign({ userId: hashedId }, SECRET_KEY, {
+				expiresIn: '3h',
+			});
+			response.cookie('userId', encodedUserId);
 			return {
-				id: this.hashidsService.encode(id),
-				address,
-				dateOfBirth,
-				email,
-				name,
+				email: newUser.email,
+				accountCreate: true,
 			};
 		}
 	}
 
+	@Post('login')
+	async login(
+		@Body('email') email: string,
+		@Body('password') password: string,
+		@Res({ passthrough: true }) response: Response,
+	) {
+		const user = await this.usersService.findOne(email);
+		if (!user) throw new BadRequestException('Invalid credentials');
+		if (!(await bcrypt.compare(password, user.password))) {
+			throw new BadRequestException('Invalid credentials');
+		}
+		const hashedId = this.hashidsService.encode(+user.id);
+		const encodedUserId = jwt.sign({ userId: hashedId }, SECRET_KEY, {
+			expiresIn: '3h',
+		});
+		response.cookie('userId', encodedUserId);
+		return {
+			message: 'success',
+		};
+	}
+
 	@Delete(':id')
 	@HttpCode(204)
-	async remove(@Param('id') id: string) {
+	async remove(
+		@Param('id') id: string,
+		@Res({ passthrough: true }) response: Response,
+	) {
 		const userId = this.hashidsService.decode(id);
 		const isUserRemoved = await this.usersService.remove(userId);
 		if (!isUserRemoved) throw new BadRequestException();
+		response.clearCookie('userId');
+		return {
+			message: 'User was successfully removed',
+		};
 	}
 
 	@Get(':id/receipts')
@@ -56,5 +99,14 @@ export class UsersController {
 			id: this.hashidsService.encode(receipt.id),
 		}));
 		return { receipts };
+	}
+
+	@Post('logout')
+	async logout(@Res({ passthrough: true }) response: Response) {
+		if (response.locals.userId) {
+			response.clearCookie('userId');
+			return 'logout successful';
+		}
+		return 'you cannot logout if you are not logged in';
 	}
 }
