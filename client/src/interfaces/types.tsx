@@ -40,3 +40,8 @@ export interface User {
 	name: string;
 	password?: string;
 }
+
+export interface Login {
+	email: string;
+	password: string;
+}
