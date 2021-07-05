@@ -22,8 +22,8 @@ function ReceiptBody(): JSX.Element {
 	const [products, setProducts] = useState<ProductInterface>();
 
 	useEffect(() => {
-		service.getReceiptByid('1').then((el) => setReceipt(el));
-	}, []);
+		service.getReceiptByid(id).then((el) => setReceipt(el));
+	}, [id]);
 
 	// useEffect(() => {
 	// 	service.getUserReceipt(id).then((el) => setReceipt(el));

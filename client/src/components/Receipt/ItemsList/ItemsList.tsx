@@ -20,7 +20,9 @@ function ItemsList({ products }: Props): JSX.Element {
 				<p>Price</p>
 			</div>
 			<div className="Item-List-Container">
-				<ul className="List">{items}</ul>
+				<ul>
+					<li className="List">{items}</li>
+				</ul>
 			</div>
 			<PriceAndQR />
 			<div className="Message-Container">

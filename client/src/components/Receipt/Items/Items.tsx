@@ -10,9 +10,7 @@ interface Props {
 function Items({ item, price }: Props): JSX.Element {
 	return (
 		<div>
-			<li>
-				{item}, {price}
-			</li>
+			{item}, {price}
 		</div>
 	);
 }
