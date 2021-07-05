@@ -25,8 +25,14 @@ module.exports = {
 		project: 'tsconfig.json',
 	},
 	plugins: ['react', '@typescript-eslint', 'import'],
-	ignorePatterns: ['.eslintrc.js', '*spec.ts', 'lint-staged.config.js'],
+	ignorePatterns: [
+		'.eslintrc.js',
+		'*spec.ts',
+		'lint-staged.config.js',
+		'service-worker.ts',
+	],
 	rules: {
+		'no-param-reassign': 0,
 		'@typescript-eslint/no-unused-vars': 'warn',
 		'@typescript-eslint/no-shadow': 'warn',
 		'no-console': 'off',
