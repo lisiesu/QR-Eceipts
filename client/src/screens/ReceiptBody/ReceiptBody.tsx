@@ -3,6 +3,7 @@ import './ReceiptBody.css';
 import { FiShoppingCart } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
+import Moment from 'react-moment';
 import ItemsList from '../../components/Receipt/ItemsList/ItemsList';
 import { Receipt } from '../../interfaces/types';
 import * as service from '../../services/ServerAPIServices';
@@ -28,7 +29,9 @@ function ReceiptBody(): JSX.Element {
 						<p className="Company-Logo">{receipt.store.name}</p>
 					</div>
 					<div className="Time-Container">
-						<p className="Timestamp">12/04/2018</p>
+						<p className="Timestamp">
+							<Moment date={receipt.timeOfPurchase} format="MMM Do YYYY" />
+						</p>
 						<li className="Shop-Icon-Circle">
 							<p className="Shop-Icon">
 								<FiShoppingCart />
