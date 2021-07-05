@@ -1,6 +1,7 @@
 import React from 'react';
 import './ReceiptList.css';
 import { getUserReceipts } from '../../services/ServerAPIServices';
+import MainContainer from '../../components/Main/MainContainer';
 import ReceiptListItem from '../../components/Receipt/ReceiptListItem/ReceiptListItem';
 
 function ReceiptList(user_Id: string): JSX.Element {
@@ -19,12 +20,12 @@ function ReceiptList(user_Id: string): JSX.Element {
 	));
 
 	return (
-		<div className="Receipt-Container">
-			<div className="Receipt-Body">
+		<MainContainer>
+			<>
 				{receipts}
 				{receipts}
-			</div>
-		</div>
+			</>
+		</MainContainer>
 	);
 }
 

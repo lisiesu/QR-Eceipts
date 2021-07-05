@@ -12,10 +12,7 @@ function Items({ item, price, currency }: Props): JSX.Element {
 	return (
 		<div className="Items">
 			<span className="Item-Span">{item}</span>
-			<span className="Price-Span">
-				{currency}
-				{price}
-			</span>
+			<span className="Price-Span">{currency + price}</span>
 		</div>
 	);
 }

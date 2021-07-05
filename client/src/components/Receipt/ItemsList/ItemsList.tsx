@@ -19,7 +19,7 @@ function ItemsList({ receipt }: Props): JSX.Element {
 	));
 
 	return (
-		<div>
+		<>
 			<div className="Item-List-Titles">
 				<p>Item</p>
 				<p>Price</p>
@@ -36,7 +36,7 @@ function ItemsList({ receipt }: Props): JSX.Element {
 					day!
 				</p>
 			</div>
-		</div>
+		</>
 	);
 }
 

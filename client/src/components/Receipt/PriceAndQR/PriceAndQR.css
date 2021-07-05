@@ -1,39 +1,54 @@
 .Price-QR-Container {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 1em;
 }
 
 .Price-Container {
-	display: flex;
-	flex-wrap: wrap;
-	border-radius: 8px;
-	background: white;
-	font-size: x-large;
-	font-weight: bold;
-	max-width: 4em;
-	min-width: 6em;
-	min-height: 2.8em;
-	padding: 0.2em;
-	color: #3d3232;
-	flex-direction: column;
+	background: rgba(25, 47, 57, 0.1);
+	border-radius: 0.5rem;
+	margin-bottom: 1rem;
+	padding: 0.5rem;
 }
 
 .Total-Title {
-	line-height: 1.2em;
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 1.6rem;
+	text-align: center;
 }
 
 .Total-Price {
-	line-height: 1em;
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 2.4rem;
+	display: flex;
+	align-items: center;
+	text-align: center;
 }
 
 .Receipt-Id {
-	display: flex;
-	border-radius: 8px;
-	background: white;
-	font-size: xx-small;
-	min-height: 5em;
-	min-width: 10em;
 	align-items: flex-end;
 	justify-content: space-around;
+	font-family: Avenir;
+	font-size: 0.8rem;
+}
+
+.QR-Container {
+	background: rgba(25, 47, 57, 0.1);
+	border-radius: 0.5rem;
+	margin-bottom: 1rem;
+	padding: 0.5rem;
+	min-width: 30%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.QR-svg img {
+	width: 72px;
 }

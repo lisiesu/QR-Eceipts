@@ -16,7 +16,12 @@ function PriceAndQR({ receipt }: Props): JSX.Element {
 					{receipt.total}
 				</p>
 			</div>
-			<p className="Receipt-Id">{receipt.id} </p>
+			<div className="QR-Container">
+				<div className="QR-svg">
+					<img src="/assets/images/sampleQR.png" />
+				</div>
+				<div className="Receipt-Id">Id:{receipt.id}</div>
+			</div>
 		</div>
 	);
 }
