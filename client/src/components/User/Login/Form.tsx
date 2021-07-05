@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Login } from '../../../interfaces/types';
+import { LoginInformation } from '../../../interfaces/types';
 import * as apiClient from '../../../services/ServerAPIServices';
 
 import './Form.css';
 
 function UserLoginForm(): JSX.Element {
-	const login: Login = {
+	const loginInformation: LoginInformation = {
 		email: '',
 		password: '',
 	};
 
-	const [input, setInput] = useState(login);
+	const [input, setInput] = useState(loginInformation);
 
 	function handleChange(event) {
 		const { name, value } = event.target;
@@ -19,8 +19,7 @@ function UserLoginForm(): JSX.Element {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		console.log(input);
-		// TODO send login using api client
+		apiClient.login(input);
 		// TODO save user state to global state
 		// TODO redirect to receipt list
 	}
