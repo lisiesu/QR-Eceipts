@@ -1,17 +1,11 @@
 import React from 'react';
 import './Header.css';
 
-import ReceiptBody from '../Receipt/ReceiptBody/ReceiptBody';
-
-interface Props {
-	title: string;
-}
-
-function Header({ title }: Props): JSX.Element {
+function Header(): JSX.Element {
+	const logo = '/assets/logos/qrreceiptsLogo.png';
 	return (
-		<div className="Header">
-			<p className="title">{title}</p>
-			{title === 'Your Receipt!' ? <ReceiptBody /> : <ReceiptBody />}
+		<div className="header">
+			<img src={logo} alt="QR receipts logo" />
 		</div>
 	);
 }

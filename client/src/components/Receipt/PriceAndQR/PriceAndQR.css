@@ -16,6 +16,7 @@
 	min-height: 2.8em;
 	padding: 0.2em;
 	color: #3d3232;
+	flex-direction: column;
 }
 
 .Total-Title {
