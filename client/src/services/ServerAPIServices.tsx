@@ -38,6 +38,7 @@ export const createUser = async (user: User): Promise<User> => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(user),
+			credentials: 'include',
 		});
 		return await response.json();
 	} catch (err) {
