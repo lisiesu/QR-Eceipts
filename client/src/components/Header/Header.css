@@ -1,10 +1,13 @@
-.Header {
-}
-
-.title {
+.header {
 	text-align: center;
 	font-weight: 500;
-	margin-top: 2.5em;
-	margin-bottom: 2.5em;
+	margin-top: 2em;
+	margin-bottom: 2em;
 	color: white;
+	position: static;
+	align-items: center;
+	justify-content: center;
+}
+.header img {
+	width: 45%;
 }
