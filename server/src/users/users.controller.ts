@@ -1,8 +1,8 @@
 import {
 	Controller,
+	Get,
 	Post,
 	Body,
-	Patch,
 	Param,
 	Delete,
 	HttpCode,
@@ -12,7 +12,6 @@ import {
 import HashidsService from 'services/hashid/hashid.service';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -38,13 +37,6 @@ export class UsersController {
 		}
 	}
 
-	@Patch(':id') // TODO
-	update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-		// return this.usersService.update(+id, updateUserDto);
-		this.usersService.update(+id, updateUserDto);
-		throw new BadRequestException();
-	}
-
 	@Delete(':id')
 	@HttpCode(204)
 	async remove(@Param('id') id: string) {
@@ -53,12 +45,16 @@ export class UsersController {
 		if (!isUserRemoved) throw new BadRequestException();
 	}
 
-	@Post(':id/receipts')
+	@Get(':id/receipts')
 	@HttpCode(200)
 	async getAllUserReceipts(@Param('id') id: string) {
 		const userId = this.hashidsService.decode(id);
-		const receipts = await this.usersService.findAllUserReceipts(userId);
-		if (receipts === undefined) throw new BadRequestException();
+		const receiptsFound = await this.usersService.findAllUserReceipts(userId);
+		if (receiptsFound === undefined) throw new BadRequestException();
+		const receipts = receiptsFound.map((receipt) => ({
+			...receipt,
+			id: this.hashidsService.encode(receipt.id),
+		}));
 		return { receipts };
 	}
 }

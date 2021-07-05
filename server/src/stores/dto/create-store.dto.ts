@@ -15,4 +15,7 @@ export class CreateStoreDto {
 
 	@IsOptional()
 	website?: string;
+
+	@IsString()
+	name: string;
 }

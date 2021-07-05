@@ -6,6 +6,7 @@ export default interface Store {
 	address: string;
 	logo?: string;
 	storeNumber: string;
+	name: string;
 	telephoneNumber: string;
 	receipts: Receipt[];
 	users: User[];

@@ -14,6 +14,10 @@ export const StoreSchema = new EntitySchema<Store>({
 		},
 		logo: {
 			type: String,
+			nullable: true,
+		},
+		name: {
+			type: String,
 		},
 		storeNumber: {
 			type: String,
@@ -24,6 +28,7 @@ export const StoreSchema = new EntitySchema<Store>({
 		},
 		website: {
 			type: String,
+			nullable: true,
 		},
 	},
 	relations: {

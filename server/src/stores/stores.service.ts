@@ -16,8 +16,9 @@ export class StoresService {
 		return this.storesRepository.save(store);
 	}
 
-	findAll(): Promise<Store[]> {
-		return this.storesRepository.find();
+	alreadyInDB(storeNumber: string): Promise<Store> {
+		const result = this.storesRepository.findOne({ storeNumber });
+		return result;
 	}
 
 	findOne(id: number): Promise<Store> {
