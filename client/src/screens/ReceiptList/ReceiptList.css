@@ -1,12 +1,17 @@
 .Receipt-Container {
 	background-color: #f5f6fa;
-	border-radius: 30px;
-	height: 100vh;
+	border-radius: 2.6em 2.6em 0 0;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	justify-self: flex-end;
 }
 
 .Receipt-Body {
-	margin-left: 1em;
-	margin-right: 1em;
+	overflow-x: visible;
+	overflow-y: scroll;
+	padding-top: 1em;
 }
 
 .Company-Details {
