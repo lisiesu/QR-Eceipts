@@ -1,14 +1,13 @@
 import React from 'react';
 import './Signup.css';
+import MainContainer from '../../components/Main/MainContainer';
 import UserSignupForm from '../../components/User/Signup/Form';
 
 function Login(): JSX.Element {
 	return (
-		<main className="formscreen-body">
-			<div className="formscreen-container">
-				<UserSignupForm />
-			</div>
-		</main>
+		<MainContainer>
+			<UserSignupForm />
+		</MainContainer>
 	);
 }
 
