@@ -68,8 +68,12 @@ export class UsersController {
 			expiresIn: '3h',
 		});
 		response.cookie('userId', encodedUserId);
+		const { name, dateOfBirth, address } = user;
 		return {
-			message: 'success',
+			name,
+			dateOfBirth,
+			address,
+			email,
 		};
 	}
 
