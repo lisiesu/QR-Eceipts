@@ -2,19 +2,24 @@ import React from 'react';
 import './ItemsList.css';
 import Items from '../Items/Items';
 import PriceAndQR from '../PriceAndQR/PriceAndQR';
-import { ProductInterface } from '../../../interfaces/types';
+import { Receipt } from '../../../interfaces/types';
 
 interface Props {
-	products: ProductInterface[];
+	receipt: Receipt;
 }
 
-function ItemsList({ products }: Props): JSX.Element {
-	const items = products.map((el) => (
-		<Items key={el.id} item={el.product} price={el.price} />
+function ItemsList({ receipt }: Props): JSX.Element {
+	const items = receipt.products.map((el) => (
+		<Items
+			key={el.id}
+			item={el.product}
+			price={el.price}
+			currency={receipt.currency}
+		/>
 	));
+
 	return (
 		<div>
-			{console.log(products)}
 			<div className="Item-List-Titles">
 				<p>Item</p>
 				<p>Price</p>
@@ -24,9 +29,12 @@ function ItemsList({ products }: Props): JSX.Element {
 					<li className="List">{items}</li>
 				</ul>
 			</div>
-			<PriceAndQR />
+			<PriceAndQR receipt={receipt} />
 			<div className="Message-Container">
-				<p>Thank you for shopping at Tesco&apos;s, have a great day!</p>
+				<p>
+					{receipt.misc}Thank you for shopping at Tesco&apos;s, have a great
+					day!
+				</p>
 			</div>
 		</div>
 	);
