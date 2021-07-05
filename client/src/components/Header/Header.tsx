@@ -2,9 +2,10 @@ import React from 'react';
 import './Header.css';
 
 function Header(): JSX.Element {
+	const logo = 'assets/logos/qrreceiptsLogo.png';
 	return (
-		<div className="Header">
-			<p>Header works</p>
+		<div className="header">
+			<img src={logo} alt="QR receipts logo" />
 		</div>
 	);
 }
