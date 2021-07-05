@@ -1,0 +1,10 @@
+.formscreen-body {
+  background-color: #f5f6fa;
+	border-radius: 30px;
+	height: 100vh;
+}
+
+.formscreen-container {
+	margin-left: 1em;
+	margin-right: 1em;
+}
