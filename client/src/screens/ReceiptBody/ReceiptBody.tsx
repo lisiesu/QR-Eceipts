@@ -3,14 +3,10 @@ import './ReceiptBody.css';
 import { FiShoppingCart } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
+import Moment from 'react-moment';
 import ItemsList from '../../components/Receipt/ItemsList/ItemsList';
-import { ProductInterface, Receipt } from '../../interfaces/types';
+import { Receipt } from '../../interfaces/types';
 import * as service from '../../services/ServerAPIServices';
-
-interface Props {
-	receipt: Receipt;
-	products: ProductInterface[];
-}
 
 function ReceiptBody(): JSX.Element {
 	const { id } = useParams<{ id?: string }>();
@@ -19,15 +15,10 @@ function ReceiptBody(): JSX.Element {
 		history.push('/receipt-list');
 	};
 	const [receipt, setReceipt] = useState<Receipt>();
-	const [products, setProducts] = useState<ProductInterface>();
 
 	useEffect(() => {
-		service.getReceiptByid('1').then((el) => setReceipt(el));
-	}, []);
-
-	// useEffect(() => {
-	// 	service.getUserReceipt(id).then((el) => setReceipt(el));
-	// }, []);
+		service.getReceiptByid(id).then((el) => setReceipt(el));
+	}, [id]);
 
 	return (
 		<div className="Receipt-Container">
@@ -38,14 +29,16 @@ function ReceiptBody(): JSX.Element {
 						<p className="Company-Logo">{receipt.store.name}</p>
 					</div>
 					<div className="Time-Container">
-						<p className="Timestamp">12/04/2018</p>
+						<p className="Timestamp">
+							<Moment date={receipt.timeOfPurchase} format="MMM Do YYYY" />
+						</p>
 						<li className="Shop-Icon-Circle">
 							<p className="Shop-Icon">
 								<FiShoppingCart />
 							</p>
 						</li>
 					</div>
-					<ItemsList products={receipt.products} />
+					<ItemsList receipt={receipt} />
 					<div className="Receipt-Saved-Text">
 						<li className="Tick-Container">
 							<p className="Tick">
