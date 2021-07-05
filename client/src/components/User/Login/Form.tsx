@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
-import { User } from '../../../interfaces/types';
+import { Login } from '../../../interfaces/types';
 import * as apiClient from '../../../services/ServerAPIServices';
 
 import './Form.css';
 
-function UserSignupForm(): JSX.Element {
-	const user: User = {
-		name: '',
+function UserLoginForm(): JSX.Element {
+	const login: Login = {
 		email: '',
 		password: '',
-		dateOfBirth: '',
-		address: '',
 	};
 
-	const [input, setInput] = useState(user);
+	const [input, setInput] = useState(login);
 
 	function handleChange(event) {
 		const { name, value } = event.target;
@@ -22,8 +19,8 @@ function UserSignupForm(): JSX.Element {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		const createdUser = await apiClient.createUser(input);
-		console.log(createdUser.id);
+		console.log(input);
+		// TODO send login using api client
 		// TODO save user state to global state
 		// TODO redirect to receipt list
 	}
@@ -32,19 +29,6 @@ function UserSignupForm(): JSX.Element {
 		<div>
 			<form onSubmit={handleSubmit}>
 				<div className="form-container">
-					<label htmlFor="name">
-						Name
-						<br />
-						<input
-							id="name"
-							name="name"
-							type="text"
-							title="Full name"
-							required
-							value={input.name}
-							onChange={handleChange}
-						/>
-					</label>
 					<label htmlFor="email">
 						Email
 						<br />
@@ -69,30 +53,6 @@ function UserSignupForm(): JSX.Element {
 							onChange={handleChange}
 						/>
 					</label>
-					<label htmlFor="date-of-birth">
-						Date of Birth
-						<br />
-						<input
-							id="date-of-birth"
-							name="dateOfBirth"
-							type="date"
-							required
-							value={input.dateOfBirth}
-							onChange={handleChange}
-						/>
-					</label>
-					<label htmlFor="address">
-						Address
-						<br />
-						<input
-							id="address"
-							name="address"
-							type="text"
-							required
-							value={input.address}
-							onChange={handleChange}
-						/>
-					</label>
 					<input className="submit-button" type="submit" />
 				</div>
 			</form>
@@ -100,4 +60,4 @@ function UserSignupForm(): JSX.Element {
 	);
 }
 
-export default UserSignupForm;
+export default UserLoginForm;

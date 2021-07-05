@@ -1,7 +1,14 @@
 import React from 'react';
+import './Login.css';
+import MainContainer from '../../components/Main/MainContainer';
+import UserLoginForm from '../../components/User/Login/Form';
 
-function Signup(): JSX.Element {
-	return <main>Login works!</main>;
+function Login(): JSX.Element {
+	return (
+		<MainContainer>
+			<UserLoginForm />
+		</MainContainer>
+	);
 }
 
-export default Signup;
+export default Login;

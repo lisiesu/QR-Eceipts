@@ -3,7 +3,7 @@ import './Signup.css';
 import MainContainer from '../../components/Main/MainContainer';
 import UserSignupForm from '../../components/User/Signup/Form';
 
-function Login(): JSX.Element {
+function Signup(): JSX.Element {
 	return (
 		<MainContainer>
 			<UserSignupForm />
@@ -11,4 +11,4 @@ function Login(): JSX.Element {
 	);
 }
 
-export default Login;
+export default Signup;
