@@ -4,7 +4,7 @@ import {
 	Get,
 	Post,
 	Body,
-	Patch,
+	// Patch,
 	Param,
 	Delete,
 	Res,
@@ -15,7 +15,7 @@ import HashidsService from 'services/hashid/hashid.service';
 import QRCodeService from '../services/qrcode/qrcode.service';
 import { ReceiptsService } from './receipts.service';
 import CreateReceiptDto from './dto/create-receipt.dto';
-import UpdateReceiptDto from './dto/update-receipt.dto';
+import HashReceipt from '../services/receipt/hashReceipt.service';
 
 dotenv.config();
 // import error from 'express';
@@ -27,6 +27,7 @@ export class ReceiptsController {
 		private readonly receiptsService: ReceiptsService,
 		private hashidsService: HashidsService,
 		private qrCodeService: QRCodeService,
+		private hashReceipt: HashReceipt,
 	) {}
 
 	@Get('/provideCookie/:userid')
@@ -44,11 +45,11 @@ export class ReceiptsController {
 
 	@Post()
 	async create(@Body() createReceiptDto: CreateReceiptDto) {
-		const receipt: any = await this.receiptsService.create(createReceiptDto);
-		const hashedId = this.hashidsService.encode(receipt.id);
+		const receipt = this.hashReceipt.hash(createReceiptDto, 'decode');
+		const returnedReceipt: any = await this.receiptsService.create(receipt);
+		const hashedId = this.hashidsService.encode(returnedReceipt.id);
 		const url = `${BASE_URL}/${hashedId}`;
 		const qrcode = this.qrCodeService.generate(url);
-		console.log(hashedId);
 		return { qrcode };
 	}
 
@@ -58,9 +59,11 @@ export class ReceiptsController {
 		let receipts: any = 'User account not found!';
 		if (userId) {
 			receipts = await this.receiptsService.findAll(userId);
-			receipts = receipts.forEach((receipt) => {
-				const hashedId = this.hashidsService.encode(receipt.id);
-				return { id: hashedId, ...receipt };
+			receipts = receipts.map((receipt) => {
+				const url = `${BASE_URL}/${receipt.id}`;
+				const qrcode = this.qrCodeService.generate(url);
+				const newReceipt = { ...receipt, qrcode };
+				return this.hashReceipt.hash(newReceipt, 'encode');
 			});
 		}
 		response.send(receipts);
@@ -76,14 +79,26 @@ export class ReceiptsController {
 			await this.receiptsService.update(receiptId, { user: userId });
 			receiptUpdated = true;
 		}
-		response.send({ ...receipt, id: hashedId, receiptUpdated });
+		const url = `${BASE_URL}/${hashedId}`;
+		const qrcode = this.qrCodeService.generate(url);
+		const newReceipt: any = { ...receipt };
+		this.hashReceipt.hash(newReceipt, 'encode');
+		response.send({
+			...newReceipt,
+			id: hashedId,
+			user: {
+				id: response.locals.userId,
+			},
+			receiptUpdated,
+			qrcode,
+		});
 	}
 
-	@Patch()
-	update(@Param('id') id: string, @Body() updateReceiptDto: UpdateReceiptDto) {
-		this.receiptsService.update(+id, updateReceiptDto);
-		return UpdateReceiptDto;
-	}
+	// @Patch()
+	// update(@Param('id') id: string, @Body() updateReceiptDto: UpdateReceiptDto) {
+	// 	this.receiptsService.update(+id, updateReceiptDto);
+	// 	return UpdateReceiptDto;
+	// }
 
 	@Delete(':id')
 	remove(@Param('id') id: number) {
