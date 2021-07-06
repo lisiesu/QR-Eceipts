@@ -1,11 +1,12 @@
 import React from 'react';
 import './Header.css';
+import Logo from '../Svg/Logo';
 
 function Header(): JSX.Element {
 	const logo = '/assets/logos/qrreceiptsLogo.png';
 	return (
 		<div className="header">
-			<img src={logo} alt="QR receipts logo" />
+			<Logo />
 		</div>
 	);
 }
