@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import './ReceiptBody.css';
 import { BiCheckCircle } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
@@ -7,19 +7,27 @@ import MainContainer from '../../components/Main/MainContainer';
 import ItemsList from '../../components/Receipt/ItemsList/ItemsList';
 import { Receipt } from '../../interfaces/types';
 import * as service from '../../services/ServerAPIServices';
+import { ReceiptsContext } from '../../contexts/receipts-context';
 
 function ReceiptBody(): JSX.Element {
 	const { id } = useParams<{ id?: string }>();
 	const history = useHistory();
+	const { receipt, setReceipt } = useContext(ReceiptsContext);
+
 	const clickHandler = () => {
 		history.push('/receipt-list');
 	};
-	const [receipt, setReceipt] = useState<Receipt>();
 	const merchantLogo = '/assets/logos/merchants/png/';
 	const categoryLogo = '/assets/logos/categories/png/';
+
 	useEffect(() => {
-		service.getReceiptByid(id).then((el) => setReceipt(el));
-	}, [id]);
+		if (!receipt) {
+			(async () => {
+				const response = await service.getReceiptByid(id);
+				setReceipt(response);
+			})();
+		}
+	}, [id, receipt, setReceipt]);
 
 	return (
 		<MainContainer>

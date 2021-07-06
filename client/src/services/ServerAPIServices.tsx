@@ -52,6 +52,10 @@ export const login = async (
 };
 
 export const getReceiptByid = async (id: string): Promise<Receipt> => {
-	const response = await fetch(`${baseUrl}/id`);
+	console.log('request');
+	const response = await fetch(`${baseUrl}/receipts/${id}`, {
+		method: 'GET',
+		credentials: 'include',
+	});
 	return response.json();
 };
