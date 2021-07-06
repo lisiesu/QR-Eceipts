@@ -40,10 +40,11 @@ export const createUser = async (user: User): Promise<User> => {
 			body: JSON.stringify(user),
 			credentials: 'include',
 		});
-		return await response.json();
+		if (response.ok) return await response.json();
+		throw new Error(response.statusText);
 	} catch (err) {
 		console.error(err);
-		return err;
+		throw new Error(err);
 	}
 };
 

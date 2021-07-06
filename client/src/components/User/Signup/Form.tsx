@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { User } from '../../../interfaces/types';
 import * as apiClient from '../../../services/ServerAPIServices';
+import { UserContext } from '../../../contexts/user-context';
 
 import './Form.css';
 
 function UserSignupForm(): JSX.Element {
-	const user: User = {
+	const history = useHistory();
+	const { setUser } = useContext(UserContext);
+
+	const inputState: User = {
 		name: '',
 		email: '',
 		password: '',
@@ -13,7 +18,7 @@ function UserSignupForm(): JSX.Element {
 		address: '',
 	};
 
-	const [input, setInput] = useState(user);
+	const [input, setInput] = useState(inputState);
 
 	function handleChange(event) {
 		const { name, value } = event.target;
@@ -21,10 +26,14 @@ function UserSignupForm(): JSX.Element {
 	}
 
 	async function handleSubmit(event) {
-		event.preventDefault();
-		const createdUser = await apiClient.createUser(input);
-		// TODO save user state to global state
-		// TODO redirect to receipt list
+		try {
+			event.preventDefault();
+			const createdUser = await apiClient.createUser(input);
+			await setUser({ ...createdUser, ...input, logged: true }); // TODO: Once that the server start returning the object created, remove "...input"
+			history.push('/receipt-list');
+		} catch (err) {
+			console.error(err);
+		}
 	}
 
 	return (
