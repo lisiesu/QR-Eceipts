@@ -37,6 +37,8 @@ module.exports = {
 		'@typescript-eslint/no-shadow': 'warn',
 		'no-console': 'off',
 		'jsx-a11y/label-has-associated-control': 'warn',
+		'react/require-default-props': 'warn',
+
 		'import/extensions': [
 			'error',
 			'ignorePackages',
