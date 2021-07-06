@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './ReceiptList.css';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getUserReceipts } from '../../services/ServerAPIServices';
 import MainContainer from '../../components/Main/MainContainer';
 import ReceiptListItem from '../../components/Receipt/ReceiptListItem/ReceiptListItem';
 import { Receipt } from '../../interfaces/types';
+import { ReceiptsContext } from '../../contexts/receipts-context';
 
 function ReceiptList(user_Id: string): JSX.Element {
 	const [unfilteredData, setUnfilteredData] = useState<Receipt[]>([]);
 	const [filteredData, setFilteredData] = useState(unfilteredData);
 	const [isVisible, setIsVisible] = useState(false);
+	const { setReceipt } = useContext(ReceiptsContext);
+	const history = useHistory();
 
 	const showSearchbar = () => {
 		isVisible === false ? setIsVisible(true) : setIsVisible(false);
@@ -32,8 +35,13 @@ function ReceiptList(user_Id: string): JSX.Element {
 		})();
 	}, []);
 
+	const handleClick = async (receipt) => {
+		await setReceipt(receipt);
+		history.push(`/receipt/${receipt.id}`);
+	};
+
 	const receipts = filteredData.map((el) => (
-		<Link to={`/receipt/${el.id}`} key={el.id}>
+		<div onClick={() => handleClick(el)}>
 			<ReceiptListItem
 				key={el.id}
 				receipt={el}
@@ -44,7 +52,7 @@ function ReceiptList(user_Id: string): JSX.Element {
 				currency={el.currency}
 				total={el.total}
 			/>
-		</Link>
+		</div>
 	));
 
 	return (
