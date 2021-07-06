@@ -58,20 +58,33 @@
 
 .Button-Text {
 	background-color: #1fc2c2;
+	background: linear-gradient(90deg, #23cfcf, #189c9cfc);
 	padding: 0 1.25rem;
 	line-height: 2.125rem;
-	font-size: 0.875rem;
+	font-size: 0.83rem;
 	font-weight: 400;
 	text-align: center;
-	margin: 0.125rem;
+	margin: 0.4em;
 	color: white;
-
+	min-width: 6.4em;
 	border-radius: 30px;
-
-	transition: color 0.125s ease;
 	cursor: pointer;
+	margin-bottom: 1em;
 
-	box-shadow: 0px 0px 0px transparent;
+	box-shadow: rgb(38, 57, 77) 0px 20px 20px -10px;
+
 	border: 0px solid transparent;
 	text-shadow: 0px 0px 0px transparent;
+	letter-spacing: 0.6px;
+	font-weight: 500;
+}
+
+.Button-Text:active {
+	background-color: #1fc2c2;
+	box-shadow: rgba(0, 0, 0, 0.315) 0px 5px 15px;
+	transform: translateY(4px);
+}
+
+.Button-Text:hover {
+	background-color: #3e8e41;
 }

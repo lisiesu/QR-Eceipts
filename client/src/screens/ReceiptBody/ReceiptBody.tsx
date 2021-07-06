@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ReceiptBody.css';
 import { BiCheckCircle } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
+import { useReactToPrint } from 'react-to-print';
 import Moment from 'react-moment';
 import MainContainer from '../../components/Main/MainContainer';
 import ItemsList from '../../components/Receipt/ItemsList/ItemsList';
+import PrintReceiptBody from '../../components/PrintComponent/PrintReceiptBody/PrintReceiptBody';
 import { Receipt } from '../../interfaces/types';
 import * as service from '../../services/ServerAPIServices';
 
@@ -14,6 +16,12 @@ function ReceiptBody(): JSX.Element {
 	const clickHandler = () => {
 		history.push('/receipt-list');
 	};
+
+	const componentRef = useRef();
+	const handlePrint = useReactToPrint({
+		content: () => componentRef.current,
+	});
+
 	const [receipt, setReceipt] = useState<Receipt>();
 	const merchantLogo = '/assets/logos/merchants/png/';
 	const categoryLogo = '/assets/logos/categories/png/';
@@ -24,7 +32,7 @@ function ReceiptBody(): JSX.Element {
 	return (
 		<MainContainer>
 			{receipt ? (
-				<>
+				<div>
 					<div className="Company-Details">
 						<p className="Company-Name">{receipt.store.name}</p>
 						<img
@@ -54,10 +62,22 @@ function ReceiptBody(): JSX.Element {
 							type="submit"
 							onClick={() => clickHandler()}
 						>
-							View all your receipts
+							View receipts
 						</button>
+						<div style={{ display: 'none' }}>
+							<PrintReceiptBody ref={componentRef} receipt={receipt} />
+						</div>
+						<div>
+							<button
+								className="Button-Text"
+								type="button"
+								onClick={handlePrint}
+							>
+								Print PDF
+							</button>
+						</div>
 					</div>
-				</>
+				</div>
 			) : (
 				<div> Loading...</div>
 			)}
