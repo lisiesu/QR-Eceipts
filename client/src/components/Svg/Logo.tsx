@@ -1,5 +1,5 @@
 import React from 'react';
-import './Logo.css';
+import './Print-Logo.css';
 
 function Logo(): JSX.Element {
 	return (

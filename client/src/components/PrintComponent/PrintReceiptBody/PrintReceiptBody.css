@@ -3,15 +3,17 @@
 	border-radius: 30px 30px 0 0;
 	height: 100vh;
 	font-family: poppins;
+	overflow: hidden;
 }
 
 .Print-logo {
 	color: #3d3232;
+	margin: 5em;
 }
 
 .Print-Receipt-Body {
-	margin-left: 1em;
-	margin-right: 1em;
+	margin-left: 5em;
+	margin-right: 5em;
 }
 
 .Print-Company-Details {
@@ -24,6 +26,7 @@
 	margin-bottom: 0;
 	margin-top: 0.8em;
 	color: #3d3232;
+	font-size: 2rem;
 }
 
 .Print-Company-Logo {
@@ -31,6 +34,7 @@
 	font-weight: bold;
 	margin-bottom: 0;
 	margin-top: 0.8em;
+	font-size: 2rem;
 }
 
 .Print-Time-Container {
@@ -41,7 +45,7 @@
 }
 
 .Print-Timestamp {
-	font-size: xx-small;
+	font-size: 1rem;
 	margin-top: 0%;
 	font-weight: 500;
 	color: #a1a1a1;

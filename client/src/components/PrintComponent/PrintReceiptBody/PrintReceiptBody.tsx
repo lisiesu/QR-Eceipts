@@ -4,7 +4,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import Moment from 'react-moment';
 import PrintItemsList from '../PrintItemsList/PrintItemsList';
 import { Receipt } from '../../../interfaces/types';
-import Logo from '../../Svg/Logo';
+import PrintLogo from '../PrintSVG/PrintLogo';
 
 interface Props {
 	receipt: Receipt;
@@ -17,12 +17,11 @@ class PrintReceiptBody extends React.PureComponent<Props> {
 		return (
 			<div className="Print-Receipt-Container">
 				<div className="Print-logo">
-					<Logo />
+					<PrintLogo />
 				</div>
 				<div className="Print-Receipt-Body">
 					<div className="Print-Company-Details">
-						<p className="Print-Company-Name">Hello!</p>
-						<p className="Print-Company-Logo">{receipt.store.name}</p>
+						<p className="Print-Company-Name">{receipt.store.name}</p>
 					</div>
 					<div className="Print-Time-Container">
 						<p className="Print-Timestamp">
