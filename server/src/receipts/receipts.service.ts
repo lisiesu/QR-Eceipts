@@ -5,26 +5,31 @@ import Receipt from './entities/receipt.interface';
 import { ReceiptSchema } from './entities/receipt.entity';
 import CreateReceiptDto from './dto/create-receipt.dto';
 import AssignReceipt from './entities/assignReceipt.interface';
+import CreateReceipt from './entities/createReceipt.interface';
 
 @Injectable()
 export class ReceiptsService {
 	constructor(
 		@InjectRepository(ReceiptSchema)
 		private receiptsRepository: Repository<
-			Receipt | CreateReceiptDto | AssignReceipt
+			Receipt | CreateReceiptDto | AssignReceipt | CreateReceipt
 		>,
 	) {}
 
-	create(createReceiptDto: CreateReceiptDto) {
-		return this.receiptsRepository.save(createReceiptDto);
+	create(receipt: CreateReceipt) {
+		return this.receiptsRepository.save(receipt);
 	}
 
 	findAll(id) {
 		return this.receiptsRepository.find({ where: { user: id } });
 	}
 
-	findOne(id: number) {
-		return this.receiptsRepository.findOne(id);
+	async findOne(id: number) {
+		const receipt = await this.receiptsRepository.findOne({
+			where: { id },
+			relations: ['store', 'category'],
+		});
+		return receipt;
 	}
 
 	update(id: number, user: AssignReceipt) {

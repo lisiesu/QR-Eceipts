@@ -1,6 +1,4 @@
 import ProductInterface from 'receipts/entities/product.interface';
-import Store from 'receipts/entities/store.interface';
-import Category from 'receipts/entities/category.interface';
 import { IsString, IsNotEmpty, IsDateString, IsNumber } from 'class-validator';
 
 export default class CreateReceiptDto {
@@ -25,14 +23,14 @@ export default class CreateReceiptDto {
 
 	@IsNotEmpty()
 	@IsNumber()
-	cardNumber: number;
+	cardNumber: string;
 
 	@IsString()
 	misc?: string;
 
 	@IsNotEmpty()
-	store: Store;
+	store: string;
 
 	@IsNotEmpty()
-	category: Category;
+	category: string;
 }

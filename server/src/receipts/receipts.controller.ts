@@ -43,11 +43,13 @@ export class ReceiptsController {
 
 	@Post()
 	async create(@Body() createReceiptDto: CreateReceiptDto) {
-		const receipt: any = await this.receiptsService.create(createReceiptDto);
-		const hashedId = this.hashidsService.encode(receipt.id);
+		const store = this.hashidsService.decode(createReceiptDto.store);
+		const category = this.hashidsService.decode(createReceiptDto.category);
+		const receipt = { ...createReceiptDto, store, category };
+		const returnedReceipt: any = await this.receiptsService.create(receipt);
+		const hashedId = this.hashidsService.encode(returnedReceipt.id);
 		const url = `${BASE_URL}/${hashedId}`;
 		const qrcode = this.qrCodeService.generate(url);
-		console.log(hashedId);
 		return { qrcode };
 	}
 
@@ -75,7 +77,12 @@ export class ReceiptsController {
 			await this.receiptsService.update(receiptId, { user: userId });
 			receiptUpdated = true;
 		}
-		response.send({ ...receipt, id: hashedId, receiptUpdated });
+		response.send({
+			...receipt,
+			id: hashedId,
+			receiptUpdated,
+			userId: response.locals.userId,
+		});
 	}
 
 	// @Patch()
