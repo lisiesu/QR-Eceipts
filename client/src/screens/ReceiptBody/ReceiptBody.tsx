@@ -62,16 +62,20 @@ function ReceiptBody(): JSX.Element {
 							type="submit"
 							onClick={() => clickHandler()}
 						>
-							View all your receipts
+							View receipts
 						</button>
-					</div>
-					<div style={{ display: 'none' }}>
-						<PrintReceiptBody ref={componentRef} receipt={receipt} />
-					</div>
-					<div>
-						<button type="button" onClick={handlePrint}>
-							Print this out!
-						</button>
+						<div style={{ display: 'none' }}>
+							<PrintReceiptBody ref={componentRef} receipt={receipt} />
+						</div>
+						<div>
+							<button
+								className="Button-Text"
+								type="button"
+								onClick={handlePrint}
+							>
+								Print PDF
+							</button>
+						</div>
 					</div>
 				</div>
 			) : (
