@@ -1,0 +1,114 @@
+.Receipt-Container {
+	background-color: #f5f6fa;
+	border-radius: 30px 30px 0 0;
+	height: 100vh;
+}
+
+.Receipt-Body {
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.Company-Details {
+	display: flex;
+	justify-content: space-between;
+}
+
+.Company-Name {
+	font-weight: bold;
+	margin-bottom: 0;
+	margin-top: 0.8em;
+	color: #3d3232;
+}
+
+.Company-Logo {
+	color: rgb(245, 164, 89);
+	font-weight: bold;
+	margin-bottom: 0;
+	margin-top: 0.8em;
+}
+
+.Time-Container {
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+	margin-bottom: 0.5em;
+}
+
+.Timestamp {
+	font-size: xx-small;
+	margin-top: 0%;
+	font-weight: 500;
+	color: #a1a1a1;
+}
+
+.Shop-Icon-Circle {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	line-height: 25px;
+	border-radius: 50%;
+	background: #f5f6fa;
+	margin-right: 2em;
+	margin-top: 0;
+	vertical-align: middle;
+	text-align: center;
+	list-style: none;
+}
+
+.Shop-Icon {
+	font-size: 25px;
+}
+
+.Receipt-Saved-Text {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	margin-bottom: 1em;
+	align-items: center;
+}
+
+.Tick-Container {
+	display: inline-block;
+	background-color: rgb(254, 254, 254);
+	width: 70px;
+	height: 70px;
+	line-height: 80px;
+	border-radius: 50%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.Tick {
+	color: #18ddba;
+	font-size: 70px;
+}
+
+.Saved-Message {
+	font-size: small;
+}
+
+.listButton {
+	display: flex;
+	justify-content: center;
+}
+
+.Button-Text {
+	background-color: #1fc2c2;
+	padding: 0 1.25rem;
+	line-height: 2.125rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	text-align: center;
+	margin: 0.125rem;
+	color: white;
+
+	border-radius: 30px;
+
+	transition: color 0.125s ease;
+	cursor: pointer;
+
+	box-shadow: 0px 0px 0px transparent;
+	border: 0px solid transparent;
+	text-shadow: 0px 0px 0px transparent;
+}
