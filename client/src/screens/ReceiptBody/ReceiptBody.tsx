@@ -32,14 +32,16 @@ function ReceiptBody(): JSX.Element {
 		if (!receipt) {
 			(async () => {
 				const response = await service.getReceiptByid(id);
+				console.log(response);
 				setReceipt(response);
 			})();
 		}
 	}, [id, receipt, setReceipt]);
 
+	// receipt && receipt.store --> checking both because server is aways returning an object
 	return (
 		<MainContainer>
-			{receipt ? (
+			{receipt && receipt.store ? (
 				<div>
 					<div className="Company-Details">
 						<p className="Company-Name">{receipt.store.name}</p>
