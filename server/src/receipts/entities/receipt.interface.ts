@@ -12,7 +12,7 @@ export default interface Receipt {
 	paymentMethod: string;
 	cardNumber: string;
 	misc?: string;
-	store: Store;
 	user: User;
+	store: Store;
 	category: Category;
 }

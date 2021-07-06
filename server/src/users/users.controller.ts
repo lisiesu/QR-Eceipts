@@ -47,6 +47,9 @@ export class UsersController {
 			response.cookie('userId', encodedUserId);
 			return {
 				email: newUser.email,
+				name: newUser.name,
+				dateOfBirth: newUser.dateOfBirth,
+				address: newUser.address,
 				accountCreate: true,
 			};
 		}
