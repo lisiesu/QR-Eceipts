@@ -4,13 +4,15 @@ import { Repository } from 'typeorm';
 import Receipt from './entities/receipt.interface';
 import { ReceiptSchema } from './entities/receipt.entity';
 import CreateReceiptDto from './dto/create-receipt.dto';
-import UpdateReceiptDto from './dto/update-receipt.dto';
+import AssignReceipt from './entities/assignReceipt.interface';
 
 @Injectable()
 export class ReceiptsService {
 	constructor(
 		@InjectRepository(ReceiptSchema)
-		private receiptsRepository: Repository<Receipt | CreateReceiptDto>,
+		private receiptsRepository: Repository<
+			Receipt | CreateReceiptDto | AssignReceipt
+		>,
 	) {}
 
 	create(createReceiptDto: CreateReceiptDto) {
@@ -25,9 +27,9 @@ export class ReceiptsService {
 		return this.receiptsRepository.findOne(id);
 	}
 
-	update(id: number, updateReceiptDto: UpdateReceiptDto) {
+	update(id: number, user: AssignReceipt) {
 		const newId = Number(id);
-		return this.receiptsRepository.update(newId, updateReceiptDto);
+		return this.receiptsRepository.update(newId, user);
 	}
 
 	remove(id: number) {

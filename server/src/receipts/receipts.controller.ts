@@ -4,7 +4,7 @@ import {
 	Get,
 	Post,
 	Body,
-	Patch,
+	// Patch,
 	Param,
 	Delete,
 	Res,
@@ -15,7 +15,6 @@ import HashidsService from 'services/hashid/hashid.service';
 import QRCodeService from '../services/qrcode/qrcode.service';
 import { ReceiptsService } from './receipts.service';
 import CreateReceiptDto from './dto/create-receipt.dto';
-import UpdateReceiptDto from './dto/update-receipt.dto';
 
 dotenv.config();
 // import error from 'express';
@@ -79,11 +78,11 @@ export class ReceiptsController {
 		response.send({ ...receipt, id: hashedId, receiptUpdated });
 	}
 
-	@Patch()
-	update(@Param('id') id: string, @Body() updateReceiptDto: UpdateReceiptDto) {
-		this.receiptsService.update(+id, updateReceiptDto);
-		return UpdateReceiptDto;
-	}
+	// @Patch()
+	// update(@Param('id') id: string, @Body() updateReceiptDto: UpdateReceiptDto) {
+	// 	this.receiptsService.update(+id, updateReceiptDto);
+	// 	return UpdateReceiptDto;
+	// }
 
 	@Delete(':id')
 	remove(@Param('id') id: number) {
