@@ -1,0 +1,37 @@
+lockfileVersion: 5.3
+
+specifiers:
+  fs: ^0.0.1-security
+  path: ^0.12.7
+
+dependencies:
+  fs: 0.0.1-security
+  path: 0.12.7
+
+packages:
+
+  /fs/0.0.1-security:
+    resolution: {integrity: sha1-invTcYa23d84E/I4WLV+yq9eQdQ=}
+    dev: false
+
+  /inherits/2.0.3:
+    resolution: {integrity: sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=}
+    dev: false
+
+  /path/0.12.7:
+    resolution: {integrity: sha1-1NwqUGxM4hl+tIHr/NWzbAFAsQ8=}
+    dependencies:
+      process: 0.11.10
+      util: 0.10.4
+    dev: false
+
+  /process/0.11.10:
+    resolution: {integrity: sha1-czIwDoQBYb2j5podHZGn1LwW8YI=}
+    engines: {node: '>= 0.6.0'}
+    dev: false
+
+  /util/0.10.4:
+    resolution: {integrity: sha512-0Pm9hTQ3se5ll1XihRic3FDIku70C+iHUdT/W926rSgHV5QgXsYbKZN8MSC3tJtSkhuROzvsQjAaFENRXr+19A==}
+    dependencies:
+      inherits: 2.0.3
+    dev: false
