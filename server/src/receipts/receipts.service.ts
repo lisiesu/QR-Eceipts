@@ -20,8 +20,12 @@ export class ReceiptsService {
 		return this.receiptsRepository.save(receipt);
 	}
 
-	findAll(id) {
-		return this.receiptsRepository.find({ where: { user: id } });
+	async findAll(id) {
+		const receipts = await this.receiptsRepository.find({
+			where: { user: id },
+			relations: ['store', 'category'],
+		});
+		return receipts;
 	}
 
 	async findOne(id: number) {

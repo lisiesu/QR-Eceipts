@@ -22,7 +22,7 @@ export default class CreateReceiptDto {
 	paymentMethod: string;
 
 	@IsNotEmpty()
-	@IsNumber()
+	@IsString()
 	cardNumber: string;
 
 	@IsString()

@@ -15,6 +15,7 @@ import HashidsService from 'services/hashid/hashid.service';
 import QRCodeService from '../services/qrcode/qrcode.service';
 import { ReceiptsService } from './receipts.service';
 import CreateReceiptDto from './dto/create-receipt.dto';
+import HashReceipt from '../services/receipt/hashReceipt.service';
 
 dotenv.config();
 // import error from 'express';
@@ -26,6 +27,7 @@ export class ReceiptsController {
 		private readonly receiptsService: ReceiptsService,
 		private hashidsService: HashidsService,
 		private qrCodeService: QRCodeService,
+		private hashReceipt: HashReceipt,
 	) {}
 
 	@Get('/provideCookie/:userid')
@@ -43,9 +45,7 @@ export class ReceiptsController {
 
 	@Post()
 	async create(@Body() createReceiptDto: CreateReceiptDto) {
-		const store = this.hashidsService.decode(createReceiptDto.store);
-		const category = this.hashidsService.decode(createReceiptDto.category);
-		const receipt = { ...createReceiptDto, store, category };
+		const receipt = this.hashReceipt.hash(createReceiptDto, 'decode');
 		const returnedReceipt: any = await this.receiptsService.create(receipt);
 		const hashedId = this.hashidsService.encode(returnedReceipt.id);
 		const url = `${BASE_URL}/${hashedId}`;
@@ -59,9 +59,11 @@ export class ReceiptsController {
 		let receipts: any = 'User account not found!';
 		if (userId) {
 			receipts = await this.receiptsService.findAll(userId);
-			receipts = receipts.forEach((receipt) => {
-				const hashedId = this.hashidsService.encode(receipt.id);
-				return { id: hashedId, ...receipt };
+			receipts = receipts.map((receipt) => {
+				const url = `${BASE_URL}/${receipt.id}`;
+				const qrcode = this.qrCodeService.generate(url);
+				const newReceipt = { ...receipt, qrcode };
+				return this.hashReceipt.hash(newReceipt, 'encode');
 			});
 		}
 		response.send(receipts);
@@ -77,11 +79,18 @@ export class ReceiptsController {
 			await this.receiptsService.update(receiptId, { user: userId });
 			receiptUpdated = true;
 		}
+		const url = `${BASE_URL}/${hashedId}`;
+		const qrcode = this.qrCodeService.generate(url);
+		const newReceipt: any = { ...receipt };
+		this.hashReceipt.hash(newReceipt, 'encode');
 		response.send({
-			...receipt,
+			...newReceipt,
 			id: hashedId,
+			user: {
+				id: response.locals.userId,
+			},
 			receiptUpdated,
-			userId: response.locals.userId,
+			qrcode,
 		});
 	}
 
