@@ -1,23 +1,36 @@
 import ProductInterface from 'receipts/entities/product.interface';
-import Store from 'receipts/entities/store.interface';
-import Category from 'receipts/entities/category.interface';
+import { IsString, IsNotEmpty, IsDateString, IsNumber } from 'class-validator';
 
 export default class CreateReceiptDto {
-	timeOfPurchase: Date;
+  @IsDateString()
+  @IsNotEmpty()
+  timeOfPurchase: Date;
 
-	products: ProductInterface[];
+  @IsNotEmpty()
+  products: ProductInterface[];
 
-	total: number;
+  @IsNotEmpty()
+  @IsNumber()
+  total: number;
 
-	currency: string;
+  @IsNotEmpty()
+  @IsString()
+  currency: string;
 
-	paymentMethod: string;
+  @IsNotEmpty()
+  @IsString()
+  paymentMethod: string;
 
-	cardNumber: number;
+  @IsNotEmpty()
+  @IsString()
+  cardNumber: string;
 
-	misc?: string;
+  @IsString()
+  misc?: string;
 
-	store: Store;
+  @IsNotEmpty()
+  store: string;
 
-	category: Category;
+  @IsNotEmpty()
+  category: string;
 }

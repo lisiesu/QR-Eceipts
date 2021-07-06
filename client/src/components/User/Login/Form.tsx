@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { LoginInformation } from '../../../interfaces/types';
 import * as apiClient from '../../../services/ServerAPIServices';
+import { UserContext } from '../../../contexts/user-context';
 
 import './Form.css';
 
 function UserLoginForm(): JSX.Element {
+	const history = useHistory();
+	const { setUser } = useContext(UserContext);
+
 	const loginInformation: LoginInformation = {
 		email: '',
 		password: '',
@@ -18,10 +23,14 @@ function UserLoginForm(): JSX.Element {
 	}
 
 	async function handleSubmit(event) {
-		event.preventDefault();
-		apiClient.login(input);
-		// TODO save user state to global state
-		// TODO redirect to receipt list
+		try {
+			event.preventDefault();
+			const user = await apiClient.login(input);
+			await setUser({ ...user, logged: true });
+			history.push('/receipt-list');
+		} catch (err) {
+			console.error(err);
+		}
 	}
 
 	return (
