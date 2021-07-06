@@ -23,7 +23,6 @@ function UserSignupForm(): JSX.Element {
 	async function handleSubmit(event) {
 		event.preventDefault();
 		const createdUser = await apiClient.createUser(input);
-		console.log(createdUser.id);
 		// TODO save user state to global state
 		// TODO redirect to receipt list
 	}

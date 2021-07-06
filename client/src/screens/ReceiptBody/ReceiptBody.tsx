@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ReceiptBody.css';
-import { FiShoppingCart } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 import Moment from 'react-moment';
+import MainContainer from '../../components/Main/MainContainer';
 import ItemsList from '../../components/Receipt/ItemsList/ItemsList';
 import PrintComponent from '../../components/PrintComponent/PrintComponent';
 import { Receipt } from '../../interfaces/types';
@@ -23,28 +23,29 @@ function ReceiptBody(): JSX.Element {
 	});
 
 	const [receipt, setReceipt] = useState<Receipt>();
-
+	const merchantLogo = '/assets/logos/merchants/png/';
+	const categoryLogo = '/assets/logos/categories/png/';
 	useEffect(() => {
 		service.getReceiptByid(id).then((el) => setReceipt(el));
 	}, [id]);
 
 	return (
-		<div className="Receipt-Container">
+		<MainContainer>
 			{receipt ? (
-				<div className="Receipt-Body">
+				<div>
 					<div className="Company-Details">
 						<p className="Company-Name">{receipt.store.name}</p>
-						<p className="Company-Logo">{receipt.store.name}</p>
+						<img
+							className="Category-Logo"
+							src={categoryLogo + receipt.category.logotype}
+						/>
+						<img
+							className="Company-Logo"
+							src={merchantLogo + receipt.store.logo}
+						/>
 					</div>
-					<div className="Time-Container">
-						<p className="Timestamp">
-							<Moment date={receipt.timeOfPurchase} format="MMM Do YYYY" />
-						</p>
-						<li className="Shop-Icon-Circle">
-							<p className="Shop-Icon">
-								<FiShoppingCart />
-							</p>
-						</li>
+					<div className="Timestamp">
+						<Moment date={receipt.timeOfPurchase} format="MMM Do YYYY" />
 					</div>
 					<ItemsList receipt={receipt} />
 					<div className="Receipt-Saved-Text">
@@ -59,9 +60,7 @@ function ReceiptBody(): JSX.Element {
 						<button
 							className="Button-Text"
 							type="submit"
-							onClick={() => {
-								clickHandler();
-							}}
+							onClick={() => clickHandler()}
 						>
 							View all your receipts
 						</button>
@@ -78,7 +77,7 @@ function ReceiptBody(): JSX.Element {
 			) : (
 				<div> Loading...</div>
 			)}
-		</div>
+		</MainContainer>
 	);
 }
 
