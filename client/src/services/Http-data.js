@@ -116,7 +116,7 @@ const data = [
 		user: 'user7',
 		store: {
 			id: 6,
-			name: 'Front End Masters',
+			name: 'F.E. Masters',
 			address: 'Abc Street',
 			logo: 'merchant_6.png',
 			storeNumber: '1',

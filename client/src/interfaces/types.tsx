@@ -41,7 +41,7 @@ export interface User {
 	password?: string;
 }
 
-export interface Login {
+export interface LoginInformation {
 	email: string;
 	password: string;
 }

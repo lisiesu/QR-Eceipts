@@ -19,7 +19,7 @@ function ItemsList({ receipt }: Props): JSX.Element {
 	));
 
 	return (
-		<div>
+		<>
 			<div className="Item-List-Titles">
 				<p>Item</p>
 				<p>Price</p>
@@ -29,14 +29,14 @@ function ItemsList({ receipt }: Props): JSX.Element {
 					<li className="List">{items}</li>
 				</ul>
 			</div>
-			<PriceAndQR /* receipt={receipt} */ />
+			<PriceAndQR receipt={receipt} />
 			<div className="Message-Container">
 				<p>
 					{receipt.misc}Thank you for shopping at Tesco&apos;s, have a great
 					day!
 				</p>
 			</div>
-		</div>
+		</>
 	);
 }
 
