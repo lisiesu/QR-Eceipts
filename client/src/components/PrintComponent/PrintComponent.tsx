@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './PrintComponent.css';
 import { FiShoppingCart } from 'react-icons/fi';
-import { BiCheckCircle } from 'react-icons/bi';
-import { MemoryRouterProps, useHistory, useParams } from 'react-router-dom';
 import Moment from 'react-moment';
-import { render } from '@testing-library/react';
 import ItemsList from '../Receipt/ItemsList/ItemsList';
 import { Receipt } from '../../interfaces/types';
-import * as service from '../../services/ServerAPIServices';
 
 interface Props {
 	receipt: Receipt;
 }
 
 class PrintComponent extends React.PureComponent<Props> {
-	render() {
+	render(): JSX.Element {
 		const { receipt } = this.props;
 		return (
 			<div className="Receipt-Container">

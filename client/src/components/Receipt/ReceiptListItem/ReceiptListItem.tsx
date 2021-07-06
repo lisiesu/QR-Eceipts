@@ -1,7 +1,6 @@
 import React from 'react';
 import Moment from 'react-moment';
 import './ReceiptListItem.css';
-import { Receipt } from '../../../interfaces/types';
 
 interface Props {
 	logo: string;
