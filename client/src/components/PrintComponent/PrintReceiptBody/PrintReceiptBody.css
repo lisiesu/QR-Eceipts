@@ -1,48 +1,53 @@
-.Receipt-Container {
+.Print-Receipt-Container {
 	background-color: #f5f6fa;
 	border-radius: 30px 30px 0 0;
 	height: 100vh;
+	font-family: poppins;
 }
 
-.Receipt-Body {
+.Print-logo {
+	color: #3d3232;
+}
+
+.Print-Receipt-Body {
 	margin-left: 1em;
 	margin-right: 1em;
 }
 
-.Company-Details {
+.Print-Company-Details {
 	display: flex;
 	justify-content: space-between;
 }
 
-.Company-Name {
+.Print-Company-Name {
 	font-weight: bold;
 	margin-bottom: 0;
 	margin-top: 0.8em;
 	color: #3d3232;
 }
 
-.Company-Logo {
+.Print-Company-Logo {
 	color: rgb(245, 164, 89);
 	font-weight: bold;
 	margin-bottom: 0;
 	margin-top: 0.8em;
 }
 
-.Time-Container {
+.Print-Time-Container {
 	display: flex;
 	justify-content: space-between;
 	padding: 0;
 	margin-bottom: 0.5em;
 }
 
-.Timestamp {
+.Print-Timestamp {
 	font-size: xx-small;
 	margin-top: 0%;
 	font-weight: 500;
 	color: #a1a1a1;
 }
 
-.Shop-Icon-Circle {
+.Print-Shop-Icon-Circle {
 	display: inline-block;
 	width: 30px;
 	height: 30px;
@@ -56,11 +61,11 @@
 	list-style: none;
 }
 
-.Shop-Icon {
+.Print-Shop-Icon {
 	font-size: 25px;
 }
 
-.Receipt-Saved-Text {
+.Print-Receipt-Saved-Text {
 	display: flex;
 	flex-direction: column;
 	padding: 0;
@@ -68,7 +73,7 @@
 	align-items: center;
 }
 
-.Tick-Container {
+.Print-Tick-Container {
 	display: inline-block;
 	background-color: rgb(254, 254, 254);
 	width: 70px;
@@ -79,21 +84,21 @@
 	text-align: center;
 }
 
-.Tick {
+.Print-Tick {
 	color: #18ddba;
 	font-size: 70px;
 }
 
-.Saved-Message {
+.Print-Saved-Message {
 	font-size: small;
 }
 
-.listButton {
+.Print-listButton {
 	display: flex;
 	justify-content: center;
 }
 
-.Button-Text {
+.Print-Button-Text {
 	background-color: #1fc2c2;
 	padding: 0 1.25rem;
 	line-height: 2.125rem;

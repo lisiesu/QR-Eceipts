@@ -1,0 +1,4 @@
+.Print-Items {
+	display: flex;
+	justify-content: space-between;
+}

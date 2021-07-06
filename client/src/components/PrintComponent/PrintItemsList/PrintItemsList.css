@@ -2,7 +2,7 @@ ul li {
 	text-decoration: none;
 }
 
-.Item-List-Titles {
+.Print-Item-List-Titles {
 	display: flex;
 	justify-content: space-between;
 	font-family: Poppins;
@@ -12,29 +12,29 @@ ul li {
 	color: #248cce;
 }
 
-.Item-List-Container {
-	max-height: 110px;
-	background: rgba(57, 34, 25, 0.1);
+.Print-Item-List-Container {
+	height: auto;
+	background: rgba(25, 47, 57, 0.1);
 	border-radius: 0.5rem;
 	margin-bottom: 1rem;
 	overflow-y: auto;
 	padding: 0.5rem;
 }
 
-.Item-List-Container::-webkit-scrollbar {
+.Print-Item-List-Container::-webkit-scrollbar {
 	-webkit-appearance: none;
 }
-.Item-List-Container::-webkit-scrollbar:vertical {
+.Print-Item-List-Container::-webkit-scrollbar:vertical {
 	width: 10px;
 }
 
-.Item-List-Container::-webkit-scrollbar-thumb {
+.Print-Item-List-Container::-webkit-scrollbar-thumb {
 	border-radius: 8px;
 	border: 2px solid white;
 	background-color: #ebedfd;
 }
 
-.List {
+.Print-List {
 	font-family: Poppins;
 	font-style: normal;
 	font-weight: normal;
@@ -43,7 +43,7 @@ ul li {
 	color: #252b48;
 }
 
-.Message-Container {
+.Print-Message-Container {
 	display: flex;
 	flex-wrap: wrap;
 	border-radius: 8px;

@@ -6,7 +6,7 @@ import { useReactToPrint } from 'react-to-print';
 import Moment from 'react-moment';
 import MainContainer from '../../components/Main/MainContainer';
 import ItemsList from '../../components/Receipt/ItemsList/ItemsList';
-import PrintComponent from '../../components/PrintComponent/PrintComponent';
+import PrintReceiptBody from '../../components/PrintComponent/PrintReceiptBody/PrintReceiptBody';
 import { Receipt } from '../../interfaces/types';
 import * as service from '../../services/ServerAPIServices';
 
@@ -66,7 +66,7 @@ function ReceiptBody(): JSX.Element {
 						</button>
 					</div>
 					<div style={{ display: 'none' }}>
-						<PrintComponent ref={componentRef} receipt={receipt} />
+						<PrintReceiptBody ref={componentRef} receipt={receipt} />
 					</div>
 					<div>
 						<button type="button" onClick={handlePrint}>

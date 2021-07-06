@@ -1,16 +1,16 @@
 import React from 'react';
-import './ItemsList.css';
-import Items from '../Items/Items';
-import PriceAndQR from '../PriceAndQR/PriceAndQR';
+import './PrintItemsList.css';
+import PrintItems from '../PrintItems/PrintItems';
+import PrintPriceAndQR from '../PrintPriceAndQR/PrintPriceAndQR';
 import { Receipt } from '../../../interfaces/types';
 
 interface Props {
 	receipt: Receipt;
 }
 
-function ItemsList({ receipt }: Props): JSX.Element {
+function PrintItemsList({ receipt }: Props): JSX.Element {
 	const items = receipt.products.map((el) => (
-		<Items
+		<PrintItems
 			key={el.id}
 			item={el.product}
 			price={el.price}
@@ -20,17 +20,17 @@ function ItemsList({ receipt }: Props): JSX.Element {
 
 	return (
 		<div>
-			<div className="Item-List-Titles">
+			<div className="Print-Item-List-Titles">
 				<p>Item</p>
 				<p>Price</p>
 			</div>
-			<div className="Item-List-Container">
+			<div className="Print-Item-List-Container">
 				<ul>
-					<li className="List">{items}</li>
+					<li className="Print-List">{items}</li>
 				</ul>
 			</div>
-			<PriceAndQR receipt={receipt} />
-			<div className="Message-Container">
+			<PrintPriceAndQR receipt={receipt} />
+			<div className="Print-Message-Container">
 				<p>
 					{receipt.misc}Thank you for shopping at {receipt.store.name}, have a
 					great day!
@@ -40,4 +40,4 @@ function ItemsList({ receipt }: Props): JSX.Element {
 	);
 }
 
-export default ItemsList;
+export default PrintItemsList;
