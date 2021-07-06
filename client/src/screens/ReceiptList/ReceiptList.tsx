@@ -25,9 +25,12 @@ function ReceiptList(user_Id: string): JSX.Element {
 	};
 
 	useEffect(() => {
-		const allReceipts = getUserReceipts('user7');
-		setUnfilteredData(allReceipts);
-		setFilteredData(allReceipts);
+		(async () => {
+			const allReceipts = await getUserReceipts('user7');
+			console.log(allReceipts);
+			// setUnfilteredData(allReceipts);
+			// setFilteredData(allReceipts);
+		})();
 	}, []);
 
 	const route = '/receipt/';
