@@ -26,10 +26,9 @@ function ReceiptList(user_Id: string): JSX.Element {
 
 	useEffect(() => {
 		(async () => {
-			const allReceipts = await getUserReceipts('user7');
-			console.log(allReceipts);
-			// setUnfilteredData(allReceipts);
-			// setFilteredData(allReceipts);
+			const allReceipts = await getUserReceipts();
+			setUnfilteredData(allReceipts);
+			setFilteredData(allReceipts);
 		})();
 	}, []);
 

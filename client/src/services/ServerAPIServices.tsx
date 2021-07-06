@@ -2,9 +2,12 @@ import { Receipt, User, LoginInformation } from '../interfaces/types';
 
 const baseUrl = 'http://localhost:3005';
 
-export const getUserReceipts = async (user_Id: string): Promise<Receipt[]> => {
+export const getUserReceipts = async (): Promise<Receipt[]> => {
 	try {
-		const response = await fetch(`${baseUrl}/receipts`);
+		const response = await fetch(`${baseUrl}/receipts`, {
+			method: 'GET',
+			credentials: 'include',
+		});
 		return await response.json();
 	} catch (err) {
 		console.log(err);
