@@ -1,20 +1,25 @@
 import React from 'react';
 import Moment from 'react-moment';
 import './ReceiptListItem.css';
+import { Receipt } from '../../../interfaces/types';
 
 interface Props {
+	receipt: Receipt;
 	logo: string;
 	merchantName: string;
 	timeOfPurchase: Date;
 	category: string;
+	currency: string;
 	total: number;
 }
 
 function ReceiptListItem({
+	receipt,
 	logo,
 	merchantName,
 	timeOfPurchase,
 	category,
+	currency,
 	total,
 }: Props): JSX.Element {
 	const logosPath = `/assets/logos/merchants/png/${logo}`;
@@ -31,7 +36,9 @@ function ReceiptListItem({
 			<div className="category">
 				<img src={categoryLogo} />
 			</div>
-			<div className="total">£ {total}</div>
+			<div className="total">
+				{currency === '£' ? currency + total : total + currency}
+			</div>
 		</div>
 	);
 }

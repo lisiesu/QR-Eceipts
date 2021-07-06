@@ -1,5 +1,5 @@
 import * as DATA from './Http-data';
-import { Receipt, User } from '../interfaces/types';
+import { Receipt, User, LoginInformation } from '../interfaces/types';
 
 const baseUrl = 'https://66d6f4ba-d92e-490a-b764-04768e8484be.mock.pstmn.io';
 const localUrl = 'http://localhost:3005';
@@ -38,6 +38,26 @@ export const createUser = async (user: User): Promise<User> => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(user),
+			credentials: 'include',
+		});
+		return await response.json();
+	} catch (err) {
+		console.error(err);
+		return err;
+	}
+};
+
+export const login = async (
+	loginInformation: LoginInformation
+): Promise<User> => {
+	try {
+		const response = await fetch(`${localUrl}/users/login`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(loginInformation),
+			credentials: 'include',
 		});
 		return await response.json();
 	} catch (err) {
