@@ -25,6 +25,10 @@ export class UsersService {
 		return users;
 	}
 
+	async findOne(email: string): Promise<User> {
+		return this.repository.findOne({ email });
+	}
+
 	async remove(id: number): Promise<boolean> {
 		const confirmation = await this.repository.delete(id);
 		return confirmation.affected !== 0;
