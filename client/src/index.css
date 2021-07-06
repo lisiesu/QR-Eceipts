@@ -6,3 +6,8 @@
 body {
 	min-width: 375px;
 }
+input:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+}
