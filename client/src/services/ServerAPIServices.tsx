@@ -43,7 +43,6 @@ export const createUser = async (user: User): Promise<User> => {
 		if (response.ok) return await response.json();
 		throw new Error(response.statusText);
 	} catch (err) {
-		console.error(err);
 		throw new Error(err);
 	}
 };
@@ -60,10 +59,10 @@ export const login = async (
 			body: JSON.stringify(loginInformation),
 			credentials: 'include',
 		});
-		return await response.json();
+		if (response.ok) return await response.json();
+		throw new Error(response.statusText);
 	} catch (err) {
-		console.error(err);
-		return err;
+		throw new Error(err);
 	}
 };
 
