@@ -51,6 +51,19 @@ export const login = async (
 	}
 };
 
+export const logout = async (): Promise<boolean> => {
+	try {
+		const response = await fetch(`${baseUrl}/users/logout`, {
+			method: 'POST',
+			credentials: 'include',
+		});
+		if (response.ok) return true;
+		return false;
+	} catch (err) {
+		throw new Error(err);
+	}
+};
+
 export const getReceiptByid = async (id: string): Promise<Receipt> => {
 	const response = await fetch(`${baseUrl}/receipts/${id}`, {
 		method: 'GET',
