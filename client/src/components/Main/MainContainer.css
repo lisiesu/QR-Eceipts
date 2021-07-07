@@ -7,6 +7,7 @@
 	justify-content: space-evenly;
 	justify-self: flex-end;
 	min-width: 375px;
+	padding-top: 0.2rem;
 }
 
 .main-innercontainer {
