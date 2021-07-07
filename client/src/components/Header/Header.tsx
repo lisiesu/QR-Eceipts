@@ -10,15 +10,20 @@ function Header(): JSX.Element {
 	const path = location.pathname;
 
 	const loginOrSignupOrLogout =
-		path === '/login' || path === '/signup' || path === '/logout';
+		path === '/login' ||
+		path === '/signup' ||
+		path === '/logout' ||
+		path === '/';
 
 	return (
 		<div className="header">
-			<div className="link">
-				{!loginOrSignupOrLogout && user.logged ? (
-					<Link to="/logout">Logout</Link>
-				) : null}
-			</div>
+			{!loginOrSignupOrLogout && user.logged ? (
+				<div className="link">
+					<Link className="logout" to="/logout">
+						<p className="logoutText">Logout</p>
+					</Link>
+				</div>
+			) : null}
 			<Logo />
 		</div>
 	);

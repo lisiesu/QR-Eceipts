@@ -40,6 +40,7 @@ function UserSignupForm(): JSX.Element {
 			event.preventDefault();
 			const createdUser = await apiClient.createUser(input);
 			await setUser({ ...createdUser, ...input, logged: true }); // TODO: Once that the server start returning the object created, remove "...input"
+			localStorage.setItem('logged', 'true');
 			setTimeout(() => {
 				history.push('/receipt-list');
 			}, 3000);
@@ -50,7 +51,7 @@ function UserSignupForm(): JSX.Element {
 
 	return (
 		<form onSubmit={handleSubmit} className="signUp">
-			<div className="form-container">
+			<div className="form-container signup">
 				<label htmlFor="name">
 					Name
 					<br />
@@ -116,6 +117,12 @@ function UserSignupForm(): JSX.Element {
 					<button className="button" type="submit">
 						Sign up
 					</button>
+					<span className="finePrint">
+						Already a user?{' '}
+						<a href="#" onClick={() => history.push('/login')}>
+							Log-in!
+						</a>{' '}
+					</span>
 					<div className="loader">
 						<div className="check">
 							<span className="check-one" />

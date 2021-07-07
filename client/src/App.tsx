@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
+import Welcome from './screens/Welcome/Welcome';
 import ReceiptBody from './screens/ReceiptBody/ReceiptBody';
 import Login from './screens/Login/Login';
 import Logout from './screens/Logout/Logout';
@@ -32,6 +33,7 @@ function App(): JSX.Element {
 					>
 						<Header />
 						<Switch>
+							<Route exact path="/" component={Welcome} />
 							<Route exact path="/receipt/:id" component={ReceiptBody} />
 							<Route exact path="/signup" component={Signup} />
 							<Route exact path="/login" component={Login} />

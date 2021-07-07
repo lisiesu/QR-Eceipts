@@ -2,11 +2,12 @@
 	display: flex;
 	text-align: center;
 	font-weight: 500;
-	margin-top: 1em;
+	margin-top: 1rem;
 	margin-bottom: 3em;
 	position: static;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
+	display: flex;
 	flex-direction: column;
 }
 .header img {

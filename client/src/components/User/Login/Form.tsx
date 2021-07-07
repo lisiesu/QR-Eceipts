@@ -37,9 +37,10 @@ function UserLoginForm(): JSX.Element {
 			event.preventDefault();
 			const user = await apiClient.login(input);
 			await setUser({ ...user, logged: true });
+			localStorage.setItem('logged', 'true');
 			setTimeout(() => {
 				history.push('/receipt-list');
-			}, 3000);
+			}, 2000);
 		} catch (err) {
 			console.error(err);
 		}
@@ -77,6 +78,12 @@ function UserLoginForm(): JSX.Element {
 					<button className="button" type="submit">
 						Log in
 					</button>
+					<span className="fineprint">
+						New to QR-Eceipts?{' '}
+						<a href="#" onClick={() => history.push('/signup')}>
+							Sign up!
+						</a>
+					</span>
 					<div className="loader">
 						<div className="check">
 							<span className="check-one" />
