@@ -8,8 +8,8 @@ import { ReceiptSchema } from './entities/receipt.entity';
 import QRCodeService from '../services/qrcode/qrcode.service';
 
 @Module({
-	imports: [TypeOrmModule.forFeature([ReceiptSchema])],
-	controllers: [ReceiptsController],
-	providers: [ReceiptsService, HashidsService, QRCodeService, HashReceipt],
+  imports: [TypeOrmModule.forFeature([ReceiptSchema])],
+  controllers: [ReceiptsController],
+  providers: [ReceiptsService, HashidsService, QRCodeService, HashReceipt],
 })
 export class ReceiptsModule {}

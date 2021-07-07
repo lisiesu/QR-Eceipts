@@ -1,47 +1,65 @@
-import React, { useState, useEffect } from 'react';
 import './ReceiptList.css';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getUserReceipts } from '../../services/ServerAPIServices';
 import MainContainer from '../../components/Main/MainContainer';
 import ReceiptListItem from '../../components/Receipt/ReceiptListItem/ReceiptListItem';
+import { Receipt } from '../../interfaces/types';
+import { ReceiptsContext } from '../../contexts/receipts-context';
 
-function ReceiptList(user_Id: string): JSX.Element {
-	const [unfilteredData, setUnfilteredData] = useState([]);
-	const [filteredData, setFilteredData] = useState(unfilteredData);
-	const [isVisible, setIsVisible] = useState<boolean>(false);
+function ReceiptList(): JSX.Element {
+	const [unfilteredData, setUnfilteredData] = useState<Receipt[]>([]);
+	const [filteredData, setFilteredData] = useState<Receipt[]>([]);
+	const [isVisible, setIsVisible] = useState(false);
+	const { setReceipt } = useContext(ReceiptsContext);
+	const history = useHistory();
+
+	useEffect(() => {
+		(async () => {
+			const allReceipts = await getUserReceipts();
+			setUnfilteredData(allReceipts);
+			setFilteredData(allReceipts);
+		})();
+	}, []);
 
 	const showSearchbar = () => {
-		if (isVisible === false) setIsVisible(true);
-		else setIsVisible(false);
+		isVisible === false ? setIsVisible(true) : setIsVisible(false);
 	};
 
 	const handleSearch = (event) => {
 		const { value } = event.target;
+		const searchString = value.toLowerCase().trim();
 		let result = [];
-		console.log(value);
-		result = unfilteredData.filter(
-			(data) => data.store.name.toLowerCase().search(value) != -1
+		result = unfilteredData.filter((element) =>
+			element.category.name.toLowerCase().includes(searchString) ||
+			element.store.name.toLowerCase().includes(searchString) ||
+			element.total.toString().toLowerCase().includes(searchString) ||
+			element.currency.toLowerCase().includes(searchString) ||
+			element.timeOfPurchase.toString().toLowerCase().includes(searchString)
+				? result.push(element)
+				: false
 		);
 		setFilteredData(result);
 	};
 
-	useEffect(() => {
-		const allReceipts = getUserReceipts('user7');
-		setUnfilteredData(allReceipts);
-		setFilteredData(allReceipts);
-	}, []);
+	const handleClick = async (receipt) => {
+		await setReceipt(receipt);
+		history.push(`/receipt/${receipt.id}`);
+	};
 
-	const route = '/receipt/';
 	const receipts = filteredData.map((el) => (
-		<a href={route + el.id}>
+		<div onClick={() => handleClick(el)}>
 			<ReceiptListItem
 				key={el.id}
+				receipt={el}
 				logo={el.store.logo}
 				merchantName={el.store.name}
 				timeOfPurchase={el.timeOfPurchase}
-				category={el.category.logotype}
+				category={el.category.name}
+				currency={el.currency}
 				total={el.total}
 			/>
-		</a>
+		</div>
 	));
 
 	return (
@@ -49,27 +67,24 @@ function ReceiptList(user_Id: string): JSX.Element {
 			<div className="searchBar">
 				<div className="searchWrapper">
 					<label htmlFor="search">
-						<a href="#" onClick={() => showSearchbar()}>
+						<div onClick={() => showSearchbar()}>
 							<img
-								src="/assets/logos/categories/png/cat_1.png"
+								src="/assets/logos/categories/png/search.png"
 								alt="search icon"
 							/>
-						</a>
+						</div>
 					</label>
 					<input
-						className="search input__field input__field--makiko"
+						className={!isVisible ? 'hidden' : 'visible'}
 						type="text"
 						name="search"
-						id={isVisible.toString()}
+						id="searchBar"
 						onChange={(event) => handleSearch(event)}
 					/>
 				</div>
 			</div>
 			<MainContainer>
-				<>
-					{receipts}
-					{receipts}
-				</>
+				<>{receipts}</>
 			</MainContainer>
 		</>
 	);

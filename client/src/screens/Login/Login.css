@@ -1,0 +1,13 @@
+.outer-container {
+	background-color: transparent;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.inner-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 5rem;
+}

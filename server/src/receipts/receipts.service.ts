@@ -9,39 +9,39 @@ import CreateReceipt from './entities/createReceipt.interface';
 
 @Injectable()
 export class ReceiptsService {
-	constructor(
-		@InjectRepository(ReceiptSchema)
-		private receiptsRepository: Repository<
-			Receipt | CreateReceiptDto | AssignReceipt | CreateReceipt
-		>,
-	) {}
+  constructor(
+    @InjectRepository(ReceiptSchema)
+    private receiptsRepository: Repository<
+      Receipt | CreateReceiptDto | AssignReceipt | CreateReceipt
+    >,
+  ) {}
 
-	create(receipt: CreateReceipt) {
-		return this.receiptsRepository.save(receipt);
-	}
+  create(receipt: CreateReceipt) {
+    return this.receiptsRepository.save(receipt);
+  }
 
-	async findAll(id) {
-		const receipts = await this.receiptsRepository.find({
-			where: { user: id },
-			relations: ['store', 'category'],
-		});
-		return receipts;
-	}
+  async findAll(id) {
+    const receipts = await this.receiptsRepository.find({
+      where: { user: id },
+      relations: ['store', 'category'],
+    });
+    return receipts;
+  }
 
-	async findOne(id: number) {
-		const receipt = await this.receiptsRepository.findOne({
-			where: { id },
-			relations: ['store', 'category'],
-		});
-		return receipt;
-	}
+  async findOne(id: number) {
+    const receipt = await this.receiptsRepository.findOne({
+      where: { id },
+      relations: ['store', 'category'],
+    });
+    return receipt;
+  }
 
-	update(id: number, user: AssignReceipt) {
-		const newId = Number(id);
-		return this.receiptsRepository.update(newId, user);
-	}
+  update(id: number, user: AssignReceipt) {
+    const newId = Number(id);
+    return this.receiptsRepository.update(newId, user);
+  }
 
-	remove(id: number) {
-		return this.receiptsRepository.delete(id);
-	}
+  remove(id: number) {
+    return this.receiptsRepository.delete(id);
+  }
 }

@@ -13,8 +13,8 @@ ul li {
 }
 
 .Item-List-Container {
-	height: 20%;
-	background: rgba(25, 47, 57, 0.1);
+	max-height: 13vh;
+	background: rgba(57, 34, 25, 0.1);
 	border-radius: 0.5rem;
 	margin-bottom: 1rem;
 	overflow-y: auto;

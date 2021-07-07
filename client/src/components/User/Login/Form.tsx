@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { LoginInformation } from '../../../interfaces/types';
 import * as apiClient from '../../../services/ServerAPIServices';
+import { UserContext } from '../../../contexts/user-context';
 
 import './Form.css';
 
 function UserLoginForm(): JSX.Element {
+	const history = useHistory();
+	const { setUser } = useContext(UserContext);
+
 	const loginInformation: LoginInformation = {
 		email: '',
 		password: '',
@@ -17,45 +22,70 @@ function UserLoginForm(): JSX.Element {
 		setInput({ ...input, [name]: value });
 	}
 
+	document.addEventListener('DOMContentLoaded', () => {
+		const btn = document.querySelector('.button');
+		const loader = document.querySelector('.loader');
+		const check = document.querySelector('.check');
+		btn.addEventListener('click', () => loader.classList.add('active'));
+		loader.addEventListener('animationend', () =>
+			check.classList.add('active')
+		);
+	});
+
 	async function handleSubmit(event) {
-		event.preventDefault();
-		apiClient.login(input);
-		// TODO save user state to global state
-		// TODO redirect to receipt list
+		try {
+			event.preventDefault();
+			const user = await apiClient.login(input);
+			await setUser({ ...user, logged: true });
+			setTimeout(() => {
+				history.push('/receipt-list');
+			}, 3000);
+		} catch (err) {
+			console.error(err);
+		}
 	}
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<div className="form-container">
-					<label htmlFor="email">
-						Email
-						<br />
-						<input
-							id="email"
-							name="email"
-							type="email"
-							required
-							value={input.email}
-							onChange={handleChange}
-						/>
-					</label>
-					<label htmlFor="password">
-						Password
-						<br />
-						<input
-							id="password"
-							name="password"
-							type="password"
-							required
-							value={input.password}
-							onChange={handleChange}
-						/>
-					</label>
-					<input className="submit-button" type="submit" />
+		<form onSubmit={handleSubmit}>
+			<div className="form-container">
+				<label className="loginForm" htmlFor="email">
+					Email
+					<br />
+					<input
+						id="email"
+						name="email"
+						type="email"
+						required
+						value={input.email}
+						onChange={handleChange}
+					/>
+				</label>
+				<label className="loginForm" htmlFor="password">
+					Password
+					<br />
+					<input
+						id="password"
+						name="password"
+						type="password"
+						required
+						value={input.password}
+						onChange={handleChange}
+					/>
+				</label>
+
+				<div className="button-wrapper">
+					<button className="button" type="submit">
+						Log in
+					</button>
+					<div className="loader">
+						<div className="check">
+							<span className="check-one" />
+							<span className="check-two" />
+						</div>
+					</div>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	);
 }
 

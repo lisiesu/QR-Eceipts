@@ -1,0 +1,59 @@
+ul li {
+	text-decoration: none;
+}
+
+.Print-Item-List-Titles {
+	display: flex;
+	justify-content: space-between;
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1rem;
+	color: #248cce;
+	margin-left: 0.8rem;
+	margin-right: 0.8rem;
+}
+
+.Print-Item-List-Container {
+	height: auto;
+	background: rgba(25, 47, 57, 0.1);
+	border-radius: 0.5rem;
+	margin-bottom: 1rem;
+	overflow-y: auto;
+	padding: 1rem;
+}
+
+.Print-Item-List-Container::-webkit-scrollbar {
+	-webkit-appearance: none;
+}
+.Print-Item-List-Container::-webkit-scrollbar:vertical {
+	width: 10px;
+}
+
+.Print-Item-List-Container::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	border: 2px solid white;
+	background-color: #ebedfd;
+}
+
+.Print-List {
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.5rem;
+	line-height: 27px;
+	color: #252b48;
+}
+
+.Print-Message-Container {
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 8px;
+	background: rgba(25, 47, 57, 0.1);
+	font-size: small;
+	text-align: center;
+	margin-bottom: 1em;
+	padding: 0.5em;
+	color: #252b48;
+	font-size: 1.5rem;
+}

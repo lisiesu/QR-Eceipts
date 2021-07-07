@@ -1,3 +1,3 @@
 export default interface AssignReceipt {
-	user: number;
+  user: number;
 }

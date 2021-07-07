@@ -3,12 +3,20 @@ import './MainContainer.css';
 
 type Props = {
 	children: JSX.Element;
+	CSSoverrideOuter?: string;
+	CSSoverrideInner?: string;
 };
 
-function MainContainer({ children }: Props): JSX.Element {
+function MainContainer({
+	children,
+	CSSoverrideOuter,
+	CSSoverrideInner,
+}: Props): JSX.Element {
 	return (
-		<main className="main-container">
-			<div className="main-innercontainer">{children}</div>
+		<main className={`main-container ${CSSoverrideOuter}`}>
+			<div className={`main-innercontainer ${CSSoverrideInner}`}>
+				{children}
+			</div>
 		</main>
 	);
 }
