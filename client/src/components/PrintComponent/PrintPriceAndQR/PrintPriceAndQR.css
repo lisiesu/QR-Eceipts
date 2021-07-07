@@ -9,9 +9,10 @@
 	background: rgba(25, 47, 57, 0.1);
 	border-radius: 0.5rem;
 	margin-bottom: 1rem;
-	padding: 0.5rem;
-	min-width: 40%;
-	min-height: 50%;
+	padding: 1rem;
+	min-width: 42%;
+	min-height: 6vh;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -45,13 +46,12 @@
 	background: rgba(25, 47, 57, 0.1);
 	border-radius: 0.5rem;
 	margin-bottom: 1rem;
-	padding: 0.5rem;
+	padding: 1rem;
+	min-width: 42%;
+	min-height: 6vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-}
-
-.Print-QR-svg img {
-	width: 72px;
+	vertical-align: middle;
 }
