@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useRef, useState } from 'react';
 import './ReceiptBody.css';
 import { BiCheckCircle } from 'react-icons/bi';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 import Moment from 'react-moment';
 import MainContainer from '../../components/Main/MainContainer';
@@ -15,13 +15,10 @@ import { UserContext } from '../../contexts/user-context';
 
 function ReceiptBody(): JSX.Element {
 	const { id } = useParams<{ id?: string }>();
-	const history = useHistory();
 	const { receipt, setReceipt } = useContext(ReceiptsContext);
-	const [saved, setSaved] = useState(false);
+	const { user } = useContext(UserContext);
 
-	const clickHandler = () => {
-		history.push('/receipt-list');
-	};
+	const [saved, setSaved] = useState(false);
 
 	const componentRef = useRef();
 	const handlePrint = useReactToPrint({
@@ -29,7 +26,6 @@ function ReceiptBody(): JSX.Element {
 	});
 
 	const merchantLogo = '/assets/logos/merchants/png/';
-	const categoryLogo = `/assets/logos/categories/png/${receipt.category.name}.png`;
 
 	useEffect(() => {
 		if (!receipt) {
@@ -49,7 +45,10 @@ function ReceiptBody(): JSX.Element {
 				<div>
 					<div className="Company-Details">
 						<p className="Company-Name">{receipt.store.name}</p>
-						<img className="Category-Logo" src={categoryLogo} />
+						<img
+							className="Category-Logo"
+							src={`/assets/logos/categories/png/${receipt.category.name}.png`}
+						/>
 						<img
 							className="Company-Logo"
 							src={merchantLogo + receipt.store.logo}
@@ -62,13 +61,19 @@ function ReceiptBody(): JSX.Element {
 					{saved ? <SavedMessage /> : null}
 
 					<div className="listButton">
-						<button
-							className="Button-Text"
-							type="submit"
-							onClick={() => clickHandler()}
-						>
-							View receipts
-						</button>
+						{user.logged ? (
+							<Link to="/receipt-list">
+								<button className="Button-Text" type="submit">
+									View receipts
+								</button>
+							</Link>
+						) : (
+							<Link to="/">
+								<button className="Button-Text" type="submit">
+									Save Receipt
+								</button>
+							</Link>
+						)}
 						<div style={{ display: 'none' }}>
 							<PrintReceiptBody ref={componentRef} receipt={receipt} />
 						</div>
