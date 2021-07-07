@@ -5,6 +5,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import ReceiptBody from './screens/ReceiptBody/ReceiptBody';
 import Login from './screens/Login/Login';
+import Logout from './screens/Logout/Logout';
 import Signup from './screens/Signup/Signup';
 import ReceiptList from './screens/ReceiptList/ReceiptList';
 import BG from './components/Svg/BG';
@@ -34,6 +35,7 @@ function App(): JSX.Element {
 							<Route exact path="/receipt/:id" component={ReceiptBody} />
 							<Route exact path="/signup" component={Signup} />
 							<Route exact path="/login" component={Login} />
+							<Route exact path="/logout" component={Logout} />
 							<Route exact path="/receipt-list" component={ReceiptList} />
 						</Switch>
 					</div>
