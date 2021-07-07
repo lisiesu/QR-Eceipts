@@ -1,6 +1,5 @@
 import {
 	Controller,
-	Get,
 	Post,
 	Body,
 	Param,
@@ -26,7 +25,7 @@ export class UsersController {
 		private hashidsService: HashidsService,
 	) {}
 
-	@Post()
+	@Post('register')
 	async create(
 		@Body() createUserDto: CreateUserDto,
 		@Res({ passthrough: true }) response: Response,
@@ -91,20 +90,6 @@ export class UsersController {
 		if (!isUserRemoved) throw new BadRequestException("User doesn't exist");
 		response.clearCookie('userId');
 		return 'User was successfully removed';
-	}
-
-	@Get(':id/receipts')
-	@HttpCode(200)
-	async getAllUserReceipts(@Param('id') id: string) {
-		const userId = this.hashidsService.decode(id);
-		const receiptsFound = await this.usersService.findAllUserReceipts(userId);
-		if (receiptsFound === undefined)
-			throw new BadRequestException('No receipts here');
-		const receipts = receiptsFound.map((receipt) => ({
-			...receipt,
-			id: this.hashidsService.encode(receipt.id),
-		}));
-		return { receipts };
 	}
 
 	@Post('logout')

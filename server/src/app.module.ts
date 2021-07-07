@@ -42,7 +42,7 @@ export default class AppModule {
 	configure(consumer: MiddlewareConsumer) {
 		consumer
 			.apply(AuthMiddleware)
-			.exclude('users', 'users/login')
-			.forRoutes('receipts', 'users/:id', 'users/:id/receipts', 'users/logout');
+			.exclude('users/register', 'users/login')
+			.forRoutes('receipts', 'users/:id', 'users/logout');
 	}
 }
