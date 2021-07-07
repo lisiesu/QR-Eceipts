@@ -40,6 +40,9 @@ export default class AppModule {
 	constructor(private connection: Connection) {}
 
 	configure(consumer: MiddlewareConsumer) {
-		consumer.apply(AuthMiddleware).forRoutes('receipts', 'users');
+		consumer
+			.apply(AuthMiddleware)
+			.exclude('users/register', 'users/login')
+			.forRoutes('receipts', 'users/:id', 'users/logout');
 	}
 }
