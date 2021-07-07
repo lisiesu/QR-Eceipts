@@ -37,9 +37,10 @@ function UserLoginForm(): JSX.Element {
 			event.preventDefault();
 			const user = await apiClient.login(input);
 			await setUser({ ...user, logged: true });
+			localStorage.setItem('logged', 'true');
 			setTimeout(() => {
 				history.push('/receipt-list');
-			}, 3000);
+			}, 2000);
 		} catch (err) {
 			console.error(err);
 		}

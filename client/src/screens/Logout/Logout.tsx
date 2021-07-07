@@ -14,6 +14,7 @@ function Logout(): JSX.Element {
 			const response = await logout();
 			if (response) {
 				await setUser({ logged: false });
+				localStorage.removeItem('logged');
 				history.push('/login');
 			}
 		})();
