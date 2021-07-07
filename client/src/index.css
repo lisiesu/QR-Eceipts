@@ -3,7 +3,12 @@
 	padding: 0;
 	box-sizing: content-box;
 }
-
 body {
-	background: #248cce;
+	min-width: 375px;
+}
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+	outline: none;
 }

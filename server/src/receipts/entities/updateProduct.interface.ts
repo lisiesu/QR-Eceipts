@@ -1,7 +1,5 @@
-export default class UpdateProductInterface {
-	id: string;
-
-	isRefunded: boolean;
-
-	refundDate?: Date;
+export default interface UpdateProductInterface {
+  id: string;
+  isRefunded: boolean;
+  refundDate?: Date;
 }

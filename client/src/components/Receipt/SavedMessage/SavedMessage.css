@@ -1,0 +1,27 @@
+.Receipt-Saved-Text {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	margin-bottom: 1em;
+	align-items: center;
+}
+
+.Tick-Container {
+	display: inline-block;
+	background-color: rgb(254, 254, 254);
+	width: 70px;
+	height: 70px;
+	line-height: 80px;
+	border-radius: 50%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.Tick {
+	color: #18ddba;
+	font-size: 70px;
+}
+
+.Saved-Message {
+	font-size: small;
+}

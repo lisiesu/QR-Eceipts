@@ -4,33 +4,44 @@ import { Repository } from 'typeorm';
 import Receipt from './entities/receipt.interface';
 import { ReceiptSchema } from './entities/receipt.entity';
 import CreateReceiptDto from './dto/create-receipt.dto';
-import UpdateReceiptDto from './dto/update-receipt.dto';
+import AssignReceipt from './entities/assignReceipt.interface';
+import CreateReceipt from './entities/createReceipt.interface';
 
 @Injectable()
 export class ReceiptsService {
-	constructor(
-		@InjectRepository(ReceiptSchema)
-		private receiptsRepository: Repository<Receipt | CreateReceiptDto>,
-	) {}
+  constructor(
+    @InjectRepository(ReceiptSchema)
+    private receiptsRepository: Repository<
+      Receipt | CreateReceiptDto | AssignReceipt | CreateReceipt
+    >,
+  ) {}
 
-	create(createReceiptDto: CreateReceiptDto) {
-		return this.receiptsRepository.save(createReceiptDto);
-	}
+  create(receipt: CreateReceipt) {
+    return this.receiptsRepository.save(receipt);
+  }
 
-	findAll(id) {
-		return this.receiptsRepository.find({ where: { user: id } });
-	}
+  async findAll(id) {
+    const receipts = await this.receiptsRepository.find({
+      where: { user: id },
+      relations: ['store', 'category'],
+    });
+    return receipts;
+  }
 
-	findOne(id: number) {
-		return this.receiptsRepository.findOne(id);
-	}
+  async findOne(id: number) {
+    const receipt = await this.receiptsRepository.findOne({
+      where: { id },
+      relations: ['store', 'category'],
+    });
+    return receipt;
+  }
 
-	update(id: string, updateReceiptDto: UpdateReceiptDto) {
-		const newId = Number(id);
-		return this.receiptsRepository.update(newId, updateReceiptDto);
-	}
+  update(id: number, user: AssignReceipt) {
+    const newId = Number(id);
+    return this.receiptsRepository.update(newId, user);
+  }
 
-	remove(id: number) {
-		return this.receiptsRepository.delete(id);
-	}
+  remove(id: number) {
+    return this.receiptsRepository.delete(id);
+  }
 }

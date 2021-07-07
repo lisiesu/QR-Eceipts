@@ -1,119 +1,65 @@
-.Receipt-Container {
-	background-color: #f5f6fa;
-	border-radius: 2.6em 2.6em 0 0;
-	height: 80vh;
+a {
+	text-decoration: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+a div {
+	transition: all 0.2s ease-in-out;
+}
+
+a div:hover {
+	transform: scale(1.1);
+}
+.searchWrapper {
 	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	justify-self: flex-end;
-}
-
-.Receipt-Body {
-	overflow-x: visible;
-	overflow-y: scroll;
-	padding-top: 1em;
-}
-
-.Company-Details {
-	display: flex;
-	justify-content: space-between;
-}
-
-.Company-Name {
-	font-weight: bold;
-	margin-bottom: 0;
-	margin-top: 0.8em;
-	color: #3d3232;
-}
-
-.Company-Logo {
-	color: rgb(245, 164, 89);
-	font-weight: bold;
-	margin-bottom: 0;
-	margin-top: 0.8em;
-}
-
-.Time-Container {
-	display: flex;
-	justify-content: space-between;
-	padding: 0;
-	margin-bottom: 0.5em;
-}
-
-.Timestamp {
-	font-size: xx-small;
-	margin-top: 0%;
-	font-weight: 500;
-	color: #a1a1a1;
-}
-
-.Shop-Icon-Circle {
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	line-height: 25px;
-	border-radius: 50%;
-	background: #f5f6fa;
-	margin-right: 2em;
-	margin-top: 0;
-	vertical-align: middle;
-	text-align: center;
-	list-style: none;
-}
-
-.Shop-Icon {
-	font-size: 25px;
-}
-
-.Receipt-Saved-Text {
-	display: flex;
-	flex-direction: column;
-	padding: 0;
-	margin-bottom: 1em;
+	background-color: white;
+	border-radius: 25px;
 	align-items: center;
+	transition: all 0.2s ease-in-out;
+	filter: drop-shadow(0px 100px 80px rgba(0, 0, 0, 0.07)),
+		drop-shadow(0px 41.7776px 33.422px rgba(0, 0, 0, 0.0503198)),
+		drop-shadow(0px 22.3363px 17.869px rgba(0, 0, 0, 0.0417275)),
+		drop-shadow(0px 12.5216px 10.0172px rgba(0, 0, 0, 0.035)),
+		drop-shadow(0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725)),
+		drop-shadow(0px 2.76726px 2.2138px rgba(0, 0, 0, 0.0196802));
 }
-
-.Tick-Container {
-	display: inline-block;
-	background-color: rgb(254, 254, 254);
-	width: 70px;
-	height: 70px;
-	line-height: 80px;
-	border-radius: 50%;
-	vertical-align: middle;
-	text-align: center;
-}
-
-.Tick {
-	color: #18ddba;
-	font-size: 70px;
-}
-
-.Saved-Message {
-	font-size: small;
-}
-
-.listButton {
+.searchBar {
 	display: flex;
 	justify-content: center;
+	margin-bottom: 1em;
 }
 
-.Button-Text {
-	background-color: #1fc2c2;
-	padding: 0 1.25rem;
-	line-height: 2.125rem;
-	font-size: 0.875rem;
-	font-weight: 400;
+label div {
+	display: flex;
+	align-items: center;
+}
+div label div img {
+	width: 50px;
+}
+
+.hidden {
+	height: 50px;
+	border-radius: 200px;
+	border: none;
+	font-size: 1rem;
 	text-align: center;
-	margin: 0.125rem;
-	color: white;
+	opacity: 0;
+	width: 0px;
+	transition: width 0.5s, opacity 0.2s ease-in;
+}
 
-	border-radius: 30px;
-
-	transition: color 0.125s ease;
-	cursor: pointer;
-
-	box-shadow: 0px 0px 0px transparent;
-	border: 0px solid transparent;
-	text-shadow: 0px 0px 0px transparent;
+.visible {
+	height: 50px;
+	border-radius: 200px;
+	border: none;
+	font-size: 1rem;
+	text-align: center;
+	width: 166px;
+	opacity: 1;
+	transition: width 0.5s, opacity 0.2s ease-out;
 }
