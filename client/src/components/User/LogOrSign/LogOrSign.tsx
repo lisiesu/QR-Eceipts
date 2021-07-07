@@ -17,7 +17,7 @@ function LogOrSign() {
 			<div className="title">
 				<div className="main-title">
 					<h1>Welcome to</h1>
-					<h1> QR-Eceipts</h1>
+					<h1>QR-Eceipts</h1>
 				</div>
 				<div className="button-wrapper">
 					<button
