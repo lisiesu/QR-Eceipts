@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useEffect, useContext, useRef, useState } from 'react';
 import './ReceiptBody.css';
 import { BiCheckCircle } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
@@ -6,15 +6,18 @@ import { useReactToPrint } from 'react-to-print';
 import Moment from 'react-moment';
 import MainContainer from '../../components/Main/MainContainer';
 import ItemsList from '../../components/Receipt/ItemsList/ItemsList';
+import SavedMessage from '../../components/Receipt/SavedMessage/SavedMessage';
 import PrintReceiptBody from '../../components/PrintComponent/PrintReceiptBody/PrintReceiptBody';
 import { Receipt } from '../../interfaces/types';
 import * as service from '../../services/ServerAPIServices';
 import { ReceiptsContext } from '../../contexts/receipts-context';
+import { UserContext } from '../../contexts/user-context';
 
 function ReceiptBody(): JSX.Element {
 	const { id } = useParams<{ id?: string }>();
 	const history = useHistory();
 	const { receipt, setReceipt } = useContext(ReceiptsContext);
+	const [saved, setSaved] = useState(false);
 
 	const clickHandler = () => {
 		history.push('/receipt-list');
@@ -34,6 +37,7 @@ function ReceiptBody(): JSX.Element {
 				const response = await service.getReceiptByid(id);
 				console.log(response);
 				setReceipt(response);
+				setSaved(response.receiptUpdated);
 			})();
 		}
 	}, [id, receipt, setReceipt]);
@@ -55,14 +59,8 @@ function ReceiptBody(): JSX.Element {
 						<Moment date={receipt.timeOfPurchase} format="MMM Do YYYY" />
 					</div>
 					<ItemsList receipt={receipt} />
-					<div className="Receipt-Saved-Text">
-						<li className="Tick-Container">
-							<p className="Tick">
-								<BiCheckCircle />
-							</p>
-						</li>
-						<p className="Saved-Message">Your receipt has been saved!</p>
-					</div>
+					{saved ? <SavedMessage /> : null}
+
 					<div className="listButton">
 						<button
 							className="Button-Text"
