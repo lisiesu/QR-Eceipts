@@ -3,12 +3,14 @@ import { useHistory } from 'react-router-dom';
 import { LoginInformation } from '../../../interfaces/types';
 import * as apiClient from '../../../services/ServerAPIServices';
 import { UserContext } from '../../../contexts/user-context';
+import { ReceiptsContext } from '../../../contexts/receipts-context';
 
 import './Form.css';
 
 function UserLoginForm(): JSX.Element {
 	const history = useHistory();
 	const { setUser } = useContext(UserContext);
+	const { receipt } = useContext(ReceiptsContext);
 
 	const loginInformation: LoginInformation = {
 		email: '',
@@ -38,6 +40,9 @@ function UserLoginForm(): JSX.Element {
 			const user = await apiClient.login(input);
 			await setUser({ ...user, logged: true });
 			localStorage.setItem('logged', 'true');
+			if (receipt) {
+				apiClient.getReceiptByid(receipt.id);
+			}
 			setTimeout(() => {
 				history.push('/receipt-list');
 			}, 2000);
