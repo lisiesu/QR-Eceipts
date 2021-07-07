@@ -26,16 +26,8 @@ function ReceiptBody(): JSX.Element {
 	});
 
 	const merchantLogo = '/assets/logos/merchants/png/';
-	const categoryLogo =
-		receipt && receipt.category ? (
-			<img
-				className="Category-Logo"
-				src={`/assets/logos/categories/png/${receipt.category.name}.png`}
-			/>
-		) : null;
 
 	useEffect(() => {
-		console.log('receipt context', receipt);
 		if (!receipt) {
 			(async () => {
 				const response = await service.getReceiptByid(id);
@@ -52,7 +44,10 @@ function ReceiptBody(): JSX.Element {
 				<div>
 					<div className="Company-Details">
 						<p className="Company-Name">{receipt.store.name}</p>
-						{categoryLogo}
+						<img
+							className="Category-Logo"
+							src={`/assets/logos/categories/png/${receipt.category.name}.png`}
+						/>
 						<img
 							className="Company-Logo"
 							src={merchantLogo + receipt.store.logo}
