@@ -98,6 +98,6 @@ export class UsersController {
 			response.clearCookie('userId');
 			return 'logout successful';
 		}
-		return 'you cannot logout if you are not logged in';
+		throw new BadRequestException('you cannot logout if you are not logged in');
 	}
 }
