@@ -4,7 +4,7 @@
 	box-sizing: content-box;
 }
 body {
-	min-width: 375px;
+	background-color: #258cce;
 }
 input:focus,
 button:focus,
