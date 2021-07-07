@@ -3,12 +3,13 @@ import { useHistory } from 'react-router-dom';
 import { User } from '../../../interfaces/types';
 import * as apiClient from '../../../services/ServerAPIServices';
 import { UserContext } from '../../../contexts/user-context';
-
+import { ReceiptsContext } from '../../../contexts/receipts-context';
 import './Form.css';
 
 function UserSignupForm(): JSX.Element {
 	const history = useHistory();
 	const { setUser } = useContext(UserContext);
+	const { receipt } = useContext(ReceiptsContext);
 
 	const inputState: User = {
 		name: '',
@@ -41,6 +42,9 @@ function UserSignupForm(): JSX.Element {
 			const createdUser = await apiClient.createUser(input);
 			await setUser({ ...createdUser, ...input, logged: true }); // TODO: Once that the server start returning the object created, remove "...input"
 			localStorage.setItem('logged', 'true');
+			if (receipt) {
+				apiClient.getReceiptByid(receipt.id);
+			}
 			setTimeout(() => {
 				history.push('/receipt-list');
 			}, 3000);
