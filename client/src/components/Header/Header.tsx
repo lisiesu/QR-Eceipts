@@ -14,10 +14,12 @@ function Header(): JSX.Element {
 
 	return (
 		<div className="header">
+			<div className="link">
+				{!loginOrSignupOrLogout && user.logged ? (
+					<Link to="/logout">Logout</Link>
+				) : null}
+			</div>
 			<Logo />
-			{!loginOrSignupOrLogout && user.logged ? (
-				<Link to="/logout">Logout</Link>
-			) : null}
 		</div>
 	);
 }
