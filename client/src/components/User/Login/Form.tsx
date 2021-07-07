@@ -40,6 +40,7 @@ function UserLoginForm(): JSX.Element {
 			const user = await apiClient.login(input);
 			await setUser({ ...user, logged: true });
 			localStorage.setItem('logged', 'true');
+			localStorage.setItem('user', JSON.stringify(user));
 			if (receipt) {
 				apiClient.getReceiptByid(receipt.id);
 			}

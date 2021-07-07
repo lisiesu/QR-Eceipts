@@ -42,6 +42,10 @@ function UserSignupForm(): JSX.Element {
 			const createdUser = await apiClient.createUser(input);
 			await setUser({ ...createdUser, ...input, logged: true }); // TODO: Once that the server start returning the object created, remove "...input"
 			localStorage.setItem('logged', 'true');
+			localStorage.setItem(
+				'user',
+				JSON.stringify({ ...createdUser, ...input, logged: true })
+			);
 			if (receipt) {
 				apiClient.getReceiptByid(receipt.id);
 			}
