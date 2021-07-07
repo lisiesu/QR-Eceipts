@@ -9,23 +9,10 @@ import { ReceiptsContext } from '../../contexts/receipts-context';
 
 function ReceiptList(): JSX.Element {
 	const [unfilteredData, setUnfilteredData] = useState<Receipt[]>([]);
-	const [filteredData, setFilteredData] = useState(unfilteredData);
+	const [filteredData, setFilteredData] = useState<Receipt[]>([]);
 	const [isVisible, setIsVisible] = useState(false);
 	const { setReceipt } = useContext(ReceiptsContext);
 	const history = useHistory();
-
-	const showSearchbar = () => {
-		isVisible === false ? setIsVisible(true) : setIsVisible(false);
-	};
-
-	const handleSearch = (event) => {
-		const { value } = event.target;
-		let result = [];
-		result = unfilteredData.filter(
-			(data) => data.store.name.toLowerCase().search(value) != -1
-		);
-		setFilteredData(result);
-	};
 
 	useEffect(() => {
 		(async () => {
@@ -34,6 +21,26 @@ function ReceiptList(): JSX.Element {
 			setFilteredData(allReceipts);
 		})();
 	}, []);
+
+	const showSearchbar = () => {
+		isVisible === false ? setIsVisible(true) : setIsVisible(false);
+	};
+
+	const handleSearch = (event) => {
+		const { value } = event.target;
+		const searchString = value.toLowerCase().trim();
+		let result = [];
+		result = unfilteredData.filter((element) =>
+			element.category.name.toLowerCase().includes(searchString) ||
+			element.store.name.toLowerCase().includes(searchString) ||
+			element.total.toString().toLowerCase().includes(searchString) ||
+			element.currency.toLowerCase().includes(searchString) ||
+			element.timeOfPurchase.toString().toLowerCase().includes(searchString)
+				? result.push(element)
+				: false
+		);
+		setFilteredData(result);
+	};
 
 	const handleClick = async (receipt) => {
 		await setReceipt(receipt);
