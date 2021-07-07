@@ -5,7 +5,10 @@ import UserSignupForm from '../../components/User/Signup/Form';
 
 function Signup(): JSX.Element {
 	return (
-		<MainContainer>
+		<MainContainer
+			CSSoverrideOuter="outer-container"
+			CSSoverrideInner="inner-container"
+		>
 			<UserSignupForm />
 		</MainContainer>
 	);
