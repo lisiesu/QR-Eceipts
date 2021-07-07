@@ -31,7 +31,7 @@ export class ReceiptsService {
 	async findOne(id: number) {
 		const receipt = await this.receiptsRepository.findOne({
 			where: { id },
-			relations: ['store', 'category'],
+			relations: ['store', 'category', 'user'],
 		});
 		return receipt;
 	}

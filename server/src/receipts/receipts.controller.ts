@@ -73,11 +73,16 @@ export class ReceiptsController {
 	async findOne(@Param('id') hashedId: string, @Res() response: Response) {
 		const receiptId: number = this.hashidsService.decode(hashedId);
 		const receipt = await this.receiptsService.findOne(receiptId);
+		console.log(receipt);
 		const userId: number = this.hashidsService.decode(response.locals.userId);
-		let receiptUpdated = false;
+		let receiptUpdated;
 		if (userId && receipt) {
 			await this.receiptsService.update(receiptId, { user: userId });
-			receiptUpdated = true;
+			if ('user' in receipt) {
+				receiptUpdated = false;
+			} else {
+				receiptUpdated = true;
+			}
 		}
 		const url = `${BASE_URL}/${hashedId}`;
 		const qrcode = this.qrCodeService.generate(url);
