@@ -26,7 +26,7 @@ function ReceiptBody(): JSX.Element {
 	});
 
 	const merchantLogo = '/assets/logos/merchants/png/';
-	const categoryLogo = '/assets/logos/categories/png/';
+	const categoryLogo = `/assets/logos/categories/png/${receipt.category.name}.png`;
 
 	useEffect(() => {
 		if (!receipt) {
@@ -45,10 +45,7 @@ function ReceiptBody(): JSX.Element {
 				<div>
 					<div className="Company-Details">
 						<p className="Company-Name">{receipt.store.name}</p>
-						<img
-							className="Category-Logo"
-							src={categoryLogo + receipt.category.logotype}
-						/>
+						<img className="Category-Logo" src={categoryLogo} />
 						<img
 							className="Company-Logo"
 							src={merchantLogo + receipt.store.logo}

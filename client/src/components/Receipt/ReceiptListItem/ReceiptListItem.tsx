@@ -22,12 +22,12 @@ function ReceiptListItem({
 	currency,
 	total,
 }: Props): JSX.Element {
-	const logosPath = `/assets/logos/merchants/png/${logo}`;
-	const categoryLogo = `/assets/logos/categories/png/${category}`;
+	const merchantLogo = `/assets/logos/merchants/png/${logo}`;
+	const categoryLogo = `/assets/logos/categories/png/${category}.png`;
 	return (
 		<div className="listItemContainer">
 			<div className="logo">
-				<img src={logosPath} />
+				<img src={merchantLogo} />
 			</div>
 			<div className="merchantName">{merchantName}</div>
 			<span className="date">
