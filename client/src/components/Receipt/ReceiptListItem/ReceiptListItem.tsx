@@ -37,7 +37,9 @@ function ReceiptListItem({
 				<img src={categoryLogo} />
 			</div>
 			<div className="total">
-				{currency === '£' ? currency + total : total + currency}
+				{currency === '£' || currency === '$'
+					? currency + total
+					: total + currency}
 			</div>
 		</div>
 	);

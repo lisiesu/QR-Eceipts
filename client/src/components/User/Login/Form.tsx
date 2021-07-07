@@ -77,6 +77,12 @@ function UserLoginForm(): JSX.Element {
 					<button className="button" type="submit">
 						Log in
 					</button>
+					<span className="fineprint">
+						New to QR-Eceipts?{' '}
+						<a href="#" onClick={() => history.push('/signup')}>
+							Sign up!
+						</a>
+					</span>
 					<div className="loader">
 						<div className="check">
 							<span className="check-one" />

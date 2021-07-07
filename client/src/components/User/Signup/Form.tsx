@@ -50,7 +50,7 @@ function UserSignupForm(): JSX.Element {
 
 	return (
 		<form onSubmit={handleSubmit} className="signUp">
-			<div className="form-container">
+			<div className="form-container signup">
 				<label htmlFor="name">
 					Name
 					<br />
@@ -116,6 +116,12 @@ function UserSignupForm(): JSX.Element {
 					<button className="button" type="submit">
 						Sign up
 					</button>
+					<span className="finePrint">
+						Already a user?{' '}
+						<a href="#" onClick={() => history.push('/login')}>
+							Log-in!
+						</a>{' '}
+					</span>
 					<div className="loader">
 						<div className="check">
 							<span className="check-one" />

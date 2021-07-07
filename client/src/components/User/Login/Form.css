@@ -8,9 +8,7 @@
 	min-width: 200px;
 	text-align: center;
 }
-#password {
-	margin-bottom: 2rem;
-}
+
 #email,
 #password,
 .button-wrapper .button {
@@ -32,8 +30,11 @@
 .form-container label {
 	color: #fff;
 	justify-self: center;
+	margin-bottom: -0rem;
 }
-
+.form-container input {
+	margin: 1rem 0 1rem 0;
+}
 .button-wrapper {
 	display: flex;
 	flex-direction: column;
@@ -42,7 +43,7 @@
 }
 .button {
 	background-color: #ddeded;
-	background: linear-gradient(90deg, #23cfcf, #189c9cfc);
+	background: linear-gradient(90deg, #23cfcf, #00fffffc);
 	padding: 0 1.25rem;
 	height: 2.5rem;
 	font-size: 1.3rem;
@@ -61,6 +62,16 @@
 .button:hover {
 	background-color: transparent;
 	transition: all 0.1s ease-in-out;
+}
+.fineprint {
+	color: rgb(180, 210, 242);
+	font-weight: lighter;
+	font-size: 0.8rem;
+	margin-top: -0.3rem;
+}
+.fineprint a {
+	text-decoration: none;
+	color: #00fffffc;
 }
 .loader {
 	display: flex;
