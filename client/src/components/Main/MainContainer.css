@@ -16,3 +16,11 @@
 	padding: 1rem 2rem 0rem 2rem;
 	height: 80vh;
 }
+
+.main-innercontainer::-webkit-scrollbar {
+	display: none;
+}
+
+.main-innercontainer {
+	-ms-overflow-style: none;
+}
