@@ -7,7 +7,7 @@ import ReceiptListItem from '../../components/Receipt/ReceiptListItem/ReceiptLis
 import { Receipt } from '../../interfaces/types';
 import { ReceiptsContext } from '../../contexts/receipts-context';
 
-function ReceiptList(user_Id: string): JSX.Element {
+function ReceiptList(): JSX.Element {
 	const [unfilteredData, setUnfilteredData] = useState<Receipt[]>([]);
 	const [filteredData, setFilteredData] = useState(unfilteredData);
 	const [isVisible, setIsVisible] = useState(false);
@@ -48,7 +48,7 @@ function ReceiptList(user_Id: string): JSX.Element {
 				logo={el.store.logo}
 				merchantName={el.store.name}
 				timeOfPurchase={el.timeOfPurchase}
-				category={el.category.logotype}
+				category={el.category.name}
 				currency={el.currency}
 				total={el.total}
 			/>
@@ -62,7 +62,7 @@ function ReceiptList(user_Id: string): JSX.Element {
 					<label htmlFor="search">
 						<div onClick={() => showSearchbar()}>
 							<img
-								src="/assets/logos/categories/png/cat_1.png"
+								src="/assets/logos/categories/png/search.png"
 								alt="search icon"
 							/>
 						</div>
