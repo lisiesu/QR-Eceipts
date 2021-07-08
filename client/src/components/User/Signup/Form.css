@@ -1,3 +1,11 @@
+.inner-container::-webkit-scrollbar {
+	display: none;
+}
+
+.inner-container {
+	-ms-overflow-style: none;
+}
+
 .inner-container {
 	margin-bottom: 0;
 	overflow-y: hidden;
