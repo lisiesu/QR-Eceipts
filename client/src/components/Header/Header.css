@@ -25,3 +25,7 @@
 	color: seashell;
 	text-shadow: 2px 2px 7px rgba(1, 2, 120, 0.63);
 }
+
+.invisible {
+	visibility: hidden;
+}

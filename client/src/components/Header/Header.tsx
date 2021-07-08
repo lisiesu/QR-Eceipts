@@ -21,7 +21,11 @@ function Header(): JSX.Element {
 				<Link className="logout" to="/logout">
 					<p className="logoutText">Logout</p>
 				</Link>
-			) : null}
+			) : (
+				<span className="logout invisible">
+					<p className="logoutText invisible">Logout</p>
+				</span>
+			)}
 			<Logo />
 		</div>
 	);
