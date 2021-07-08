@@ -34,6 +34,7 @@ export class AuthMiddleware implements NestMiddleware {
       res.locals.message = 'Success!';
       next();
     } catch (error) {
+      res.status(400);
       res.send('You are not logged in!');
     }
     // next();
