@@ -10,6 +10,7 @@ export interface Receipt {
 	user: string;
 	store: Store;
 	category: Category;
+	receiptUpdated: boolean;
 }
 export interface ProductInterface {
 	id: string;

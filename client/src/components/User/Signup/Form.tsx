@@ -3,12 +3,13 @@ import { useHistory } from 'react-router-dom';
 import { User } from '../../../interfaces/types';
 import * as apiClient from '../../../services/ServerAPIServices';
 import { UserContext } from '../../../contexts/user-context';
-
+import { ReceiptsContext } from '../../../contexts/receipts-context';
 import './Form.css';
 
 function UserSignupForm(): JSX.Element {
 	const history = useHistory();
 	const { setUser } = useContext(UserContext);
+	const { receipt } = useContext(ReceiptsContext);
 
 	const inputState: User = {
 		name: '',
@@ -40,6 +41,14 @@ function UserSignupForm(): JSX.Element {
 			event.preventDefault();
 			const createdUser = await apiClient.createUser(input);
 			await setUser({ ...createdUser, ...input, logged: true }); // TODO: Once that the server start returning the object created, remove "...input"
+			localStorage.setItem('logged', 'true');
+			localStorage.setItem(
+				'user',
+				JSON.stringify({ ...createdUser, ...input, logged: true })
+			);
+			if (receipt) {
+				apiClient.getReceiptByid(receipt.id);
+			}
 			setTimeout(() => {
 				history.push('/receipt-list');
 			}, 3000);
@@ -50,7 +59,7 @@ function UserSignupForm(): JSX.Element {
 
 	return (
 		<form onSubmit={handleSubmit} className="signUp">
-			<div className="form-container">
+			<div className="form-container signup">
 				<label htmlFor="name">
 					Name
 					<br />
@@ -116,6 +125,12 @@ function UserSignupForm(): JSX.Element {
 					<button className="button" type="submit">
 						Sign up
 					</button>
+					<span className="finePrint">
+						Already a user?{' '}
+						<a href="#" onClick={() => history.push('/login')}>
+							Log-in!
+						</a>{' '}
+					</span>
 					<div className="loader">
 						<div className="check">
 							<span className="check-one" />

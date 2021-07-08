@@ -11,7 +11,7 @@ interface Props {
 function PrintItemsList({ receipt }: Props): JSX.Element {
 	const items = receipt.products.map((el) => (
 		<PrintItems
-			key={el.id}
+			key={`print${el.id}`}
 			item={el.product}
 			price={el.price}
 			currency={receipt.currency}

@@ -1,7 +1,14 @@
-.outer-container {
+.inner-container::-webkit-scrollbar {
+	display: none;
 }
+
+.inner-container {
+	-ms-overflow-style: none;
+}
+
 .inner-container {
 	margin-bottom: 0;
+	overflow-y: hidden;
 }
 #email,
 #password,
@@ -10,19 +17,16 @@
 #address {
 	height: 2.5rem;
 	border: none;
-	margin-bottom: 1rem;
 	border-radius: 18px;
 	min-width: 200px;
 	text-align: center;
-}
-#password {
-	margin-bottom: 2rem;
 }
 
 .form-container label {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: flex-start;
 }
 .form-container input {
 	text-align: center;
@@ -30,7 +34,8 @@
 
 #name,
 #date-of-birth,
-#address #email,
+#address,
+#email,
 #password,
 .button-wrapper .button {
 	box-shadow: 0 3.1px 3.1px -5px rgba(0, 0, 0, 0.043),
@@ -39,18 +44,18 @@
 		0 24.8px 25.2px -5px rgba(0, 0, 0, 0.092),
 		0 46.4px 47.2px -5px rgba(0, 0, 0, 0.111),
 		0 111px 113px -5px rgba(0, 0, 0, 0.15);
-	margin-bottom: 1rem;
 }
 .signUp {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	justify-content: flex-start;
 }
 
-.form-container label {
+.signUp label {
 	color: #fff;
-	justify-self: center;
+	justify-content: flex-end;
 }
 
 .button-wrapper {
@@ -80,6 +85,16 @@
 .button:hover {
 	background-color: transparent;
 	transition: all 0.1s ease-in-out;
+}
+.finePrint {
+	color: rgb(180, 210, 242);
+	font-weight: lighter;
+	font-size: 0.8rem;
+	margin-top: -0.3rem;
+}
+.finePrint a {
+	text-decoration: none;
+	color: #00fffffc;
 }
 .loader {
 	display: flex;
