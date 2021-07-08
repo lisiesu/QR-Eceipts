@@ -18,11 +18,9 @@ function Header(): JSX.Element {
 	return (
 		<div className="header">
 			{!loginOrSignupOrLogout && user.logged ? (
-				<div className="link">
-					<Link className="logout" to="/logout">
-						<p className="logoutText">Logout</p>
-					</Link>
-				</div>
+				<Link className="logout" to="/logout">
+					<p className="logoutText">Logout</p>
+				</Link>
 			) : null}
 			<Logo />
 		</div>

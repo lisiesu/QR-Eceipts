@@ -31,17 +31,18 @@
 .Button-Text {
 	background-color: #1fc2c2;
 	background: linear-gradient(90deg, #23cfcf, #189c9cfc);
-	padding: 0 1.25rem;
+	padding: 0 0.7rem;
 	line-height: 2.125rem;
-	font-size: 0.83rem;
+	font-size: 1rem;
 	font-weight: 400;
 	text-align: center;
 	margin: 0.4em;
 	color: white;
-	min-width: 6.4em;
+	min-width: 8.3em;
 	border-radius: 30px;
 	cursor: pointer;
 	margin-bottom: 1em;
+	height: 3rem;
 
 	box-shadow: 0 3.1px 3.1px -5px rgba(0, 0, 0, 0.043),
 		0 7.4px 7.5px -5px rgba(0, 0, 0, 0.062),
