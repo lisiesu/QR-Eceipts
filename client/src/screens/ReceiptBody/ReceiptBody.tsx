@@ -1,75 +1,97 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext, useRef, useState } from 'react';
 import './ReceiptBody.css';
-import { FiShoppingCart } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { useReactToPrint } from 'react-to-print';
+import Moment from 'react-moment';
+import MainContainer from '../../components/Main/MainContainer';
 import ItemsList from '../../components/Receipt/ItemsList/ItemsList';
-import { ProductInterface, Receipt } from '../../interfaces/types';
+import SavedMessage from '../../components/Receipt/SavedMessage/SavedMessage';
+import PrintReceiptBody from '../../components/PrintComponent/PrintReceiptBody/PrintReceiptBody';
+import { Receipt } from '../../interfaces/types';
 import * as service from '../../services/ServerAPIServices';
-
-interface Props {
-	receipt: Receipt;
-	products: ProductInterface[];
-}
+import { ReceiptsContext } from '../../contexts/receipts-context';
+import { UserContext } from '../../contexts/user-context';
 
 function ReceiptBody(): JSX.Element {
 	const { id } = useParams<{ id?: string }>();
-	const history = useHistory();
-	const clickHandler = () => {
-		history.push('/receipt-list');
-	};
-	const [receipt, setReceipt] = useState<Receipt>();
-	const [products, setProducts] = useState<ProductInterface>();
+	const { receipt, setReceipt } = useContext(ReceiptsContext);
+	const { user } = useContext(UserContext);
+
+	const [saved, setSaved] = useState(false);
+
+	const componentRef = useRef();
+	const handlePrint = useReactToPrint({
+		content: () => componentRef.current,
+	});
+
+	const merchantLogo = '/assets/logos/merchants/png/';
 
 	useEffect(() => {
-		service.getReceiptByid(id).then((el) => setReceipt(el));
-	}, [id]);
+		if (!receipt) {
+			(async () => {
+				const response = await service.getReceiptByid(id);
+				console.log(response);
+				setReceipt(response);
+				setSaved(response.receiptUpdated);
+			})();
+		}
+	}, [id, receipt, setReceipt]);
 
-	// useEffect(() => {
-	// 	service.getUserReceipt(id).then((el) => setReceipt(el));
-	// }, []);
-
+	// receipt && receipt.store --> checking both because server is aways returning an object
 	return (
-		<div className="Receipt-Container">
-			{receipt ? (
-				<div className="Receipt-Body">
+		<MainContainer>
+			{receipt && receipt.store ? (
+				<div>
 					<div className="Company-Details">
 						<p className="Company-Name">{receipt.store.name}</p>
-						<p className="Company-Logo">{receipt.store.name}</p>
+						<img
+							className="Category-Logo"
+							src={`/assets/logos/categories/png/${receipt.category.name}.png`}
+						/>
+						<img
+							className="Company-Logo"
+							src={merchantLogo + receipt.store.logo}
+						/>
 					</div>
-					<div className="Time-Container">
-						<p className="Timestamp">12/04/2018</p>
-						<li className="Shop-Icon-Circle">
-							<p className="Shop-Icon">
-								<FiShoppingCart />
-							</p>
-						</li>
+					<div className="Timestamp">
+						<Moment date={receipt.timeOfPurchase} format="MMM Do YYYY" />
 					</div>
-					<ItemsList products={receipt.products} />
-					<div className="Receipt-Saved-Text">
-						<li className="Tick-Container">
-							<p className="Tick">
-								<BiCheckCircle />
-							</p>
-						</li>
-						<p className="Saved-Message">Your receipt has been saved!</p>
-					</div>
+					<ItemsList receipt={receipt} />
+					{saved ? <SavedMessage /> : null}
+
 					<div className="listButton">
-						<button
-							className="Button-Text"
-							type="submit"
-							onClick={() => {
-								clickHandler();
-							}}
-						>
-							View all your receipts
-						</button>
+						{user.logged ? (
+							<Link to="/receipt-list">
+								<button className="Button-Text" type="submit">
+									View receipts
+								</button>
+							</Link>
+						) : (
+							<Link to="/">
+								<button className="Button-Text" type="submit">
+									Save Receipt
+								</button>
+							</Link>
+						)}
+						<div style={{ display: 'none' }}>
+							<PrintReceiptBody ref={componentRef} receipt={receipt} />
+						</div>
+						<div>
+							<button
+								className="Button-Text"
+								type="button"
+								onClick={handlePrint}
+							>
+								Print PDF
+							</button>
+						</div>
 					</div>
 				</div>
 			) : (
 				<div> Loading...</div>
 			)}
-		</div>
+		</MainContainer>
 	);
 }
 

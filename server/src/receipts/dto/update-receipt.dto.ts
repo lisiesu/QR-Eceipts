@@ -1,9 +1,15 @@
+import { IsString, IsOptional, IsNotEmpty } from 'class-validator';
 import UpdateProductInterface from '../entities/updateProduct.interface';
 
 export default class UpdateReceiptDto {
-	products?: UpdateProductInterface[];
+  @IsNotEmpty()
+  products?: UpdateProductInterface[];
 
-	user?: number;
+  @IsNotEmpty()
+  @IsString()
+  user: string;
 
-	misc?: string;
+  @IsOptional()
+  @IsString()
+  misc?: string;
 }

@@ -4,15 +4,15 @@ import type Category from './category.interface';
 import ProductInterface from './product.interface';
 
 export default interface Receipt {
-	id: number;
-	timeOfPurchase: Date;
-	products: ProductInterface[];
-	total: number;
-	currency: string;
-	paymentMethod: string;
-	cardNumber: string;
-	misc?: string;
-	store: Store;
-	user: User;
-	category: Category;
+  id: number;
+  timeOfPurchase: Date;
+  products: ProductInterface[];
+  total: number;
+  currency: string;
+  paymentMethod: string;
+  cardNumber: string;
+  misc?: string;
+  user: User;
+  store: Store;
+  category: Category;
 }

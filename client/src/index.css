@@ -3,7 +3,12 @@
 	padding: 0;
 	box-sizing: content-box;
 }
-
 body {
-	background: #248cce;
+	background-color: #258cce;
+}
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+	outline: none;
 }

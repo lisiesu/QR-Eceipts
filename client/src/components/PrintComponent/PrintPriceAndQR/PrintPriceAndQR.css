@@ -1,0 +1,57 @@
+.Print-Price-QR-Container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1em;
+}
+
+.Print-Price-Container {
+	background: rgba(25, 47, 57, 0.1);
+	border-radius: 0.5rem;
+	margin-bottom: 1rem;
+	padding: 1rem;
+	min-width: 42%;
+	min-height: 6vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.Print-Total-Title {
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 1.6rem;
+	text-align: center;
+}
+
+.Print-Total-Price {
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 2.4rem;
+	display: flex;
+	text-align: center;
+}
+
+.Print-Receipt-Id {
+	align-items: flex-end;
+	justify-content: space-around;
+	font-family: Avenir;
+	font-size: 0.8rem;
+}
+
+.Print-QR-Container {
+	background: rgba(25, 47, 57, 0.1);
+	border-radius: 0.5rem;
+	margin-bottom: 1rem;
+	padding: 1rem;
+	min-width: 42%;
+	min-height: 6vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	vertical-align: middle;
+}

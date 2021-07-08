@@ -10,6 +10,7 @@ export interface Receipt {
 	user: string;
 	store: Store;
 	category: Category;
+	receiptUpdated: boolean;
 }
 export interface ProductInterface {
 	id: string;
@@ -39,4 +40,10 @@ export interface User {
 	email: string;
 	name: string;
 	password?: string;
+	logged?: boolean;
+}
+
+export interface LoginInformation {
+	email: string;
+	password: string;
 }
