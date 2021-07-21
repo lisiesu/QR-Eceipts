@@ -1,7 +1,7 @@
 
-# Project Title
+# QR-Eceipts
 
-A brief description of what this project does and who it's for
+QR-Eceipts is a web application with two main goal: making paper receipts a thing of the past, and to provide a novel yet convenient way of accessing your receipts with the use of QR codes.
 
 
 ## Screenshots
@@ -20,9 +20,9 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 
 ## Tech Stack
 
-**Client:** React, Redux, TailwindCSS
+**Client:** React, TypeScript, WorkBox
 
-**Server:** Node, Express
+**Server:** Node, Express, NestJs, Docker, TypeScript, PostgreSQL, TypeORM.
 
 
 ## Installation
