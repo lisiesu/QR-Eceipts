@@ -25,6 +25,18 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 **Server:** Node, Express, NestJs, Docker, TypeScript, PostgreSQL, TypeORM.
 
 
+[![NPM](https://img.shields.io/badge/NPM--red?style=flat&logo=npm)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/REACT--blue?style=flat&logo=react)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/TypeORM--blue?style=flat&logo=typeorm)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/JavaScript--yellow?style=flat&logo=javascript)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/NestJs--green?style=flat&logo=nestjs)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/Docker--green?style=flat&logo=docker)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/TypeScript--red?style=flat&logo=typescript)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/Node-blue?style=flat&logo=node)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/PostgreSQL--blue?style=flat&logo=postgresql)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/JavaScript--yellow?style=flat&logo=javascript)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/Express--green?style=flat&logo=express)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![NPM](https://img.shields.io/badge/WorkBox--green?style=flat&logo=workbox)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 ## Installation
 
 Install my-project with npm
