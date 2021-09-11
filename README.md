@@ -6,7 +6,7 @@ QR-Eceipts is a web application with two main goal: making paper receipts a thin
 
 ## Screenshots
 
-![App Screenshot](https://www.dropbox.com/s/5kciautwntsluy8/Screenshot%20from%202021-07-21%2011-32-47.png?dl=0)
+![App Screenshot](https://snipboard.io/vwxzpt.jpg)
 
 
 ## Badges
